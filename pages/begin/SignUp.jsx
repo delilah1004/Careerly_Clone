@@ -82,7 +82,11 @@ export default function SignUpPage({ navigation }) {
           {`'회원가입'을 누름으로써\n커리어리의 이용약관과 개인정보처리 방침에 동의합니다`}
         </Text>
 
-        <ButtonItem title="이메일로 시작하기" />
+        <ButtonItem
+          title="이메일로 시작하기"
+          navigation={navigation}
+          page={'TabNavigator'}
+        />
 
         <View style={styles.textButtonContainer}>
           <TextButton

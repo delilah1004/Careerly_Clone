@@ -18,7 +18,13 @@ export default function SignIn({ navigation }) {
           <InputItem title="이메일" />
           <InputItem title="비밀번호" />
         </Form>
-        <ButtonItem style={{ marginTop: 20 }} title="로그인" />
+
+        <ButtonItem
+          style={{ marginTop: 20 }}
+          title="로그인"
+          navigation={navigation}
+          page={'TabNavigator'}
+        />
 
         <View style={styles.textButtonContainer}>
           <TextButton
