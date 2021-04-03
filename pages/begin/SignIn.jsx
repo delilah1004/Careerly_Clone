@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Form, View } from 'native-base';
 
-import HeaderBack from '../../components/HeaderBack';
+import HeaderBack from '../../components/header/HeaderBack';
 import InputItem from '../../components/InputItem';
 import ButtonItem from '../../components/ButtonItem';
 import TextButton from '../../components/TextButton';
