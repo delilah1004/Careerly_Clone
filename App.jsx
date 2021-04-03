@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './navigations/StackNavigator';
 
 import * as Font from 'expo-font';
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   console.disableYellowBox = true;
