@@ -37,11 +37,11 @@ export default function App() {
 
   return ready ? (
     <View style={styles.container}>
-      <Text>Open up App.jsx to start working on careerly!</Text>
+      <Text>careerly!</Text>
       <StatusBar style="auto" />
     </View>
   ) : (
-    <Loding />
+    <Loading />
   );
 }
 
