@@ -11,12 +11,12 @@ import {
 
 import Main from '../pages/main/Main';
 import SearchMember from '../pages/member/SearchMember';
-import Notification from '../pages/Notification';
+import Notification from '../pages/Notificate';
 import MyPage from '../pages/mypage/Mypage';
 
 const Tabs = createBottomTabNavigator();
 
-const TabNavigator = ({ navigation }) => {
+const TabNavigator = () => {
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
