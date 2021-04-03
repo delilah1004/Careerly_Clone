@@ -11,12 +11,20 @@ export default function App() {
   const loadFont = () => {
     setTimeout(async () => {
       await Font.loadAsync({
+        // 본문 Font
         KoPub_light: require('./assets/fonts/KoPubWorld Dotum Light.ttf'),
         KoPub_medium: require('./assets/fonts/KoPubWorld Dotum Medium.ttf'),
         KoPub_bold: require('./assets/fonts/KoPubWorld Dotum Bold.ttf'),
+        // 제목 및 굵은 글씨 Font
         Malgun_sl: require('./assets/fonts/MALGUNSL.TTF'),
         Malgun: require('./assets/fonts/MALGUN.TTF'),
         Malgun_bold: require('./assets/fonts/MALGUNBD.TTF'),
+        // 숫자 관련 Font
+        Spoqa_thin: require('./assets/fonts/SpoqaHanSansNeo-Thin.ttf'),
+        Spoqa_light: require('./assets/fonts/SpoqaHanSansNeo-Light.ttf'),
+        Spoqa_medium: require('./assets/fonts/SpoqaHanSansNeo-Medium.ttf'),
+        Spoqa_regular: require('./assets/fonts/SpoqaHanSansNeo-Regular.ttf'),
+        Spoqa_bold: require('./assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
         ...Ionicons.font,
       });
       await setReady(true);
