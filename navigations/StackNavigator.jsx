@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import SignIn from '../pages/begin/SignIn';
+import SignUp from '../pages/begin/SignUp';
 import TabNavigator from './TabNavigator';
-
-// import Vote from '../pages/main/Vote';
 
 const Stack = createStackNavigator();
 
@@ -14,8 +14,9 @@ const StackNavigator = () => {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
-      {/* <Stack.Screen name="Vote" component={Vote} /> */}
     </Stack.Navigator>
   );
 };
