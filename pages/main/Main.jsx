@@ -23,10 +23,11 @@ import {
   Fontisto,
   FontAwesome,
 } from '@expo/vector-icons';
+import PostCreate from './PostCreate';
 
 const im = require('../../assets/icon.png');
 
-export default function Main() {
+export default function Main({ navigation }) {
   return (
     <ScrollView
       style={{
@@ -45,11 +46,27 @@ export default function Main() {
                 투표
               </Text>
             </CardItem>
-            <Text style={{ marginLeft: 10 }}>
+            <Text style={{ marginLeft: 20 }}>
               세상에 좋은 팀장이 있다? 없다?
             </Text>
             <CardItem footer>
-              <Text>GeekyAnts</Text>
+              <View style={{ marginTop: 30, flexDirection: 'row' }}>
+                <Thumbnail small source={im} />
+                <Text style={{ alignSelf: 'center', marginLeft: 10 }}>
+                  홍길동
+                </Text>
+                <Text
+                  style={{
+                    alignSelf: 'center',
+                    position: 'absolute',
+                    marginLeft: 50,
+                    fontSize: 15,
+                    paddingTop: 50,
+                  }}
+                >
+                  HR
+                </Text>
+              </View>
             </CardItem>
           </Card>
         </TouchableOpacity>
@@ -78,7 +95,11 @@ export default function Main() {
           </CardItem>
         </Card>
       </ScrollView>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('PostCreate');
+        }}
+      >
         <View
           style={{
             marginLeft: 15,
