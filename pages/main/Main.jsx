@@ -1,36 +1,9 @@
 import React, { useEffect } from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Share,
-} from 'react-native';
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Text } from 'native-base';
 
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import RNUrlPreview from 'react-native-url-preview';
-import {
-  Container,
-  Header,
-  Content,
-  Left,
-  Icon,
-  Right,
-  Text,
-  Button,
-  Card,
-  CardItem,
-  Thumbnail,
-} from 'native-base';
+import { FontAwesome } from '@expo/vector-icons';
 
-import {
-  Foundation,
-  Ionicons,
-  Fontisto,
-  FontAwesome,
-} from '@expo/vector-icons';
-
-const im = require('../../assets/icon.png');
 import VoteCard from '../../components/vote/VoteCard';
 import MainCard from '../../components/MainCard';
 
