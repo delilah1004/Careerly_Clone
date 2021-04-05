@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
-import { Text } from 'native-base';
+import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text } from 'native-base';
 
 import { FontAwesome } from '@expo/vector-icons';
 
 import VoteCard from '../../components/vote/VoteCard';
-import MainCard from '../../components/MainCard';
+import MainCard from '../../components/main/MainCard';
 
 export default function Main({ navigation }) {
   useEffect(() => {
