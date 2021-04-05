@@ -11,6 +11,12 @@ import Notificate from '../pages/Notificate';
 import SearchMember from '../pages/member/SearchMember';
 import MemberList from '../pages/member/MemberList';
 import MemberInfo from '../pages/member/MemberInfo';
+import Setting from '../pages/set/Setting';
+import Alert from '../pages/set/Alert';
+import ServiceCenter from '../pages/set/ServiceCenter';
+import UserUpdate from '../pages/set/UserUpdate';
+import PasswordChange from '../pages/set/PasswordChange';
+import { Settings } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +37,11 @@ const StackNavigator = () => {
       <Stack.Screen name="SearchMember" component={SearchMember} />
       <Stack.Screen name="MemberList" component={MemberList} />
       <Stack.Screen name="MemberInfo" component={MemberInfo} />
+      <Stack.Screen name="Alert" component={Alert} />
+      <Stack.Screen name="ServiceCenter" component={ServiceCenter} />
+      <Stack.Screen name="UserUpdate" component={UserUpdate} />
+      <Stack.Screen name="PasswordChange" component={PasswordChange} />
+      <Stack.Screen name="Setting" component={Setting} />
     </Stack.Navigator>
   );
 };
