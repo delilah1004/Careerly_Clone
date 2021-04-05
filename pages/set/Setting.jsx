@@ -26,10 +26,15 @@ import {
 import { Entypo } from '@expo/vector-icons';
 
 import HeaderBack from '../../components/header/HeaderBack';
-import TextButton from '../../components/TextButton';
+
+import { signOut } from '../../config/APIFunctions';
 
 const containerWidth = Dimensions.get('window').width / 3;
+
 export default function Setting({ navigation }) {
+  const logout = async () => {
+    await signOut(navigation);
+  };
   return (
     <Container>
       <HeaderBack navigation={navigation} title={'설정'} />
@@ -195,7 +200,7 @@ export default function Setting({ navigation }) {
           </Grid>
         </TouchableOpacity>
       </Content>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={logout}>
         <Text
           style={{
             textAlign: 'center',
@@ -230,7 +235,6 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   url: {
-    marginTop: '100',
     width: '95%',
     alignSelf: 'center',
     justifyContent: 'center',
@@ -246,9 +250,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1.5,
     borderBottomColor: '#EEE',
     alignItems: 'center',
-  },
-  container: {
-    width: containerWidth,
   },
   back: {
     marginStart: 15,
