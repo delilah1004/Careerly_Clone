@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -35,6 +35,12 @@ import VoteCard from '../../components/vote/VoteCard';
 import MainCard from '../../components/MainCard';
 
 export default function Main({ navigation }) {
+  useEffect(() => {
+    navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+    });
+  }, []);
+
   return (
     <ScrollView
       style={{

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Text, View } from 'native-base';
 
@@ -8,6 +8,12 @@ import TextButton from '../../components/TextButton';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export default function Start({ navigation }) {
+  useEffect(() => {
+    navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+    });
+  }, [navigation]);
+
   return (
     <Container>
       <View style={styles.container}>
