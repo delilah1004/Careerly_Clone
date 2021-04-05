@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Start from '../pages/begin/Start';
 import SignIn from '../pages/begin/SignIn';
 import SignUp from '../pages/begin/SignUp';
+import RolePick from '../pages/begin/RolePick';
 import TabNavigator from './TabNavigator';
 import PostCreate from '../pages/main/PostCreate';
 import PostInfo from '../pages/main/PostInfo';
@@ -24,6 +25,7 @@ const StackNavigator = () => {
       <Stack.Screen name="Start" component={Start} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="RolePick" component={RolePick} />
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
       <Stack.Screen name="PostCreate" component={PostCreate} />
       <Stack.Screen name="PostInfo" component={PostInfo} />
