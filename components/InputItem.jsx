@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Item, Input, Text } from 'native-base';
 
-export default function InputItem({ title, error }) {
+export default function InputItem({ title, error, placeholder }) {
   return (
     <>
       <Text style={styles.label}>{title}</Text>
       <Item regular style={{ alignSelf: 'center', borderRadius: 5 }}>
-        <Input style={styles.input} />
+        <Input style={styles.input} placeholder={placeholder} />
       </Item>
       <Item style={{ borderColor: 'transparent' }}>
         <Text style={{ color: 'tomato' }}>{error}</Text>
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   input: {
-    color: '#fff',
+    color: 'black',
     alignSelf: 'center',
   },
 });
