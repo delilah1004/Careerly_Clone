@@ -42,7 +42,7 @@ const TabNavigator = () => {
             return (
               <Foundation
                 name={iconName}
-                color={focused ? 'tomato' : 'grey'}
+                color={focused ? '#ED6653' : '#777'}
                 size={24}
               />
             );
