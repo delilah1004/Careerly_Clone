@@ -1,52 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
   ScrollView,
   TouchableOpacity,
-  Dimensions,
   Share,
 } from 'react-native';
-
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import RNUrlPreview from 'react-native-url-preview';
 import {
   Container,
-  Header,
-  Content,
-  Left,
-  Icon,
-  Right,
   Text,
-  Button,
   Card,
   CardItem,
   Thumbnail,
   Input,
   Item,
   List,
-  ListItem,
 } from 'native-base';
+
 import HeaderBack from '../../components/header/HeaderBack';
+import CommentCompont from '../../components/CommentComponent';
+
+import RNUrlPreview from 'react-native-url-preview';
 import {
-  Foundation,
-  Ionicons,
-  Fontisto,
-  FontAwesome,
   MaterialCommunityIcons,
   MaterialIcons,
   Octicons,
 } from '@expo/vector-icons';
 
 const im = require('../../assets/icon.png');
-import CommentCompont from '../../components/CommentCompont';
-const containerheight = Dimensions.get('window').height / 0.5;
-const share = () => {
-  Share.share({
-    message: `공유 \n\n 라일락 \n\n 코인`,
-  });
-};
+
 export default function PostInfo({ navigation, route }) {
+  const share = () => {
+    Share.share({
+      message: `공유 \n\n 라일락 \n\n 코인`,
+    });
+  };
   return (
     <ScrollView>
       <HeaderBack title={`홍길동 님의 게시물`} navigation={navigation} />
@@ -91,25 +79,16 @@ export default function PostInfo({ navigation, route }) {
           </CardItem>
           <CardItem>
             <Text style={{ marginLeft: 10, marginTop: 5 }}>
-              선언한 const Stack = createStackNavigator(); Stack 변수에 들어있는
-              태그를 꺼내 사용합니다. Stack.Navigator 태그 내부엔 페이지(화면)를
-              스타일링 할 수 있는 다양한 옵션들이 담겨 있습니다 컴포넌트들을 이
-              담겨 있습니다 선언한 const Stack = createStackNavigator(); Stack
-              변수에 들어있는 태그를 꺼내 화면)를 스타일링 할 수 있는 다양한
-              옵션들이 담겨 있습니다 컴포넌트들을 페이지처럼 여기게끔 해주는
-              기능을 하는 네비게이터 선언한 const Stack = cr 선언한 const Stack
-              = createStackNavigator(); Stack 변수에 들어있는 태그를 꺼내
-              사용합니다. Stack.Navigator 태그 내부엔 페이지(화면)를 스타일링 할
-              수 있는 다양한 옵션들이 담겨 있습니다 컴포넌트들을 이 담겨
-              있습니다 선언한 const Stack = createStackNavigator(); Stack 변수에
-              들어있는 태그를 꺼내 화면)를 스타일링 할 수 있는 다양한 옵션들이
-              담겨 있습니다 컴포넌트들을 페이지처럼 여기게끔 해주는 기능을 하는
-              네비게이터 선언한 const Stack = cr 는 다양한 옵션들이 담겨
-              있습니다 컴포넌트들을 이 담겨 있습니다 선언한 const Stack =
-              createStackNavigator(); Stack 변수에 들어있는 태그를 꺼내 화면)를
-              스타일링 네비게이터 선언한 const Stack = cr 는 다양한 옵션들이
-              담겨 있습니다 컴포넌트들을 이 담겨 있습니다 선언한 const Stack =
-              createStackNavigator(); Stack 변수에 들어있는 태그를 꺼내 화면)
+              `[식목일: 종이 명함말고 커리어리 프로필 어떠세요? 🌳] 커리어리
+              여러분 안녕하세요! 🌈 4월 5일, 오늘은 식목일이에요. 커리어리
+              팀원들과 나무에 대해 이야기하던 중, 종이 (나무)로 만드는 명함에
+              대한 이야기 나왔어요! 그래서 오늘은 종이 명함에 대해서 짧게
+              이야기해보려고 해요. 📌종이 명함 - 무엇이 문제일까요? ✅ 매년, 약
+              100억 장의 종이 명함이 만들어져요. ✅ 매년, 약 600만 그루의 나무가
+              명함을 만드는 데에 사용돼요. ✅ 매년, 만들어지는 명함의 약 90%는
+              버려져요. 환경 보호를 위해 종이 명함 대신, 커리어리 프로필을
+              공유해보는 게 어떨까요? 👍 (+ 커리어리 프로필을 알아도 서로 연락할
+              길이 없는 것 같다고요? 곧 있을 업데이트를 기대해주세요!🙏)`
             </Text>
           </CardItem>
           <CardItem>

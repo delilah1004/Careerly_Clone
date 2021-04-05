@@ -8,15 +8,13 @@ import {
   View,
   Item,
   Input,
-  Header,
-  Button,
 } from 'native-base';
-import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
 import HeaderSavePost from '../../components/header/HeaderPostSave';
 
 const containerWidth = Dimensions.get('window').width / 3;
+
 export default function PostCreate({ navigation }) {
   const [content, setContent] = useState('');
   const [url, setUrl] = useState('');
@@ -127,7 +125,6 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   url: {
-    marginTop: '100',
     width: '95%',
     alignSelf: 'center',
     justifyContent: 'center',
@@ -143,9 +140,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1.5,
     borderBottomColor: '#EEE',
     alignItems: 'center',
-  },
-  container: {
-    width: containerWidth,
   },
   back: {
     marginStart: 15,
