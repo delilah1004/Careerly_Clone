@@ -6,7 +6,7 @@ import { Container, Text, Form, View } from 'native-base';
 import InputItem from '../../components/InputItem';
 import TextButton from '../../components/TextButton';
 
-import { emailCheck } from '../../config/APIFunctions';
+import { checkEmail } from '../../config/UserAPI';
 
 export default function SignUpPage({ navigation }) {
   const [name, setName] = useState('');
@@ -14,7 +14,7 @@ export default function SignUpPage({ navigation }) {
   const [password, setPassword] = useState('');
 
   const check = () => {
-    emailCheck(name, email, password, navigation);
+    checkEmail(name, email, password, navigation);
   };
 
   let showButton = () => {

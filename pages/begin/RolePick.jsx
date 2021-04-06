@@ -7,7 +7,7 @@ import CategoryButton from '../../components/RoleCategory';
 
 import data from '../../config/data.json';
 
-import { register } from '../../config/APIFunctions';
+import { register } from '../../config/UserAPI';
 
 export default function RolePick({ navigation, route }) {
   const category = data.category;
