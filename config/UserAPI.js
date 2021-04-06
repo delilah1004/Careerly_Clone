@@ -51,7 +51,7 @@ export async function register(name, email, password, role, navigation) {
 
     if (response.data.success) {
       Alert.alert('회원가입 성공!');
-      navigation.navigate('SignIn');
+      navigation.push('SignIn');
     } else {
       Alert.alert('회원가입 실패');
     }
@@ -77,7 +77,7 @@ export async function checkEmail(name, email, password, navigation) {
     };
 
     if (response.data.success) {
-      navigation.navigate('RolePick', { currentUser });
+      navigation.push('RolePick', { currentUser });
     } else {
       Alert.alert('이미 존재하는 이메일입니다!');
     }
