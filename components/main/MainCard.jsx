@@ -41,7 +41,9 @@ export default function MainCard({ navigation }) {
               alignItems: 'center',
             }}
           >
-            <Thumbnail medium source={im} />
+            <TouchableOpacity>
+              <Thumbnail medium source={im} />
+            </TouchableOpacity>
           </Col>
           <Col
             size={8}

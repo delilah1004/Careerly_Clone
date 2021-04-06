@@ -14,7 +14,7 @@ import HeaderPostSave from '../../components/header/HeaderPostSave';
 
 import { Entypo } from '@expo/vector-icons';
 
-import { createPost } from '../../config/PostAPI';
+import { createPost } from '../../config/postAPI';
 
 export default function PostCreate({ navigation }) {
   const [content, setContent] = useState('');

@@ -22,7 +22,11 @@ export default function Main({ navigation }) {
         backgroundColor: 'rgba(52, 52, 52, 0.1)',
       }}
     >
-      <ScrollView style={{ marginTop: 50, maxHeight: 210 }} horizontal={true}>
+      <ScrollView
+        style={{ marginTop: 50, maxHeight: 210, alignSelf: 'center' }}
+        horizontal={true}
+      >
+        <VoteCard navigation={navigation} />
         <VoteCard navigation={navigation} />
         <VoteCard navigation={navigation} />
       </ScrollView>
@@ -65,6 +69,9 @@ export default function Main({ navigation }) {
         </View>
       </TouchableOpacity>
       <ScrollView>
+        <MainCard navigation={navigation} />
+        <MainCard navigation={navigation} />
+        <MainCard navigation={navigation} />
         <MainCard navigation={navigation} />
         <MainCard navigation={navigation} />
       </ScrollView>

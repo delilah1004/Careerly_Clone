@@ -21,8 +21,8 @@ export default function HeaderBack({ navigation, title }) {
 
 const styles = StyleSheet.create({
   header: {
-    borderBottomWidth: 1.5,
-    borderBottomColor: '#EEE',
+    borderBottomWidth: 1.8,
+    borderBottomColor: '#D8D8D8',
     justifyContent: 'space-between',
     alignItems: 'center',
   },

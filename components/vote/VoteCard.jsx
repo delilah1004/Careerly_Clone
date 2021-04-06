@@ -28,7 +28,7 @@ const im = require('../../assets/icon.png');
 export default function VoteCard({ navigation }) {
   return (
     <TouchableOpacity>
-      <Card style={{ width: 300, height: 200, borderRadius: 10, elevation: 3 }}>
+      <Card style={{ width: 280, height: 200, borderRadius: 10, elevation: 3 }}>
         <CardItem header>
           <Text
             style={{

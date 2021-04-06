@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import { Container, Text, View } from 'native-base';
 
 import Loading from '../Loading';
 
 import HeaderBack from '../../components/header/HeaderBack';
+import HeaderShare from '../../components/header/HeaderShare';
 import MemberCard from '../../components/member/MemberCard';
 
 import { getMemberListByName } from '../../config/UserAPI';
 import members from '../../config/member.json';
-
+const ViewWidth = Dimensions.get('window').width;
 export default function MemberList({ navigation, route }) {
   const [ready, setReady] = useState(false);
   const [memberList, setMemberList] = useState(members.result);
@@ -29,7 +35,7 @@ export default function MemberList({ navigation, route }) {
     const result = await getMemberListByName(name, 1);
 
     console.log(result);
-    // setMemberList(result);
+    setMemberList(result);
   };
 
   const search = () => {
@@ -69,14 +75,16 @@ export default function MemberList({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: getStatusBarHeight(),
+    flexWrap: 'wrap',
+    width: ViewWidth * 1.05,
     backgroundColor: '#EEE',
-    alignItems: 'center',
   },
   input: {
-    width: '90%',
+    width: ViewWidth / 1.14,
     backgroundColor: '#FFF',
     borderRadius: 5,
+    alignSelf: 'center',
     padding: 15,
+    marginTop: 8,
   },
 });

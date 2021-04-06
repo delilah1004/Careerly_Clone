@@ -40,7 +40,6 @@ const StackNavigator = () => {
       <Stack.Screen name="Notificate" component={Notificate} />
       <Stack.Screen name="SearchMember" component={SearchMember} />
       <Stack.Screen name="MemberList" component={MemberList} />
-      <Stack.Screen name="MemberInfo" component={MemberInfo} />
       <Stack.Screen name="Setting" component={Setting} />
       <Stack.Screen name="Alert" component={Alert} />
       <Stack.Screen name="ServiceCenter" component={ServiceCenter} />
@@ -49,6 +48,7 @@ const StackNavigator = () => {
       <Stack.Screen name="ProfileUpdate" component={ProfileUpdate} />
       <Stack.Screen name="FollowerList" component={FollowerList} />
       <Stack.Screen name="VoteCreate" component={VoteCreate} />
+      <Stack.Screen name="MemberInfo" component={MemberInfo} />
     </Stack.Navigator>
   );
 };
