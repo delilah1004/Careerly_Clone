@@ -6,15 +6,7 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
-import {
-  Container,
-  Input,
-  Item,
-  List,
-  Text,
-  Thumbnail,
-  View,
-} from 'native-base';
+import { Container, Footer, Input, Text, Thumbnail, View } from 'native-base';
 
 import {
   MaterialCommunityIcons,
@@ -23,6 +15,7 @@ import {
 } from '@expo/vector-icons';
 
 import RNUrlPreview from 'react-native-url-preview';
+
 import HeaderBack from '../../components/header/HeaderBack';
 import CommentComponent from '../../components/CommentComponent';
 
@@ -42,33 +35,40 @@ export default function PostInfo({ navigation, route }) {
 
   return (
     <Container style={styles.container}>
-      <HeaderBack title={`홍길동 님의 게시물`} navigation={navigation} />
+      <HeaderBack
+        title={post.user.name + ' 님의 게시물'}
+        navigation={navigation}
+      />
       <ScrollView>
         <View style={styles.post}>
           {/* 글 작성자 정보 */}
           <View style={styles.itemHeader}>
-            {/* 글 작성자 이미지 */}
-            <TouchableOpacity>
-              <Thumbnail style={styles.thumbnail} source={im} />
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row' }}>
+              {/* 글 작성자 이미지 */}
+              <TouchableOpacity>
+                <Thumbnail style={styles.thumbnail} source={im} />
+              </TouchableOpacity>
 
-            <View style={styles.infoBox}>
-              <View style={styles.user}>
-                {/* 글 작성자 이름 */}
-                <Text style={styles.authorName}>{post.user.name}</Text>
+              <View style={styles.infoBox}>
+                <View style={styles.user}>
+                  {/* 글 작성자 이름 */}
+                  <Text style={styles.authorName}>{post.user.name}</Text>
 
-                {/* 글 작성 시간 */}
-                <Text style={styles.time}>1시간전</Text>
+                  {/* 글 작성 시간 */}
+                  <Text style={styles.time}>1시간전</Text>
+                </View>
+
+                {/* 글 작성자 직함 */}
+                <Text style={styles.authorRole}>{post.user.role}</Text>
               </View>
-
-              {/* 글 작성자 직함 */}
-              <Text style={styles.authorRole}>{post.user.role}</Text>
             </View>
 
-            {/* 팔로우 버튼 */}
-            <TouchableOpacity style={styles.followButton}>
-              <Text style={styles.text}>팔로우</Text>
-            </TouchableOpacity>
+            <View>
+              {/* 팔로우 버튼 */}
+              <TouchableOpacity style={styles.followButton}>
+                <Text style={styles.text}>팔로우</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           {/* 글 */}
@@ -124,18 +124,28 @@ export default function PostInfo({ navigation, route }) {
             </View>
           </View>
         </View>
-        <Item style={{ backgroundColor: 'white' }}>
-          <Input placeholder="게시물에 대해 이야기를 나눠보세요" />
-          <TouchableOpacity style={styles.button2}>
-            <Text style={styles.buttonText2}>등록</Text>
-          </TouchableOpacity>
-        </Item>
-        <List style={{ backgroundColor: 'white' }}>
-          <CommentComponent />
-          <CommentComponent />
-          <CommentComponent />
-        </List>
+
+        {/* 댓글 목록 */}
+        <View style={{ paddingBottom: 10 }}>
+          {post.comment.map((comment) => {
+            return (
+              <CommentComponent navigation={navigation} comment={comment} />
+            );
+          })}
+        </View>
       </ScrollView>
+
+      {/* 댓글 작성란 */}
+      <Footer style={styles.commentBox}>
+        <Input
+          style={styles.input}
+          placeholder="게시물에 대해 이야기를 나눠보세요"
+          placeholderTextColor="#999"
+        />
+        <TouchableOpacity style={styles.addButton}>
+          <Text style={styles.addButtonText}>등록</Text>
+        </TouchableOpacity>
+      </Footer>
     </Container>
   );
 }
@@ -148,7 +158,7 @@ const styles = StyleSheet.create({
   post: {
     backgroundColor: '#FFF',
     padding: 20,
-    marginVertical: 7,
+    marginBottom: 7,
     borderBottomWidth: 1,
     borderBottomColor: '#DBDBDB',
   },
@@ -173,7 +183,7 @@ const styles = StyleSheet.create({
   },
   authorRole: {
     color: '#999',
-    fontSize: 15,
+    fontSize: 14,
   },
   time: {
     color: '#AAA',
@@ -181,14 +191,14 @@ const styles = StyleSheet.create({
   },
 
   followButton: {
-    padding: 5,
     backgroundColor: '#FFEDEE',
+    paddingVertical: 6,
+    paddingHorizontal: 10,
     borderRadius: 5,
-    alignSelf: 'center',
-    justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
+    fontSize: 13,
     color: '#EB6552',
   },
 
@@ -224,19 +234,26 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
 
-  button2: {
-    width: 65,
-    height: 30,
-    marginEnd: 15,
-    marginLeft: 80,
+  commentBox: {
+    backgroundColor: '#FFF',
+    borderTopWidth: 1,
+    borderTopColor: '#DBDBDB',
+    alignItems: 'center',
+  },
+  input: {
+    paddingLeft: 20,
+    fontSize: 14,
+  },
+  addButton: {
     backgroundColor: '#ed6653',
     borderRadius: 5,
-    alignSelf: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    margin: 10,
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  buttonText2: {
-    fontSize: 12,
+  addButtonText: {
+    fontSize: 14,
     color: 'white',
   },
 });
