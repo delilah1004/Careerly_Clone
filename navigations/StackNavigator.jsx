@@ -29,7 +29,6 @@ const StackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="FollowerList" component={FollowerList} />
       <Stack.Screen name="Start" component={Start} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
@@ -47,6 +46,7 @@ const StackNavigator = () => {
       <Stack.Screen name="UserUpdate" component={UserUpdate} />
       <Stack.Screen name="PasswordChange" component={PasswordChange} />
       <Stack.Screen name="ProfileUpdate" component={ProfileUpdate} />
+      <Stack.Screen name="FollowerList" component={FollowerList} />
     </Stack.Navigator>
   );
 };
