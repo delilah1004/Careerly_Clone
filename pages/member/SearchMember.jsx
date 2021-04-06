@@ -16,7 +16,7 @@ import MemberCategory from '../../components/member/MemberCategory';
 import data from '../../config/data.json';
 import MemberCard from '../../components/member/MemberCard';
 
-const ScrollWidth = Dimensions.get('window').width * 3;
+const ScrollWidth = Dimensions.get('window').width * 2;
 
 export default function SearchMember() {
   const category = data.category;

@@ -18,6 +18,7 @@ import ServiceCenter from '../pages/set/ServiceCenter';
 import UserUpdate from '../pages/set/UserUpdate';
 import PasswordChange from '../pages/set/PasswordChange';
 import ProfileUpdate from '../pages/mypage/ProfileUpdate';
+import FollowerList from '../pages/FollowerList';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,7 @@ const StackNavigator = () => {
       <Stack.Screen name="UserUpdate" component={UserUpdate} />
       <Stack.Screen name="PasswordChange" component={PasswordChange} />
       <Stack.Screen name="ProfileUpdate" component={ProfileUpdate} />
+      <Stack.Screen name="FollowerList" component={FollowerList} />
     </Stack.Navigator>
   );
 };
