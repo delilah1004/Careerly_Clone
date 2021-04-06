@@ -20,8 +20,6 @@ export default function SignIn({ navigation }) {
   useEffect(() => {
     setTimeout(() => {
       AsyncStorage.getItem('session', (err, token) => {
-        console.log('ASYNCSTORAGE');
-        console.log(token);
         if (token) {
           navigation.push('TabNavigator');
         } else {
