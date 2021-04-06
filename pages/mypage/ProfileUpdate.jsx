@@ -1,35 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-  ScrollView,
-  Image,
-} from 'react-native';
-import {
-  Container,
-  Form,
-  Textarea,
-  Text,
-  View,
-  Item,
-  Input,
-  Header,
-  Button,
-  Content,
-  Thumbnail,
-  Icon,
-} from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { Container, Form, Textarea, Text, View, Thumbnail } from 'native-base';
 
 import HeaderSave from '../../components/header/HeaderSave';
 import InputItem from '../../components/InputItem';
+
 import * as ImagePicker from 'expo-image-picker';
 
 const icon = require('../../assets/profileicon.png');
+
 export default function ProfileUpdate({ navigation }) {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
+
   const [number, setNumber] = useState('');
   const [numberError, setNumberError] = useState('');
 
@@ -47,6 +30,7 @@ export default function ProfileUpdate({ navigation }) {
       setNumberError('');
     }
   };
+
   useEffect(() => {
     getPermission();
   }, []);
@@ -60,6 +44,7 @@ export default function ProfileUpdate({ navigation }) {
       }
     }
   };
+
   const pickImage = async () => {
     console.log('이미지 선택');
     let imageData = await ImagePicker.launchImageLibraryAsync({
@@ -79,10 +64,11 @@ export default function ProfileUpdate({ navigation }) {
     const blob = await response.blob();
     setImageUri(imageData.uri);
   };
+
   return (
     <Container>
       <HeaderSave navigation={navigation} title={'프로필 편집'} />
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         {imageUri == '' || imageUri == undefined ? (
           <TouchableOpacity onPress={() => pickImage()}>
             <Thumbnail large source={icon} style={{ alignSelf: 'center' }} />
