@@ -14,14 +14,14 @@ export async function emailCheck(name, email, password, navigation) {
       },
     });
 
-    let data = {
+    let currentUser = {
       name: name,
       email: email,
       password: password,
     };
 
     if (response.data.success) {
-      navigation.navigate('RolePick', { data });
+      navigation.navigate('RolePick', { currentUser });
     } else {
       Alert.alert('이미 존재하는 이메일입니다!');
     }

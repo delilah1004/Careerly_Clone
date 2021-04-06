@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Start from '../pages/begin/Start';
 import SignIn from '../pages/begin/SignIn';
 import SignUp from '../pages/begin/SignUp';
+import RolePick from '../pages/begin/RolePick';
 import TabNavigator from './TabNavigator';
 import PostCreate from '../pages/main/PostCreate';
 import PostInfo from '../pages/main/PostInfo';
@@ -16,7 +17,6 @@ import Alert from '../pages/set/Alert';
 import ServiceCenter from '../pages/set/ServiceCenter';
 import UserUpdate from '../pages/set/UserUpdate';
 import PasswordChange from '../pages/set/PasswordChange';
-import { Settings } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +30,7 @@ const StackNavigator = () => {
       <Stack.Screen name="Start" component={Start} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="RolePick" component={RolePick} />
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
       <Stack.Screen name="PostCreate" component={PostCreate} />
       <Stack.Screen name="PostInfo" component={PostInfo} />
@@ -37,11 +38,11 @@ const StackNavigator = () => {
       <Stack.Screen name="SearchMember" component={SearchMember} />
       <Stack.Screen name="MemberList" component={MemberList} />
       <Stack.Screen name="MemberInfo" component={MemberInfo} />
+      <Stack.Screen name="Setting" component={Setting} />
       <Stack.Screen name="Alert" component={Alert} />
       <Stack.Screen name="ServiceCenter" component={ServiceCenter} />
       <Stack.Screen name="UserUpdate" component={UserUpdate} />
       <Stack.Screen name="PasswordChange" component={PasswordChange} />
-      <Stack.Screen name="Setting" component={Setting} />
     </Stack.Navigator>
   );
 };
