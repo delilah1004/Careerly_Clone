@@ -18,6 +18,7 @@ import ServiceCenter from '../pages/set/ServiceCenter';
 import UserUpdate from '../pages/set/UserUpdate';
 import PasswordChange from '../pages/set/PasswordChange';
 import ProfileUpdate from '../pages/mypage/ProfileUpdate';
+import FollowerList from '../pages/FollowerList';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ const StackNavigator = () => {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="FollowerList" component={FollowerList} />
       <Stack.Screen name="Start" component={Start} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />

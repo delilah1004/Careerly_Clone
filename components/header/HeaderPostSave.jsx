@@ -9,7 +9,6 @@ import { Header, View, Text, Button } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
 const containerWidth = Dimensions.get('window').width / 3;
-import { postCreate } from '../../config/APIFunctions';
 
 export default function HeaderPostSave({ navigation, upload }) {
   return (
