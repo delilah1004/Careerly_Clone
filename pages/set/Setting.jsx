@@ -1,35 +1,18 @@
-import React, { useState } from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import {
-  Container,
-  Form,
-  Textarea,
-  Text,
-  View,
-  Item,
-  Input,
-  Header,
-  Button,
-  Content,
-} from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import {
-  Foundation,
-  Ionicons,
-  Fontisto,
-  FontAwesome,
-  MaterialCommunityIcons,
-  MaterialIcons,
-  Octicons,
-  AntDesign,
-} from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
+import React from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Container, Text, Content } from 'native-base';
+import { Col, Grid } from 'react-native-easy-grid';
 
 import HeaderBack from '../../components/header/HeaderBack';
 
-import { signOut } from '../../config/APIFunctions';
+import {
+  Ionicons,
+  Fontisto,
+  MaterialCommunityIcons,
+  AntDesign,
+} from '@expo/vector-icons';
 
-const containerWidth = Dimensions.get('window').width / 3;
+import { signOut } from '../../config/UserAPI';
 
 export default function Setting({ navigation }) {
   const logout = async () => {

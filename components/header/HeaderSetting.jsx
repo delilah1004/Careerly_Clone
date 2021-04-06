@@ -11,7 +11,7 @@ export default function HeaderSetting({ navigation }) {
         <Button transparent>
           <EvilIcons name="share-google" size={30} color="black" />
         </Button>
-        <Button transparent onPress={() => navigation.navigate('Setting')}>
+        <Button transparent onPress={() => navigation.push('Setting')}>
           <AntDesign name="setting" size={24} color="black" />
         </Button>
       </Right>

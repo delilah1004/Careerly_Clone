@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import {
   Container,
   Form,
@@ -9,11 +9,12 @@ import {
   Item,
   Input,
 } from 'native-base';
-import { Entypo } from '@expo/vector-icons';
 
 import HeaderPostSave from '../../components/header/HeaderPostSave';
 
-import { postCreate } from '../../config/APIFunctions';
+import { Entypo } from '@expo/vector-icons';
+
+import { createPost } from '../../config/PostAPI';
 
 export default function PostCreate({ navigation }) {
   const [content, setContent] = useState('');
@@ -25,7 +26,7 @@ export default function PostCreate({ navigation }) {
       return false;
     }
 
-    let result = await postCreate(content, url, navigation);
+    let result = await createPost(content, url, navigation);
     if (result) {
       await Alert.alert('업로드 완료');
       setContent('');

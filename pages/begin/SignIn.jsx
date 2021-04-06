@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Container, Form, View, Text } from 'native-base';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loading from '../Loading';
 
 import HeaderBack from '../../components/header/HeaderBack';
 import InputItem from '../../components/InputItem';
 import TextButton from '../../components/TextButton';
 
-import { signIn } from '../../config/APIFunctions';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { signIn } from '../../config/UserAPI';
 
 export default function SignIn({ navigation }) {
   const [ready, setReady] = useState(false);
@@ -21,8 +20,6 @@ export default function SignIn({ navigation }) {
   useEffect(() => {
     setTimeout(() => {
       AsyncStorage.getItem('session', (err, token) => {
-        console.log('ASYNCSTORAGE');
-        console.log(token);
         if (token) {
           navigation.push('TabNavigator');
         } else {
