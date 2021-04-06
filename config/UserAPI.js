@@ -21,7 +21,9 @@ export async function signIn(email, password, navigation) {
     Alert.alert('로그인 성공!');
     navigation.push('TabNavigator');
   } catch (err) {
-    Alert.alert('로그인에 문제가 있습니다! ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -32,7 +34,9 @@ export async function signOut(navigation) {
     Alert.alert('로그아웃!');
     navigation.push('Start');
   } catch (err) {
-    Alert.alert('로그아웃에 문제가 있습니다! ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -56,7 +60,9 @@ export async function register(name, email, password, role, navigation) {
       Alert.alert('회원가입 실패');
     }
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -82,7 +88,9 @@ export async function checkEmail(name, email, password, navigation) {
       Alert.alert('이미 존재하는 이메일입니다!');
     }
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
