@@ -80,7 +80,12 @@ export default function Mypage({ navigation }) {
               paddingBottom: 95,
             }}
           >
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                navigation.navigate('ProfileUpdate');
+              }}
+            >
               <Text style={styles.buttonText}>편집하기</Text>
             </TouchableOpacity>
           </View>
@@ -201,7 +206,12 @@ export default function Mypage({ navigation }) {
               >
                 아직 업로드한 게시물이 없어요.
               </Text>
-              <TouchableOpacity style={styles.button2}>
+              <TouchableOpacity
+                style={styles.button2}
+                onPress={() => {
+                  navigation.navigate('PostCreate');
+                }}
+              >
                 <Text style={styles.buttonText2}>첫게시물 작성하기</Text>
               </TouchableOpacity>
             </View>

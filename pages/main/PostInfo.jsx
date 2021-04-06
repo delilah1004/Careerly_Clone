@@ -41,7 +41,7 @@ export default function PostInfo({ navigation, route }) {
       <Container style={{ backgroundColor: 'rgba(52, 52, 52, 0.1)' }}>
         <Card style={{ height: 750 }}>
           <CardItem style={{ borderRadius: 10 }} header>
-            <Thumbnail small source={im} />
+            <Thumbnail small source={im} style={{ marginTop: 10 }} />
             <Text
               style={{
                 marginLeft: 15,
@@ -61,17 +61,16 @@ export default function PostInfo({ navigation, route }) {
             <Text
               style={{
                 position: 'absolute',
-                marginTop: 10,
                 marginLeft: 70,
-                paddingTop: 35,
-                fontSize: 15,
+                paddingTop: 50,
+                fontSize: 13,
                 color: 'gray',
               }}
             >
               벤처케피탈리스트
             </Text>
 
-            <View style={styles.container}>
+            <View>
               <TouchableOpacity style={styles.button1}>
                 <Text style={styles.buttonText1}>팔로우</Text>
               </TouchableOpacity>
@@ -155,13 +154,13 @@ export default function PostInfo({ navigation, route }) {
           </CardItem>
         </Card>
       </Container>
-      <Item>
+      <Item style={{ backgroundColor: 'white' }}>
         <Input placeholder="게시물에 대해 이야기를 나눠보세요" />
         <TouchableOpacity style={styles.button2}>
           <Text style={styles.buttonText2}>등록</Text>
         </TouchableOpacity>
       </Item>
-      <List>
+      <List style={{ backgroundColor: 'white' }}>
         <CommentCompont />
         <CommentCompont />
         <CommentCompont />

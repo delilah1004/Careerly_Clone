@@ -32,7 +32,7 @@ import {
   MaterialIcons,
   Octicons,
 } from '@expo/vector-icons';
-const im = require('../assets/icon.png');
+const im = require('../../assets/icon.png');
 const share = () => {
   Share.share({
     message: `공유 \n\n 라일락 \n\n 코인`,

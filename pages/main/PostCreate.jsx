@@ -13,8 +13,6 @@ import { Entypo } from '@expo/vector-icons';
 
 import HeaderSavePost from '../../components/header/HeaderPostSave';
 
-const containerWidth = Dimensions.get('window').width / 3;
-
 export default function PostCreate({ navigation }) {
   const [content, setContent] = useState('');
   const [url, setUrl] = useState('');

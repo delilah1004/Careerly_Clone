@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const containerWidth = Dimensions.get('window').width / 3;
 
-export default function HeaderSave({ navigation, title }) {
+export default function HeaderSave({ navigation, title, save }) {
   return (
     <Header style={styles.header} transparent>
       <View style={styles.container}>
@@ -23,7 +23,7 @@ export default function HeaderSave({ navigation, title }) {
       </View>
 
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={save}>
           <Text style={styles.buttonText}>저장하기</Text>
         </TouchableOpacity>
       </View>
