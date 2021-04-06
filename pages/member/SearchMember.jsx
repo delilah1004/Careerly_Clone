@@ -12,10 +12,10 @@ import { Container, Input } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
 import MemberCategory from '../../components/member/MemberCategory';
+import MemberCard from '../../components/member/MemberCard';
 
 import data from '../../config/data.json';
 import members from '../../config/member.json';
-import MemberCard from '../../components/member/MemberCard';
 
 const ScrollWidth = Dimensions.get('window').width * 2.6;
 
