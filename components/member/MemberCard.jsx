@@ -14,8 +14,8 @@ export default function MemberCard() {
         {/* <Image style={styles.cardImage} source={im} /> */}
         <Thumbnail small source={im} style={styles.cardImage} />
         <Text style={styles.name}>오수희</Text>
-        <Text elliipsizeMode="tail" style={styles.role}>
-          콘텐츠 전략가 라
+        <Text style={styles.role} numberOfLines={1}>
+          콘텐츠 전략가
         </Text>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.text}>팔로우</Text>
@@ -49,15 +49,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    width: CardWidth * 0.7,
+    width: CardWidth * 0.65,
     padding: 5,
-    backgroundColor: '#ed6653',
+    backgroundColor: '#FFEDEE',
     borderRadius: 5,
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    color: 'white',
+    color: '#EB6552',
   },
 });

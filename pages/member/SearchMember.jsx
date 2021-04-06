@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Col, Container, Grid, Input, Row } from 'native-base';
+import { Ionicons } from '@expo/vector-icons';
 
 import MemberCategory from '../../components/member/MemberCategory';
 
@@ -74,7 +75,7 @@ export default function SearchMember() {
               }}
             />
             <TouchableOpacity style={styles.button}>
-              <Text style={styles.text}>팔로우</Text>
+              <Ionicons name="search-outline" size={22} color="white" />
             </TouchableOpacity>
           </View>
 
@@ -107,7 +108,7 @@ export default function SearchMember() {
         {/* 회원 카드 목록 */}
         <ScrollView
           style={{ paddingHorizontal: 10 }}
-          showsHorizontalScrollIndicator={false}
+          showsHorizontalScrollIndicato={false}
         >
           <View
             style={{
@@ -115,6 +116,7 @@ export default function SearchMember() {
               flexWrap: 'wrap',
             }}
           >
+            <MemberCard />
             <MemberCard />
             <MemberCard />
             <MemberCard />
@@ -147,7 +149,8 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#ed6653',
-
+    padding: 15,
+    width: 50,
     marginLeft: 10,
     paddingHorizontal: 10,
     borderRadius: 5,
