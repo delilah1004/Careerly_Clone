@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import {
-  Container,
-  Form,
-  Textarea,
-  Text,
-  View,
-  Item,
-  Input,
-} from 'native-base';
+import { Container, Form, Textarea, Text, View, Input } from 'native-base';
 
 import HeaderPostSave from '../../components/header/HeaderPostSave';
 
@@ -38,76 +30,71 @@ export default function PostCreate({ navigation }) {
 
   return (
     <Container>
-      <HeaderPostSave navigation={navigation} upload={upload} />
-      <Form style={styles.form}>
-        <Text style={styles.label}>내용</Text>
-        <Form style={styles.contentLayout}>
+      <HeaderPostSave
+        navigation={navigation}
+        title={'게시물 업로드'}
+        buttonTitle={'업로드하기'}
+        upload={upload}
+      />
+
+      <View style={styles.container}>
+        <Form style={styles.form}>
+          {/* 내용 */}
+          <Text style={styles.label}>내용</Text>
           <Textarea
+            style={styles.content}
             rowSpan={10}
-            borderRadius={8}
-            bordered
+            borderRadius={5}
             value={content}
-            onChangeText={(text) => setContent(text)}
             placeholder="함께 나누고 싶은 생각을 적어주세요"
-            placeholderTextColor="gray"
+            placeholderTextColor="#AAA"
+            onChangeText={(text) => {
+              setContent(text);
+            }}
+          />
+
+          {/* URL */}
+          <View style={styles.url}>
+            <Text style={styles.label}>URL</Text>
+            <Text style={{ color: 'gray', fontSize: 13 }}> (선택)</Text>
+          </View>
+          <Input
+            style={styles.input}
+            placeholder={'공유할 URL을 입력해주세요'}
+            placeholderTextColor="#AAA"
+            value={url}
+            onChangeText={(text) => {
+              setUrl(text);
+            }}
           />
         </Form>
-        <View style={{ marginTop: 20 }}>
-          <Text style={styles.label}>
-            URL<Text style={{ color: 'gray', marginLeft: 5 }}>(선택)</Text>
+
+        {/* Tip */}
+        <View style={styles.tip}>
+          <Text>💡</Text>
+          <Text style={{ marginRight: 20 }}>
+            프로필을 입력한 사람의 평균 팔로워 수가 더 높아요.
           </Text>
-          <Item regular style={styles.url}>
-            <Input
-              placeholder="공유할 URL을 입력해주세요"
-              placeholderTextColor="gray"
-              placeholderFontSize={10}
-              value={url}
-              onChangeText={(text) => setUrl(text)}
-            />
-          </Item>
         </View>
-      </Form>
-      <View
-        style={{
-          marginLeft: 15,
-          marginTop: 30,
-          marginBottom: 20,
-          width: '90%',
-          backgroundColor: 'rgba(52, 52, 52, 0.05)',
-          height: 50,
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          borderRadius: 10,
-        }}
-      >
-        <Text
-          style={{
-            textAlign: 'center',
-            width: 350,
-            color: 'black',
+
+        {/* 투표 만들기 */}
+        <TouchableOpacity
+          style={{ flexDirection: 'row', marginTop: 20 }}
+          onPress={() => {
+            navigation.navigate('VoteCreate');
           }}
         >
-          💡 프로필을 입력한 사람의 평균 팔로워 수가 더 높아요.
-        </Text>
+          <Entypo name="list" size={24} color="#44ADA4" />
+          <Text style={{ fontWeight: '700', marginLeft: 10 }}>투표 만들기</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={{ flexDirection: 'row', paddingTop: 125, paddingLeft: 10 }}
-        onPress={() => {
-          navigation.navigate('VoteCreate');
-        }}
-      >
-        <Entypo name="list" size={24} color="green" />
-        <Text style={{ marginLeft: 10 }}>투표 만들기</Text>
-      </TouchableOpacity>
     </Container>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: '90%',
-    justifyContent: 'center',
     alignSelf: 'center',
   },
   form: {
@@ -122,28 +109,34 @@ const styles = StyleSheet.create({
     marginRight: 5,
     color: '#000',
   },
+  input: {
+    backgroundColor: '#FFF',
+    width: '100%',
+    padding: 10,
+    fontSize: 14,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#DBDBDB',
+    alignSelf: 'center',
+  },
   url: {
-    width: '95%',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  tip: {
+    backgroundColor: '#F7F7F7',
+    flexDirection: 'row',
+    width: '100%',
+    padding: 20,
+    marginVertical: 10,
     borderRadius: 10,
-  },
-  contentLayout: {
-    width: '95%',
-    alignSelf: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-    borderBottomWidth: 1.5,
-    borderBottomColor: '#EEE',
     alignItems: 'center',
   },
-  back: {
-    marginStart: 15,
-  },
-  title: {
-    alignSelf: 'center',
+  content: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#DBDBDB',
   },
   button: {
     width: 70,

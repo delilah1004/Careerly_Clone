@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Dimensions,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import React from 'react';
+import { Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import { Header, View, Text, Button } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
 const containerWidth = Dimensions.get('window').width / 3;
 
-export default function HeaderPostSave({ navigation, upload }) {
+export default function HeaderPostSave({
+  navigation,
+  title,
+  buttonTitle,
+  upload,
+}) {
   return (
     <Header style={styles.header} transparent>
       <View style={styles.container}>
@@ -24,12 +24,12 @@ export default function HeaderPostSave({ navigation, upload }) {
       </View>
 
       <View style={styles.container}>
-        <Text style={styles.title}>게시물 업로드</Text>
+        <Text style={styles.title}>{title}</Text>
       </View>
 
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={() => upload()}>
-          <Text style={styles.buttonText}>업로드하기</Text>
+          <Text style={styles.buttonText}>{buttonTitle}</Text>
         </TouchableOpacity>
       </View>
     </Header>
@@ -52,10 +52,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   button: {
+    backgroundColor: '#ED6653',
+    opacity: 0.5,
     width: 70,
     height: 30,
     marginEnd: 15,
-    backgroundColor: 'pink',
     borderRadius: 5,
     alignSelf: 'flex-end',
     alignItems: 'center',
