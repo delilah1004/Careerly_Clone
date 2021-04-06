@@ -15,12 +15,30 @@ const im = require('../../assets/icon.png');
 const WindowWidth = Dimensions.get('window').width;
 const ThumbSize = WindowWidth * 0.12;
 
+const currentDate = new Date();
+
 export default function MainCard({ navigation, post }) {
   const share = () => {
     Share.share({
       message: `공유 \n\n 라일락 \n\n 코인`,
     });
   };
+
+  // console.log(post);
+
+  const read = () => {
+    // navigation.push('PostInfo');
+    navigation.push('PostInfo', { post });
+  };
+
+  // 날짜 계산하기!
+  // 월이 다르면 N달전
+  // 일이 다르면 N일전
+  // 시간이 다르면 N시간전
+  // 분이 다르면 N분전
+  // 초가 다르면 N초전
+  // console.log(currentDate);
+  // console.log(post.createdAt);
 
   return (
     <View style={styles.post}>
@@ -34,10 +52,10 @@ export default function MainCard({ navigation, post }) {
         <View style={styles.infoBox}>
           <View style={styles.user}>
             {/* 글 작성자 이름 */}
-            <Text style={styles.authorName}>홍길동</Text>
+            <Text style={styles.authorName}>{post.user.name}</Text>
 
             {/* 글 작성자 직함 */}
-            <Text style={styles.authorRole}> 벤처케피탈리스트</Text>
+            <Text style={styles.authorRole}>{post.user.role}</Text>
           </View>
 
           {/* 글 작성 시간 */}
@@ -55,7 +73,7 @@ export default function MainCard({ navigation, post }) {
 
       {/* 추천 현황 */}
       <View style={styles.recommend}>
-        <Text style={styles.number}>22명</Text>
+        <Text style={styles.number}>{post.recommendedCnt}명</Text>
         <Text style={{ fontSize: 13 }}>이 추천했어요</Text>
       </View>
 
@@ -77,15 +95,13 @@ export default function MainCard({ navigation, post }) {
           >
             <MaterialIcons name="share" size={20} color="#A2D9D3" />
             <Text style={styles.buttonText}>공유하기</Text>
-            <Text style={styles.number}>1</Text>
+            <Text style={styles.number}>{post.sharedCnt}</Text>
           </TouchableOpacity>
 
           {/* 댓글 */}
           <TouchableOpacity
             style={[styles.button, { marginStart: 10 }]}
-            onPress={() => {
-              navigation.navigate('PostInfo');
-            }}
+            onPress={read}
           >
             <MaterialCommunityIcons
               name="comment-processing-outline"
@@ -93,7 +109,7 @@ export default function MainCard({ navigation, post }) {
               color="#A2D9D3"
             />
             <Text style={styles.buttonText}>댓글</Text>
-            <Text style={styles.number}>1</Text>
+            <Text style={styles.number}>{post.commentCnt}</Text>
           </TouchableOpacity>
         </View>
       </View>
