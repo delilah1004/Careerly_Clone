@@ -2,15 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Container, Form, View, Text } from 'native-base';
 
+import Loading from '../Loading';
+
 import HeaderBack from '../../components/header/HeaderBack';
 import InputItem from '../../components/InputItem';
 import TextButton from '../../components/TextButton';
 
 import { signIn } from '../../config/APIFunctions';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function SignIn({ navigation }) {
+  const [ready, setReady] = useState(false);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    setTimeout(() => {
+      AsyncStorage.getItem('session', (err, token) => {
+        console.log('ASYNCSTORAGE');
+        console.log(token);
+        if (token) {
+          navigation.push('TabNavigator');
+        } else {
+          setReady(true);
+        }
+      });
+      setReady(true);
+    }, 1000);
+  }, []);
 
   const doSignIn = () => {
     signIn(email, password, navigation);
@@ -35,7 +56,7 @@ export default function SignIn({ navigation }) {
     }
   };
 
-  return (
+  return ready ? (
     <Container>
       <HeaderBack title={'로그인'} navigation={navigation} />
 
@@ -68,6 +89,8 @@ export default function SignIn({ navigation }) {
         </View>
       </View>
     </Container>
+  ) : (
+    <Loading />
   );
 }
 
