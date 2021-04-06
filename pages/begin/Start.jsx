@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Text, View } from 'native-base';
 
-import ButtonItem from '../../components/ButtonItem';
-import TextButton from '../../components/TextButton';
+import ButtonItem from '../../components/begin/ButtonItem';
+import TextButton from '../../components/begin/TextButton';
 
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
