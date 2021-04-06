@@ -1,38 +1,26 @@
 import React from 'react';
+import { StyleSheet, TouchableOpacity, Share } from 'react-native';
 import {
-  StyleSheet,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Share,
-} from 'react-native';
-
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import RNUrlPreview from 'react-native-url-preview';
-import {
-  Container,
-  Header,
-  Content,
-  Left,
-  Icon,
-  Right,
   Text,
-  Button,
   Card,
   CardItem,
   Thumbnail,
+  View,
+  Grid,
+  Col,
+  Row,
 } from 'native-base';
 
+import RNUrlPreview from 'react-native-url-preview';
+
 import {
-  Foundation,
-  Ionicons,
-  Fontisto,
-  FontAwesome,
   MaterialCommunityIcons,
   MaterialIcons,
   Octicons,
 } from '@expo/vector-icons';
+
 const im = require('../../assets/icon.png');
+
 const share = () => {
   Share.share({
     message: `공유 \n\n 라일락 \n\n 코인`,
@@ -41,30 +29,33 @@ const share = () => {
 
 export default function MainCard({ navigation }) {
   return (
-    <Card style={{ height: 350, borderRadius: 10 }}>
-      <CardItem style={{ borderRadius: 10 }} header>
-        <Thumbnail small source={im} />
-        <Text
-          style={{
-            marginLeft: 20,
-            textAlign: 'center',
-            fontWeight: 'bold',
-          }}
-        >
-          홍길동
-          <Text style={{ fontWeight: 'normal' }}> 벤처케피탈리스트</Text>
-        </Text>
-        <Text
-          style={{
-            position: 'absolute',
-            marginLeft: 120,
-            paddingTop: 35,
-            fontSize: 10,
-            color: 'gray',
-          }}
-        >
-          1시간전
-        </Text>
+    // 투표
+    <Card>
+      <CardItem header>
+        <Grid>
+          <Col
+            size={2}
+            style={{
+              backgroundColor: 'green',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Thumbnail medium source={im} />
+          </Col>
+          <Col
+            size={8}
+            style={{
+              justifyContent: 'space-around',
+            }}
+          >
+            <Row>
+              <Text style={styles.name}>홍길동</Text>
+              <Text> 벤처케피탈리스트</Text>
+            </Row>
+            <Text style={styles.time}>1시간전</Text>
+          </Col>
+        </Grid>
       </CardItem>
       <Text style={{ marginLeft: 10 }} numberOfLines={5}>
         컴포넌트들을 페이지처럼 여기게끔 해주는 기능을 하는 네비게이터 태그를
@@ -142,3 +133,13 @@ export default function MainCard({ navigation }) {
     </Card>
   );
 }
+
+const styles = StyleSheet.create({
+  name: {
+    fontWeight: 'bold',
+  },
+  time: {
+    fontSize: 15,
+    color: 'gray',
+  },
+});
