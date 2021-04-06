@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Dimensions,
   StyleSheet,
   TouchableOpacity,
   Alert,
@@ -24,7 +23,7 @@ import {
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
 import HeaderSave from '../../components/header/HeaderSave';
-import InputItem from '../../components/begin/InputItem';
+import InputItem from '../../components/InputItem';
 import * as ImagePicker from 'expo-image-picker';
 
 const icon = require('../../assets/profileicon.png');

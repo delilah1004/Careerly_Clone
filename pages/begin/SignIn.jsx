@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loading from '../Loading';
 
 import HeaderBack from '../../components/header/HeaderBack';
-import InputItem from '../../components/begin/InputItem';
+import InputItem from '../../components/InputItem';
 import TextButton from '../../components/begin/TextButton';
 
 import { signIn } from '../../config/UserAPI';

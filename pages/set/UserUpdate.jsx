@@ -1,39 +1,18 @@
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import {
-  Container,
-  Form,
-  Textarea,
-  Text,
-  View,
-  Item,
-  Input,
-  Header,
-  Button,
-  Content,
-} from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import {
-  Foundation,
-  Ionicons,
-  Fontisto,
-  FontAwesome,
-  MaterialCommunityIcons,
-  MaterialIcons,
-  Octicons,
-  AntDesign,
-} from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
+import { Dimensions, StyleSheet } from 'react-native';
+import { Container, Form, View } from 'native-base';
 
 import HeaderBack from '../../components/header/HeaderBack';
-import InputItem from '../../components/begin/InputItem';
-import ButtonItem from '../../components/begin/ButtonItem';
+
+import InputItem from '../../components/InputItem';
+import ButtonItem from '../../components/ButtonItem';
 
 export default function UserUpdate({ navigation }) {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [number, setNumber] = useState('');
   const [numberError, setNumberError] = useState('');
+
   const UserUpdate = () => {
     if (email == '') {
       setEmailError('이메일을 입력해주세요');
@@ -48,6 +27,7 @@ export default function UserUpdate({ navigation }) {
       setNumberError('');
     }
   };
+
   return (
     <Container>
       <HeaderBack navigation={navigation} title={'계정 정보 변경하기'} />
