@@ -18,14 +18,23 @@ export async function getVoteList() {
   }
 }
 
-export async function createVote(voteInfo) {
+export async function createVote(
+  subject,
+  content,
+  choice1,
+  choice2,
+  navigation
+) {
   try {
     const response = await axios({
       method: 'post',
       url: host + '/vote',
       header: await AsyncStorage.getItem('session'),
       data: {
-        vote: voteInfo,
+        subject: subject,
+        content: content,
+        choice1: choice1,
+        choice2: choice2,
       },
     });
 

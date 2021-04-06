@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import {
   Container,
   Form,
@@ -9,63 +9,48 @@ import {
   Item,
   Input,
 } from 'native-base';
-import { Entypo } from '@expo/vector-icons';
 
-import HeaderPostSave from '../../components/header/HeaderPostSave';
+import { createVote } from '../../config/VoteAPI';
+import { ScrollView } from 'react-native-gesture-handler';
+import HeaderVostSave from '../../components/header/HeaderVostSave';
 
-import { postCreate } from '../../config/APIFunctions';
-
-export default function PostCreate({ navigation }) {
+export default function VoteCreate({ navigation }) {
   const [content, setContent] = useState('');
-  const [url, setUrl] = useState('');
+  const [subject, setSubject] = useState('');
+  const [choice1, setChoice1] = useState('');
+  const [choice2, setChoice2] = useState('');
 
-  const upload = async () => {
+  const voteUpload = async () => {
+    if (subject == '') {
+      Alert.alert('내용을 입력해주세요');
+      return false;
+    }
     if (content == '') {
       Alert.alert('내용을 입력해주세요');
       return false;
     }
 
-    let result = await postCreate(content, url, navigation);
+    let result = await createVote(
+      subject,
+      content,
+      choice1,
+      choice2,
+      navigation
+    );
     if (result) {
       await Alert.alert('업로드 완료');
       setContent('');
-      setUrl('');
+      setSubject('');
+      setChoice1('');
+      setChoice2('');
     } else {
       Alert.alert('업로드 실패');
     }
   };
 
   return (
-    <Container>
-      <HeaderPostSave navigation={navigation} upload={upload} />
-      <Form style={styles.form}>
-        <Text style={styles.label}>내용</Text>
-        <Form style={styles.contentLayout}>
-          <Textarea
-            rowSpan={10}
-            borderRadius={8}
-            bordered
-            value={content}
-            onChangeText={(text) => setContent(text)}
-            placeholder="함께 나누고 싶은 생각을 적어주세요"
-            placeholderTextColor="gray"
-          />
-        </Form>
-        <View style={{ marginTop: 20 }}>
-          <Text style={styles.label}>
-            URL<Text style={{ color: 'gray', marginLeft: 5 }}>(선택)</Text>
-          </Text>
-          <Item regular style={styles.url}>
-            <Input
-              placeholder="공유할 URL을 입력해주세요"
-              placeholderTextColor="gray"
-              placeholderFontSize={10}
-              value={url}
-              onChangeText={(text) => setUrl(text)}
-            />
-          </Item>
-        </View>
-      </Form>
+    <ScrollView>
+      <HeaderVostSave navigation={navigation} upload={voteUpload} />
       <View
         style={{
           marginLeft: 15,
@@ -81,43 +66,73 @@ export default function PostCreate({ navigation }) {
       >
         <Text
           style={{
-            textAlign: 'center',
+            paddingLeft: 5,
             width: 350,
             color: 'black',
           }}
         >
-          💡 프로필을 입력한 사람의 평균 팔로워 수가 더 높아요.
+          💡 투표는 등록일로부터 7일간 진행됩니다.
         </Text>
       </View>
-      <TouchableOpacity
-        style={{ flexDirection: 'row', paddingTop: 125, paddingLeft: 10 }}
-        onPress={() => {
-          navigation.navigate('VoteCreate');
-        }}
-      >
-        <Entypo name="list" size={24} color="green" />
-        <Text style={{ marginLeft: 10 }}>투표 만들기</Text>
-      </TouchableOpacity>
-    </Container>
+      <Form style={styles.form}>
+        <View>
+          <Text style={styles.label}>투표주제</Text>
+          <Item regular style={styles.url}>
+            <Input
+              placeholder="사람들에게 묻고 싶은 주제를 적어주세요."
+              placeholderTextColor="gray"
+              placeholderFontSize={10}
+              value={subject}
+              onChangeText={(text) => setSubject(text)}
+            />
+          </Item>
+          <Text style={styles.label}>투표 설명</Text>
+          <Form style={styles.contentLayout}>
+            <Textarea
+              rowSpan={6}
+              borderRadius={5}
+              bordered
+              value={content}
+              onChangeText={(text) => setContent(text)}
+              placeholder=" 투표에 대한 자세한 설명을 적어주세요."
+              placeholderTextColor="gray"
+            />
+          </Form>
+          <Text style={styles.label}>투표 선택지 </Text>
+          <Item regular style={styles.url}>
+            <Input
+              placeholder="선택지 1"
+              placeholderTextColor="gray"
+              placeholderFontSize={10}
+              value={choice1}
+              onChangeText={(text) => setChoice1(text)}
+            />
+          </Item>
+          <Item regular style={styles.url}>
+            <Input
+              placeholder="선택지 2"
+              placeholderTextColor="gray"
+              placeholderFontSize={10}
+              value={choice2}
+              onChangeText={(text) => setChoice2(text)}
+            />
+          </Item>
+        </View>
+      </Form>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '90%',
-    justifyContent: 'center',
-    alignSelf: 'center',
-  },
   form: {
     width: '100%',
     marginVertical: 10,
   },
   label: {
     fontWeight: 'bold',
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 10,
-    marginLeft: 10,
+    marginLeft: 15,
     marginRight: 5,
     color: '#000',
   },
@@ -125,37 +140,13 @@ const styles = StyleSheet.create({
     width: '95%',
     alignSelf: 'center',
     justifyContent: 'center',
-    marginTop: 10,
+    marginTop: 20,
     borderRadius: 10,
   },
   contentLayout: {
     width: '95%',
     alignSelf: 'center',
     justifyContent: 'center',
-  },
-  header: {
-    borderBottomWidth: 1.5,
-    borderBottomColor: '#EEE',
-    alignItems: 'center',
-  },
-  back: {
-    marginStart: 15,
-  },
-  title: {
-    alignSelf: 'center',
-  },
-  button: {
-    width: 70,
-    height: 30,
-    marginEnd: 15,
-    backgroundColor: 'pink',
-    borderRadius: 5,
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    fontSize: 12,
-    color: 'white',
+    marginTop: 10,
   },
 });

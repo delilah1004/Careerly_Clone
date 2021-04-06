@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { Container, Form, View } from 'native-base';
 
 import HeaderBack from '../../components/header/HeaderBack';
+
 import InputItem from '../../components/InputItem';
 import ButtonItem from '../../components/ButtonItem';
 

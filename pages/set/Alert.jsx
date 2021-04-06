@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Switch } from 'react-native';
+import { StyleSheet, Switch, Dimensions } from 'react-native';
 import { Container, Text, Content } from 'native-base';
 import { Col, Grid } from 'react-native-easy-grid';
 
 import HeaderBack from '../../components/header/HeaderBack';
+
+const containerWidth = Dimensions.get('window').width / 3;
 
 export default function Alerte({ navigation }) {
   const [isEnabled, setIsEnabled] = useState(false);
