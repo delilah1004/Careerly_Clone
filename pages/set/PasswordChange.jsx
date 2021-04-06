@@ -1,32 +1,8 @@
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import {
-  Container,
-  Form,
-  Textarea,
-  Text,
-  View,
-  Item,
-  Input,
-  Header,
-  Button,
-  Content,
-} from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import {
-  Foundation,
-  Ionicons,
-  Fontisto,
-  FontAwesome,
-  MaterialCommunityIcons,
-  MaterialIcons,
-  Octicons,
-  AntDesign,
-} from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
+import { StyleSheet } from 'react-native';
+import { Container, Form, View } from 'native-base';
 
 import HeaderBack from '../../components/header/HeaderBack';
-import TextButton from '../../components/TextButton';
 import InputItem from '../../components/InputItem';
 import ButtonItem from '../../components/ButtonItem';
 
@@ -35,6 +11,7 @@ export default function UserUpdate({ navigation }) {
   const [passwordError, setPasswordError] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [passwordConfirmError, setPasswordConfirmError] = useState('');
+
   const PassWordChange = () => {
     if (password == '') {
       setPasswordError('비밀번호를 입력해주세요');
@@ -50,6 +27,7 @@ export default function UserUpdate({ navigation }) {
       setPasswordConfirmError('');
     }
   };
+
   return (
     <Container>
       <HeaderBack navigation={navigation} title={'비밀번호 변경하기'} />

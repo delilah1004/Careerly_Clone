@@ -1,27 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Dimensions,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-  ScrollView,
-  Image,
-} from 'react-native';
-import {
-  Container,
-  Form,
-  Textarea,
-  Text,
-  View,
-  Item,
-  Input,
-  Header,
-  Button,
-  Content,
-  Thumbnail,
-  Icon,
-} from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { Container, Form, Textarea, Text, View, Thumbnail } from 'native-base';
 
 import HeaderSave from '../../components/header/HeaderSave';
 import InputItem from '../../components/InputItem';
