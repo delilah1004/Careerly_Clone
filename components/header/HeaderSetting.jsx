@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Header, Left, Body, Right, Text, Button } from 'native-base';
-import { Ionicons, EvilIcons, AntDesign } from '@expo/vector-icons';
+import { Header, Body, Right, Button } from 'native-base';
+import { EvilIcons, AntDesign } from '@expo/vector-icons';
 
 export default function HeaderSetting({ navigation }) {
   return (
@@ -21,8 +21,6 @@ export default function HeaderSetting({ navigation }) {
 
 const styles = StyleSheet.create({
   header: {
-    borderBottomWidth: 1.5,
-    borderBottomColor: '#EEE',
     justifyContent: 'center',
     alignItems: 'center',
   },
