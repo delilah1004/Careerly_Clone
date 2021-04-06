@@ -3,7 +3,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Container, View, Text } from 'native-base';
 
-import CategoryButton from '../../components/RoleCategory';
+import RoleCategory from '../../components/begin/RoleCategory';
 
 import data from '../../config/data.json';
 
@@ -29,7 +29,7 @@ export default function RolePick({ navigation, route }) {
         <View style={styles.categoryContainer}>
           {category.map((title) => {
             return (
-              <CategoryButton
+              <RoleCategory
                 title={title}
                 setRole={setRole}
                 currentRole={role}

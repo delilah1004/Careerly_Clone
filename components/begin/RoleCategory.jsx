@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'native-base';
 
-export default function CategoryButton({ title, setRole, currentRole }) {
+export default function RoleCategory({ title, setRole, currentRole }) {
   if (title == currentRole) {
     return (
       <TouchableOpacity
