@@ -25,11 +25,6 @@ export default function InputItem({ title, hint, type, setFunc }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
   label: {
     fontWeight: 'bold',
     marginBottom: 10,
