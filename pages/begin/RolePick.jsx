@@ -11,10 +11,11 @@ import { register } from '../../config/APIFunctions';
 
 export default function RolePick({ navigation, route }) {
   const category = data.category;
-  const info = route.params;
+  const info = route.params.currentUser;
   const [role, setRole] = useState('');
 
   const doSignUp = () => {
+    console.log(info.name, info.email, info.password, role);
     register(info.name, info.email, info.password, role, navigation);
   };
 
@@ -27,7 +28,13 @@ export default function RolePick({ navigation, route }) {
         </Text>
         <View style={styles.categoryContainer}>
           {category.map((title) => {
-            return <CategoryButton title={title} setFunc={setRole} />;
+            return (
+              <CategoryButton
+                title={title}
+                setRole={setRole}
+                currentRole={role}
+              />
+            );
           })}
         </View>
 

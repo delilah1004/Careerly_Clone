@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'native-base';
 
-export default function CategoryButton({ title, setFunc }) {
-  const [active, setActive] = useState(false);
-
-  return (
-    <TouchableOpacity
-      style={[styles.box, active ? styles.activeBox : styles.defaultBox]}
-      onPress={() => {
-        setActive(true);
-        setFunc(title);
-      }}
-    >
-      <Text
-        style={[styles.text, active ? styles.activeText : styles.defaultText]}
+export default function CategoryButton({ title, setRole, currentRole }) {
+  if (title == currentRole) {
+    return (
+      <TouchableOpacity
+        style={[styles.box, styles.activeBox]}
+        onPress={() => {
+          setRole(title);
+        }}
       >
-        {title}
-      </Text>
-    </TouchableOpacity>
-  );
+        <Text style={[styles.text, styles.activeText]}>{title}</Text>
+      </TouchableOpacity>
+    );
+  } else {
+    return (
+      <TouchableOpacity
+        style={[styles.box, styles.defaultBox]}
+        onPress={() => {
+          setRole(title);
+        }}
+      >
+        <Text style={[styles.text, styles.defaultText]}>{title}</Text>
+      </TouchableOpacity>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
