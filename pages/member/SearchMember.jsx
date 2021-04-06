@@ -23,9 +23,8 @@ export default function SearchMember({ navigation }) {
   const category = data.category;
 
   const [name, setName] = useState('');
-  const [memberList, setMemberList] = useState(members.result);
-
   const [cate, setCate] = useState('추천');
+  const [memberList, setMemberList] = useState(members.result);
 
   const setFunc = (title) => {
     setCate(title);
@@ -38,7 +37,7 @@ export default function SearchMember({ navigation }) {
   return (
     <Container style={styles.container}>
       {/* 회원 카드 목록 */}
-      <ScrollView showsHorizontalScrollIndicato={false}>
+      <ScrollView showsHorizontalScrollIndicator={false}>
         <View
           style={{
             width: '85%',
