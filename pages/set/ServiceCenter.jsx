@@ -26,7 +26,6 @@ import {
 import { Entypo } from '@expo/vector-icons';
 
 import HeaderBack from '../../components/header/HeaderBack';
-import TextButton from '../../components/TextButton';
 
 const containerWidth = Dimensions.get('window').width / 3;
 export default function ServiceCenter({ navigation }) {

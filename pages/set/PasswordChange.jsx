@@ -26,9 +26,8 @@ import {
 import { Entypo } from '@expo/vector-icons';
 
 import HeaderBack from '../../components/header/HeaderBack';
-import TextButton from '../../components/TextButton';
-import InputItem from '../../components/InputItem';
-import ButtonItem from '../../components/ButtonItem';
+import InputItem from '../../components/begin/InputItem';
+import ButtonItem from '../../components/begin/ButtonItem';
 
 export default function UserUpdate({ navigation }) {
   const [password, setPassword] = useState('');
