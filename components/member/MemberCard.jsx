@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, Thumbnail, View } from 'native-base';
 
 const im = require('../../assets/icon.png');
@@ -7,15 +7,14 @@ const im = require('../../assets/icon.png');
 const ViewWidth = Dimensions.get('window').width;
 const CardWidth = ViewWidth * 0.5;
 
-export default function MemberCard() {
+export default function MemberCard({ navigation, member }) {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.card}>
-        {/* <Image style={styles.cardImage} source={im} /> */}
         <Thumbnail small source={im} style={styles.cardImage} />
-        <Text style={styles.name}>오수희</Text>
+        <Text style={styles.name}>{member.name}</Text>
         <Text style={styles.role} numberOfLines={1}>
-          콘텐츠 전략가
+          {member.role}
         </Text>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.text}>팔로우</Text>

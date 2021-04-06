@@ -3,46 +3,27 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 import {
   StyleSheet,
   View,
-  Text,
   ScrollView,
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { Col, Container, Grid, Input, Row } from 'native-base';
+import { Container, Input } from 'native-base';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import MemberCategory from '../../components/member/MemberCategory';
 
 import data from '../../config/data.json';
+import members from '../../config/member.json';
 import MemberCard from '../../components/member/MemberCard';
 
-const ScrollWidth = Dimensions.get('window').width * 2;
+const ScrollWidth = Dimensions.get('window').width * 2.6;
 
-export default function SearchMember() {
+export default function SearchMember({ navigation }) {
   const category = data.category;
 
-  const members = {
-    result: [
-      { _id: 'dd', name: 'test1', role: '백엔드 개발자', userImg: 'aaa.jpg' },
-      {
-        _id: 'dd',
-        name: 'test2',
-        role: '클라이언트 개발자',
-        userImg: 'nnn.jpg',
-      },
-      { _id: 'dd', name: 'test3', role: '게임 개발자', userImg: 'eee.jpg' },
-      {
-        _id: 'dd',
-        name: 'test4',
-        role: '데이터사이언티스트 ',
-        userImg: 'qqq.jpg',
-      },
-    ],
-  };
-
-  const [searchName, setSearchName] = useState('');
-
-  const [memberList, setMemberList] = useState(members);
+  const [name, setName] = useState('');
+  const [memberList, setMemberList] = useState(members.result);
 
   const [cate, setCate] = useState('추천');
 
@@ -50,12 +31,18 @@ export default function SearchMember() {
     setCate(title);
   };
 
+  const search = () => {
+    navigation.push('MemberList', { name });
+  };
+
   return (
     <Container style={styles.container}>
-      <View style={styles.content}>
+      {/* 회원 카드 목록 */}
+      <ScrollView showsHorizontalScrollIndicato={false}>
         <View
           style={{
             width: '85%',
+            alignSelf: 'center',
             alignItems: 'center',
             justifyContent: 'center',
           }}
@@ -71,10 +58,10 @@ export default function SearchMember() {
               style={styles.input}
               placeholder={'이름으로 검색해보세요.'}
               onChangeText={(text) => {
-                setSearchName(text);
+                setName(text);
               }}
             />
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={search}>
               <Ionicons name="search-outline" size={22} color="white" />
             </TouchableOpacity>
           </View>
@@ -105,24 +92,18 @@ export default function SearchMember() {
             </View>
           </ScrollView>
         </View>
-        {/* 회원 카드 목록 */}
-        <ScrollView
-          style={{ paddingHorizontal: 10 }}
-          showsHorizontalScrollIndicato={false}
+
+        <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+          }}
         >
-          <View
-            style={{
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-            }}
-          >
-            <MemberCard />
-            <MemberCard />
-            <MemberCard />
-            <MemberCard />
-          </View>
-        </ScrollView>
-      </View>
+          {memberList.map((member) => {
+            return <MemberCard navigation={navigation} member={member} />;
+          })}
+        </View>
+      </ScrollView>
     </Container>
   );
 }

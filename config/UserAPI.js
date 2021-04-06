@@ -98,7 +98,8 @@ export async function getMemberListByName(name, pageNum) {
       },
     });
 
-    console.log(response.data);
+    // console.log(response.data.result);
+    return response.data.result;
   } catch (err) {
     Alert.alert('Error! => ', err.message);
   }

@@ -1,0 +1,44 @@
+{
+  "result": [
+    {
+      "_id": "dd",
+      "name": "test1",
+      "role": "백엔드 개발자",
+      "followerCnt": 0,
+      "followingCnt": 0,
+      "id": "606c22dab3b3594b4f3d111e"
+    },
+    {
+      "_id": "dd",
+      "name": "test2",
+      "role": "클라이언트 개발자",
+      "followerCnt": 0,
+      "followingCnt": 0,
+      "id": "606c22dab3b3594b4faaa16e"
+    },
+    {
+      "_id": "dd",
+      "name": "test3",
+      "role": "게임 개발자",
+      "followerCnt": 0,
+      "followingCnt": 0,
+      "id": "606c22dab3b3fffb4f3d116e"
+    },
+    {
+      "_id": "dd",
+      "name": "test4",
+      "role": "데이터사이언티스트 ",
+      "followerCnt": 0,
+      "followingCnt": 0,
+      "id": "606c22dab3b55555b4f3d116e"
+    },
+    {
+      "_id": "dd",
+      "name": "test5",
+      "role": "프로덕트 매니저 ",
+      "followerCnt": 0,
+      "followingCnt": 0,
+      "id": "606c22dab3b578786b4f3d116e"
+    }
+  ]
+}
