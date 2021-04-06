@@ -3,7 +3,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Container, Text, Form, View } from 'native-base';
 
-import InputItem from '../../components/begin/InputItem';
+import InputItem from '../../components/InputItem';
 import TextButton from '../../components/begin/TextButton';
 
 import { checkEmail } from '../../config/UserAPI';
