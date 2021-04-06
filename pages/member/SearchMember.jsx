@@ -38,21 +38,9 @@ export default function SearchMember({ navigation }) {
     <Container style={styles.container}>
       {/* 회원 카드 목록 */}
       <ScrollView showsHorizontalScrollIndicator={false}>
-        <View
-          style={{
-            width: '85%',
-            alignSelf: 'center',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <View style={styles.content}>
           {/* 검색창 */}
-          <View
-            style={{
-              marginTop: 20,
-              flexDirection: 'row',
-            }}
-          >
+          <View style={styles.searchBar}>
             <Input
               style={styles.input}
               placeholder={'이름으로 검색해보세요.'}
@@ -114,31 +102,36 @@ const styles = StyleSheet.create({
     backgroundColor: '#EEE',
   },
   content: {
+    width: '88%',
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  cateContainer: {
-    flex: 1,
+  searchBar: {
+    marginTop: 20,
+    height: 50,
+    flexDirection: 'row',
   },
   input: {
     backgroundColor: '#FFF',
+    height: '100%',
+    fontSize: 14,
     borderRadius: 5,
     paddingLeft: 15,
     alignSelf: 'center',
   },
   button: {
     backgroundColor: '#ed6653',
-    padding: 15,
     width: 50,
+    height: '100%',
+    paddingHorizontal: 15,
     marginLeft: 10,
-    paddingHorizontal: 10,
     borderRadius: 5,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: {
-    color: 'white',
+  cateContainer: {
+    flex: 1,
   },
 });
