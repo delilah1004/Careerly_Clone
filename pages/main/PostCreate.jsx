@@ -11,7 +11,9 @@ import {
 } from 'native-base';
 import { Entypo } from '@expo/vector-icons';
 
-import HeaderSavePost from '../../components/header/HeaderPostSave';
+import HeaderPostSave from '../../components/header/HeaderPostSave';
+
+import { postCreate } from '../../config/APIFunctions';
 
 export default function PostCreate({ navigation }) {
   const [content, setContent] = useState('');
@@ -22,23 +24,20 @@ export default function PostCreate({ navigation }) {
       Alert.alert('내용을 입력해주세요');
       return false;
     }
-    let data = {
-      content: content,
-      url: url,
-      date: new Date.getTime(),
-    };
-    let result = await ContentPost(data);
+
+    let result = await postCreate(content, url, navigation);
     if (result) {
       await Alert.alert('업로드 완료');
       setContent('');
       setUrl('');
-      navigation.push('TabNavigator');
+    } else {
+      Alert.alert('업로드 실패');
     }
   };
 
   return (
     <Container>
-      <HeaderSavePost navigation={navigation} upload={upload} />
+      <HeaderPostSave navigation={navigation} upload={upload} />
       <Form style={styles.form}>
         <Text style={styles.label}>내용</Text>
         <Form style={styles.contentLayout}>

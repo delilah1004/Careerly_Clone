@@ -54,6 +54,22 @@ export async function register(name, email, password, role, navigation) {
   }
 }
 
+export async function postCreate(content, shareurl) {
+  try {
+    const response = await axios({
+      method: 'post',
+      url: host + '/post',
+      data: {
+        content: content,
+        shareurl: shareurl,
+      },
+    });
+    return response.data.success;
+  } catch (err) {
+    Alert.alert('무슨 문제가 있는 것 같아요! => ', err.message);
+  }
+}
+
 export async function signIn(email, password, navigation) {
   try {
     const response = await axios({

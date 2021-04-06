@@ -1,9 +1,15 @@
-import React from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import { Header, View, Text, Button } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
 const containerWidth = Dimensions.get('window').width / 3;
+import { postCreate } from '../../config/APIFunctions';
 
 export default function HeaderPostSave({ navigation, upload }) {
   return (

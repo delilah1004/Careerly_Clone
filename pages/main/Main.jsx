@@ -33,10 +33,9 @@ export default function Main({ navigation }) {
       >
         <View
           style={{
-            marginLeft: 5,
             marginTop: 30,
             marginBottom: 20,
-            width: 400,
+            width: 420,
             backgroundColor: '#FFF',
             height: 80,
             justifyContent: 'center',
