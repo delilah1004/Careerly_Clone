@@ -6,7 +6,7 @@ export default function TextButton({ title, navigation, page }) {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate(page);
+        navigation.push(page);
       }}
     >
       <Text
