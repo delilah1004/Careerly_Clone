@@ -1,33 +1,35 @@
 import React from 'react';
 import {
   StyleSheet,
-  View,
-  ScrollView,
   TouchableOpacity,
   Share,
+  Dimensions,
+  ScrollView,
 } from 'react-native';
 import {
   Container,
-  Text,
-  Card,
-  CardItem,
-  Thumbnail,
   Input,
   Item,
   List,
+  Text,
+  Thumbnail,
+  View,
 } from 'native-base';
 
-import HeaderBack from '../../components/header/HeaderBack';
-import CommentCompont from '../../components/CommentComponent';
-
-import RNUrlPreview from 'react-native-url-preview';
 import {
   MaterialCommunityIcons,
   MaterialIcons,
   Octicons,
 } from '@expo/vector-icons';
 
+import RNUrlPreview from 'react-native-url-preview';
+import HeaderBack from '../../components/header/HeaderBack';
+import CommentComponent from '../../components/CommentComponent';
+
 const im = require('../../assets/icon.png');
+
+const WindowWidth = Dimensions.get('window').width;
+const ThumbSize = WindowWidth * 0.12;
 
 export default function PostInfo({ navigation, route }) {
   const share = () => {
@@ -35,152 +37,193 @@ export default function PostInfo({ navigation, route }) {
       message: `공유 \n\n 라일락 \n\n 코인`,
     });
   };
-  return (
-    <ScrollView>
-      <HeaderBack title={`홍길동 님의 게시물`} navigation={navigation} />
-      <Container style={{ backgroundColor: 'rgba(52, 52, 52, 0.1)' }}>
-        <Card style={{ height: 750 }}>
-          <CardItem style={{ borderRadius: 10 }} header>
-            <Thumbnail small source={im} style={{ marginTop: 10 }} />
-            <Text
-              style={{
-                marginLeft: 15,
-                textAlign: 'center',
-                fontWeight: 'bold',
-              }}
-            >
-              홍길동
-              <View style={{ marginLeft: 30, paddingRight: 20 }}>
-                <Text
-                  style={{ fontSize: 10, textAlign: 'center', marginLeft: 10 }}
-                >
-                  3시간 전
-                </Text>
-              </View>
-            </Text>
-            <Text
-              style={{
-                position: 'absolute',
-                marginLeft: 70,
-                paddingTop: 50,
-                fontSize: 13,
-                color: 'gray',
-              }}
-            >
-              벤처케피탈리스트
-            </Text>
 
-            <View>
-              <TouchableOpacity style={styles.button1}>
-                <Text style={styles.buttonText1}>팔로우</Text>
+  const post = route.params.post;
+
+  return (
+    <Container style={styles.container}>
+      <HeaderBack title={`홍길동 님의 게시물`} navigation={navigation} />
+      <ScrollView>
+        <View style={styles.post}>
+          {/* 글 작성자 정보 */}
+          <View style={styles.itemHeader}>
+            {/* 글 작성자 이미지 */}
+            <TouchableOpacity>
+              <Thumbnail style={styles.thumbnail} source={im} />
+            </TouchableOpacity>
+
+            <View style={styles.infoBox}>
+              <View style={styles.user}>
+                {/* 글 작성자 이름 */}
+                <Text style={styles.authorName}>{post.user.name}</Text>
+
+                {/* 글 작성 시간 */}
+                <Text style={styles.time}>1시간전</Text>
+              </View>
+
+              {/* 글 작성자 직함 */}
+              <Text style={styles.authorRole}>{post.user.role}</Text>
+            </View>
+
+            {/* 팔로우 버튼 */}
+            <TouchableOpacity style={styles.followButton}>
+              <Text style={styles.text}>팔로우</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* 글 */}
+          <Text style={styles.content} numberOfLines={6} ellipsizeMode={'tail'}>
+            {post.content}
+          </Text>
+
+          {/* 링크 연결 */}
+          <RNUrlPreview text={post.url} />
+
+          {/* 추천 현황 */}
+          <View style={styles.recommend}>
+            <Text style={styles.number}>{post.recommendedCnt}명</Text>
+            <Text style={{ fontSize: 13 }}>이 추천했어요</Text>
+          </View>
+
+          {/* 각종 버튼 */}
+          <View style={styles.buttonContainer}>
+            {/* 추천해요 */}
+            <TouchableOpacity style={styles.button}>
+              <Octicons name="light-bulb" size={20} color="#A2D9D3" />
+              <Text style={styles.buttonText}>추천해요</Text>
+            </TouchableOpacity>
+
+            <View style={{ flexDirection: 'row' }}>
+              {/* 공유하기 */}
+              <TouchableOpacity
+                style={[styles.button]}
+                onPress={() => {
+                  share();
+                }}
+              >
+                <MaterialIcons name="share" size={20} color="#A2D9D3" />
+                <Text style={styles.buttonText}>공유하기</Text>
+                <Text style={styles.number}>{post.sharedCnt}</Text>
+              </TouchableOpacity>
+
+              {/* 댓글 */}
+              <TouchableOpacity
+                style={[styles.button, { marginStart: 10 }]}
+                onPress={() => {
+                  navigation.navigate('PostInfo', { post });
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="comment-processing-outline"
+                  size={20}
+                  color="#A2D9D3"
+                />
+                <Text style={styles.buttonText}>댓글</Text>
+                <Text style={styles.number}>{post.commentCnt}</Text>
               </TouchableOpacity>
             </View>
-          </CardItem>
-          <CardItem>
-            <Text style={{ marginLeft: 10, marginTop: 5 }}>
-              `[식목일: 종이 명함말고 커리어리 프로필 어떠세요? 🌳] 커리어리
-              여러분 안녕하세요! 🌈 4월 5일, 오늘은 식목일이에요. 커리어리
-              팀원들과 나무에 대해 이야기하던 중, 종이 (나무)로 만드는 명함에
-              대한 이야기 나왔어요! 그래서 오늘은 종이 명함에 대해서 짧게
-              이야기해보려고 해요. 📌종이 명함 - 무엇이 문제일까요? ✅ 매년, 약
-              100억 장의 종이 명함이 만들어져요. ✅ 매년, 약 600만 그루의 나무가
-              명함을 만드는 데에 사용돼요. ✅ 매년, 만들어지는 명함의 약 90%는
-              버려져요. 환경 보호를 위해 종이 명함 대신, 커리어리 프로필을
-              공유해보는 게 어떨까요? 👍 (+ 커리어리 프로필을 알아도 서로 연락할
-              길이 없는 것 같다고요? 곧 있을 업데이트를 기대해주세요!🙏)`
-            </Text>
-          </CardItem>
-          <CardItem>
-            <RNUrlPreview text={'https://www.youtube.com/'} />
-          </CardItem>
-          <CardItem footer>
-            <TouchableOpacity style={{ flexDirection: 'row' }}>
-              <Octicons
-                name="light-bulb"
-                style={{
-                  alignSelf: 'center',
-                }}
-                size={15}
-                color="#8BFAF5"
-              />
-              <Text style={{ marginLeft: 3, fontSize: 12 }}>추천해요</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{ flexDirection: 'row' }}
-              onPress={() => {
-                share();
-              }}
-            >
-              <MaterialIcons
-                style={{
-                  marginLeft: 200,
-                  marginRight: 10,
-                  alignSelf: 'center',
-                }}
-                name="share"
-                size={15}
-                color="#8BFAF5"
-              />
-              <Text
-                style={{
-                  fontSize: 12,
-                  borderRightWidth: 1,
-                  paddingRight: 10,
-                  borderRightColor: 'gray',
-                }}
-              >
-                공유하기
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{ flexDirection: 'row' }}>
-              <MaterialCommunityIcons
-                name="comment-processing-outline"
-                size={15}
-                style={{
-                  marginLeft: 10,
-                  marginRight: 5,
-                  alignSelf: 'center',
-                }}
-                color="#8BFAF5"
-              />
-              <Text
-                style={{
-                  fontSize: 12,
-                }}
-              >
-                댓글
-              </Text>
-            </TouchableOpacity>
-          </CardItem>
-        </Card>
-      </Container>
-      <Item style={{ backgroundColor: 'white' }}>
-        <Input placeholder="게시물에 대해 이야기를 나눠보세요" />
-        <TouchableOpacity style={styles.button2}>
-          <Text style={styles.buttonText2}>등록</Text>
-        </TouchableOpacity>
-      </Item>
-      <List style={{ backgroundColor: 'white' }}>
-        <CommentCompont />
-        <CommentCompont />
-        <CommentCompont />
-      </List>
-    </ScrollView>
+          </View>
+        </View>
+        <Item style={{ backgroundColor: 'white' }}>
+          <Input placeholder="게시물에 대해 이야기를 나눠보세요" />
+          <TouchableOpacity style={styles.button2}>
+            <Text style={styles.buttonText2}>등록</Text>
+          </TouchableOpacity>
+        </Item>
+        <List style={{ backgroundColor: 'white' }}>
+          <CommentComponent />
+          <CommentComponent />
+          <CommentComponent />
+        </List>
+      </ScrollView>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  button1: {
-    width: 65,
-    height: 30,
-    marginEnd: 15,
-    marginLeft: 135,
-    backgroundColor: '#FAE0E8',
-    borderRadius: 5,
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-    justifyContent: 'center',
+  container: {
+    flex: 1,
+    backgroundColor: '#EEE',
   },
+  post: {
+    backgroundColor: '#FFF',
+    padding: 20,
+    marginVertical: 7,
+    borderBottomWidth: 1,
+    borderBottomColor: '#DBDBDB',
+  },
+  itemHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  thumbnail: {
+    width: ThumbSize,
+    height: ThumbSize,
+  },
+  infoBox: {
+    marginLeft: 10,
+    justifyContent: 'space-around',
+  },
+  user: {
+    flexDirection: 'row',
+  },
+  authorName: {
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  authorRole: {
+    color: '#999',
+    fontSize: 15,
+  },
+  time: {
+    color: '#AAA',
+    fontSize: 13,
+  },
+
+  followButton: {
+    padding: 5,
+    backgroundColor: '#FFEDEE',
+    borderRadius: 5,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: '#EB6552',
+  },
+
+  content: {
+    marginVertical: 10,
+    fontSize: 14,
+    lineHeight: 27,
+  },
+
+  itemUrl: {},
+
+  recommend: {
+    flexDirection: 'row',
+    marginVertical: 10,
+  },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+    justifyContent: 'space-between',
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 13,
+    marginLeft: 5,
+  },
+  number: {
+    fontSize: 13,
+    fontWeight: '700',
+    marginLeft: 4,
+  },
+
   button2: {
     width: 65,
     height: 30,
@@ -191,10 +234,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  buttonText1: {
-    fontSize: 12,
-    color: '#ed6653',
   },
   buttonText2: {
     fontSize: 12,
