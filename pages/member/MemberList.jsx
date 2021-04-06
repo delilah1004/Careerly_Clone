@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
 import {
   ScrollView,
   StyleSheet,
@@ -11,7 +10,6 @@ import { Container, Text, View } from 'native-base';
 import Loading from '../Loading';
 
 import HeaderBack from '../../components/header/HeaderBack';
-import HeaderShare from '../../components/header/HeaderShare';
 import MemberCard from '../../components/member/MemberCard';
 
 import { getMemberListByName } from '../../config/UserAPI';

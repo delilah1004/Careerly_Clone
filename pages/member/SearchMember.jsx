@@ -44,6 +44,7 @@ export default function SearchMember({ navigation }) {
             <Input
               style={styles.input}
               placeholder={'이름으로 검색해보세요.'}
+              placeholderTextColor="#AAA"
               onChangeText={(text) => {
                 setName(text);
               }}
