@@ -1,17 +1,6 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Share } from 'react-native';
-import {
-  Text,
-  Card,
-  CardItem,
-  Thumbnail,
-  View,
-  Grid,
-  Col,
-  Row,
-} from 'native-base';
-
-import RNUrlPreview from 'react-native-url-preview';
+import { StyleSheet, TouchableOpacity, Share, Dimensions } from 'react-native';
+import { Text, Thumbnail, View } from 'native-base';
 
 import {
   MaterialCommunityIcons,
@@ -19,129 +8,163 @@ import {
   Octicons,
 } from '@expo/vector-icons';
 
+import RNUrlPreview from 'react-native-url-preview';
+
 const im = require('../../assets/icon.png');
 
-const share = () => {
-  Share.share({
-    message: `공유 \n\n 라일락 \n\n 코인`,
-  });
-};
+const WindowWidth = Dimensions.get('window').width;
+const ThumbSize = WindowWidth * 0.12;
 
-export default function MainCard({ navigation }) {
+export default function MainCard({ navigation, post }) {
+  const share = () => {
+    Share.share({
+      message: `공유 \n\n 라일락 \n\n 코인`,
+    });
+  };
+
   return (
-    // 투표
-    <Card>
-      <CardItem header>
-        <Grid>
-          <Col
-            size={2}
-            style={{
-              backgroundColor: 'green',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <TouchableOpacity>
-              <Thumbnail medium source={im} />
-            </TouchableOpacity>
-          </Col>
-          <Col
-            size={8}
-            style={{
-              justifyContent: 'space-around',
-            }}
-          >
-            <Row>
-              <Text style={styles.name}>홍길동</Text>
-              <Text> 벤처케피탈리스트</Text>
-            </Row>
-            <Text style={styles.time}>1시간전</Text>
-          </Col>
-        </Grid>
-      </CardItem>
-      <Text style={{ marginLeft: 10 }} numberOfLines={5}>
-        컴포넌트들을 페이지처럼 여기게끔 해주는 기능을 하는 네비게이터 태그를
-        선언합니다. 위에서 선언한 const Stack = createStackNavigator(); Stack
-        변수에 들어있는 태그를 꺼내 사용합니다. Stack.Navigator 태그 내부엔
-        페이지(화면)를 스타일링 할 수 있는 다양한 옵션들이 담겨 있습니다
+    <View style={styles.post}>
+      {/* 글 작성자 정보 */}
+      <View style={styles.itemHeader}>
+        {/* 글 작성자 이미지 */}
+        <TouchableOpacity>
+          <Thumbnail style={styles.thumbnail} source={im} />
+        </TouchableOpacity>
+
+        <View style={styles.infoBox}>
+          <View style={styles.user}>
+            {/* 글 작성자 이름 */}
+            <Text style={styles.authorName}>홍길동</Text>
+
+            {/* 글 작성자 직함 */}
+            <Text style={styles.authorRole}> 벤처케피탈리스트</Text>
+          </View>
+
+          {/* 글 작성 시간 */}
+          <Text style={styles.time}>1시간전</Text>
+        </View>
+      </View>
+
+      {/* 글 */}
+      <Text style={styles.content} numberOfLines={6} ellipsizeMode={'tail'}>
+        {post.content}
       </Text>
-      <CardItem footer>
-        <RNUrlPreview text={'https://www.youtube.com/'} />
-      </CardItem>
-      <CardItem>
-        <TouchableOpacity style={{ flexDirection: 'row' }}>
-          <Octicons
-            name="light-bulb"
-            style={{
-              alignSelf: 'center',
-            }}
-            size={15}
-            color="#8BFAF5"
-          />
-          <Text style={{ marginLeft: 3, fontSize: 12 }}>추천해요</Text>
+
+      {/* 링크 연결 */}
+      <RNUrlPreview text={post.url} />
+
+      {/* 추천 현황 */}
+      <View style={styles.recommend}>
+        <Text style={styles.number}>22명</Text>
+        <Text style={{ fontSize: 13 }}>이 추천했어요</Text>
+      </View>
+
+      {/* 각종 버튼 */}
+      <View style={styles.buttonContainer}>
+        {/* 추천해요 */}
+        <TouchableOpacity style={styles.button}>
+          <Octicons name="light-bulb" size={20} color="#A2D9D3" />
+          <Text style={styles.buttonText}>추천해요</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{ flexDirection: 'row' }}
-          onPress={() => {
-            share();
-          }}
-        >
-          <MaterialIcons
-            style={{
-              marginLeft: 200,
-              marginRight: 10,
-              alignSelf: 'center',
-            }}
-            name="share"
-            size={15}
-            color="#8BFAF5"
-          />
-          <Text
-            style={{
-              fontSize: 12,
-              borderRightWidth: 1,
-              paddingRight: 10,
-              borderRightColor: 'gray',
+
+        <View style={{ flexDirection: 'row' }}>
+          {/* 공유하기 */}
+          <TouchableOpacity
+            style={[styles.button]}
+            onPress={() => {
+              share();
             }}
           >
-            공유하기
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{ flexDirection: 'row' }}
-          onPress={() => {
-            navigation.navigate('PostInfo');
-          }}
-        >
-          <MaterialCommunityIcons
-            name="comment-processing-outline"
-            size={15}
-            style={{
-              marginLeft: 10,
-              marginRight: 5,
-              alignSelf: 'center',
-            }}
-            color="#8BFAF5"
-          />
-          <Text
-            style={{
-              fontSize: 12,
+            <MaterialIcons name="share" size={20} color="#A2D9D3" />
+            <Text style={styles.buttonText}>공유하기</Text>
+            <Text style={styles.number}>1</Text>
+          </TouchableOpacity>
+
+          {/* 댓글 */}
+          <TouchableOpacity
+            style={[styles.button, { marginStart: 10 }]}
+            onPress={() => {
+              navigation.navigate('PostInfo');
             }}
           >
-            댓글
-          </Text>
-        </TouchableOpacity>
-      </CardItem>
-    </Card>
+            <MaterialCommunityIcons
+              name="comment-processing-outline"
+              size={20}
+              color="#A2D9D3"
+            />
+            <Text style={styles.buttonText}>댓글</Text>
+            <Text style={styles.number}>1</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  name: {
+  post: {
+    backgroundColor: '#FFF',
+    padding: 20,
+    marginVertical: 7,
+    borderBottomWidth: 1,
+    borderBottomColor: '#DBDBDB',
+  },
+  itemHeader: {
+    flexDirection: 'row',
+  },
+  thumbnail: {
+    width: ThumbSize,
+    height: ThumbSize,
+  },
+  infoBox: {
+    marginLeft: 10,
+    justifyContent: 'space-around',
+  },
+  user: {
+    flexDirection: 'row',
+  },
+  authorName: {
+    fontSize: 15,
     fontWeight: 'bold',
   },
-  time: {
+  authorRole: {
+    color: '#999',
     fontSize: 15,
-    color: 'gray',
+  },
+  time: {
+    color: '#AAA',
+    fontSize: 13,
+  },
+
+  content: {
+    marginVertical: 10,
+    fontSize: 14,
+    lineHeight: 27,
+  },
+
+  itemUrl: {},
+
+  recommend: {
+    flexDirection: 'row',
+    marginVertical: 10,
+  },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+    justifyContent: 'space-between',
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 13,
+    marginLeft: 5,
+  },
+  number: {
+    fontSize: 13,
+    fontWeight: '700',
+    marginLeft: 4,
   },
 });
