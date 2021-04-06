@@ -1,69 +1,56 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, Thumbnail, View } from 'native-base';
 
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import RNUrlPreview from 'react-native-url-preview';
-import {
-  Container,
-  Header,
-  Content,
-  Left,
-  Icon,
-  Right,
-  Text,
-  Button,
-  Card,
-  CardItem,
-  Thumbnail,
-  Tab,
-  Tabs,
-} from 'native-base';
-
-import {
-  Foundation,
-  Ionicons,
-  Fontisto,
-  FontAwesome,
-  SimpleLineIcons,
-} from '@expo/vector-icons';
 const im = require('../assets/icon.png');
+
+const WindowWidth = Dimensions.get('window').width;
+const CardWidth = WindowWidth * 0.5;
 
 export default function MyCard({ navigation }) {
   return (
-    <TouchableOpacity>
-      <Card style={{ width: 210, height: 200, borderRadius: 10, elevation: 3 }}>
-        <CardItem style={{ marginLeft: 65 }} header>
-          <Thumbnail small source={im} />
-        </CardItem>
+    <View style={styles.cardContainer}>
+      <Thumbnail small source={im} />
 
-        <CardItem>
-          <Text style={{ alignSelf: 'center', marginLeft: 10 }}>
-            내 커리어를 등록하고 채용, 네트워크 기회를 만드세요
-          </Text>
-        </CardItem>
-        <CardItem footer>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>추가하기</Text>
-          </TouchableOpacity>
-        </CardItem>
-      </Card>
-    </TouchableOpacity>
+      <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+        <Text style={{ fontWeight: 'bold', marginVertical: 10 }}>
+          경력 또는 학력 추가
+        </Text>
+        <Text
+          style={{ fontSize: 14, textAlign: 'center', marginVertical: 15 }}
+          numberOfLines={2}
+        >
+          내 커리어를 등록하고 채용, 네트워크 기회를 만드세요
+        </Text>
+      </View>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>경력 및 학력 작성</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 const styles = StyleSheet.create({
+  cardContainer: {
+    backgroundColor: '#FFF',
+    width: CardWidth,
+    padding: 15,
+    margin: 5,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  card: {},
   button: {
-    width: 100,
-    height: 30,
-    marginEnd: 15,
+    width: '100%',
+    paddingVertical: 8,
     backgroundColor: '#FFEDEE',
     borderRadius: 5,
-    marginLeft: 40,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
   buttonText: {
-    fontSize: 12,
+    fontSize: 13,
     color: '#CF7568',
   },
 });

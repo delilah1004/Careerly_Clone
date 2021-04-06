@@ -1,69 +1,56 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Dimensions,
   StyleSheet,
   TouchableOpacity,
   ProgressBarAndroid,
   Image,
+  ScrollView,
 } from 'react-native';
-import {
-  Container,
-  Form,
-  Textarea,
-  Text,
-  View,
-  Item,
-  Input,
-  Header,
-  Icon,
-  Button,
-  Thumbnail,
-  Content,
-  Tab,
-  Tabs,
-} from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Container, Text, View, Thumbnail, Tab, Tabs } from 'native-base';
+
 import * as Animatable from 'react-native-animatable';
 
-import {
-  Foundation,
-  Ionicons,
-  Fontisto,
-  FontAwesome,
-  SimpleLineIcons,
-} from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+
+import HeaderSetting from '../../components/header/HeaderSetting';
+import Mycard from '../../components/Mycard';
 
 const none = require('../../assets/none.png');
 const gift = require('../../assets/gift.png');
-const containerWidth = Dimensions.get('window').width / 3;
-const containerheight = Dimensions.get('screen').height;
 
-import Mycard from '../../components/Mycard';
+const WindowWidth = Dimensions.get('window').width;
+const WindowHeight = Dimensions.get('window').height;
+const ThumbSize = WindowWidth * 0.2;
 
-import HeaderSetting from '../../components/header/HeaderSetting';
-import { ScrollView } from 'react-native-gesture-handler';
 export default function Mypage({ navigation }) {
   return (
-    <ScrollView>
-      <Container style={{ height: containerheight * 1.65 }}>
+    <Container style={styles.container}>
+      <ScrollView>
         <HeaderSetting navigation={navigation} />
 
-        <Grid style={styles.banner}>
-          <Col size={5} style={{ padding: 15 }}>
+        <View style={styles.banner}>
+          {/* 초대 광고 메시지 */}
+          <View style={styles.adBox}>
             <Text style={styles.bannertext}>초대할때마다 </Text>
             <Text style={styles.bannertext}>혜택이 계속 쌓입니다!</Text>
-          </Col>
+          </View>
+
+          {/* 선물 애니메이션 */}
           <Animatable.View
             animation="jello"
             easing="ease-in"
             iterationCount={'infinite'}
             direction="alternate"
           >
-            <Col size={2} style={{ padding: 20 }}>
-              <Thumbnail source={gift} />
-            </Col>
+            <Thumbnail
+              style={{ width: ThumbSize, height: ThumbSize }}
+              source={gift}
+            />
           </Animatable.View>
-        </Grid>
+        </View>
+
+        {/* 프로필 */}
         <View
           style={{
             justifyContent: 'center',
@@ -71,28 +58,38 @@ export default function Mypage({ navigation }) {
             marginTop: 30,
           }}
         >
+          {/* 사용자 사진 */}
           <FontAwesome name="user-circle-o" size={60} color="gray" />
+
+          {/* 프로필 편집 버튼 */}
           <View
             style={{
               position: 'absolute',
-              zIndex: 2,
-              paddingLeft: 280,
-              paddingBottom: 95,
+              top: 0,
+              right: 0,
             }}
           >
             <TouchableOpacity
-              style={styles.button}
+              style={styles.editButton}
               onPress={() => {
                 navigation.navigate('ProfileUpdate');
               }}
             >
-              <Text style={styles.buttonText}>편집하기</Text>
+              <Text style={styles.editText}>편집하기</Text>
             </TouchableOpacity>
           </View>
-          <Text style={{ fontSize: 25, marginTop: 10 }}>홍길동</Text>
-          <Text style={{ fontSize: 15, marginTop: 10, color: '#777777' }}>
+
+          {/* 사용자 이름 */}
+          <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 10 }}>
+            홍길동
+          </Text>
+
+          {/* 사용자 직함 */}
+          <Text style={{ fontSize: 14, marginVertical: 5, color: '#999' }}>
             소프트웨어 엔지니어
           </Text>
+
+          {/* 팔로워/팔로잉 */}
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity style={{ flexDirection: 'row', marginRight: 25 }}>
               <Text
@@ -128,6 +125,8 @@ export default function Mypage({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+
+        {/* 프로필 완성도 */}
         <View
           style={{
             backgroundColor: '#EEEEEE',
@@ -168,13 +167,20 @@ export default function Mypage({ navigation }) {
             }}
           />
 
-          <ScrollView style={{ marginTop: 10 }} horizontal={true}>
+          {/* 프로필 완성 스테이지 카드 */}
+          <ScrollView
+            style={{ margin: 10 }}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
             <Mycard />
             <Mycard />
             <Mycard />
             <Mycard />
           </ScrollView>
         </View>
+
+        {/* 게시물 관리 탭 */}
         <Tabs locked={true} tabBarUnderlineStyle={{ backgroundColor: 'grey' }}>
           <Tab
             heading="게시물"
@@ -183,39 +189,39 @@ export default function Mypage({ navigation }) {
             tabStyle={{ backgroundColor: '#FFFFFF' }}
             activeTabStyle={{ backgroundColor: '#FFFFFF' }}
           >
-            <View style={styles.container}>
+            {/* 내가 작성한 게시물 */}
+            <View style={styles.postContainer}>
               <Image
                 source={none}
                 resizeMode="cover"
                 style={{
                   width: 100,
                   height: 100,
+                  marginVertical: 20,
                   borderRadius: 10,
                   justifyContent: 'center',
                   alignSelf: 'center',
-                  marginLeft: 250,
                 }}
               />
               <Text
                 style={{
-                  width: 250,
-                  marginTop: 15,
                   textAlign: 'center',
-                  marginLeft: 70,
                 }}
               >
                 아직 업로드한 게시물이 없어요.
               </Text>
               <TouchableOpacity
-                style={styles.button2}
+                style={styles.addFirstPostButton}
                 onPress={() => {
                   navigation.navigate('PostCreate');
                 }}
               >
-                <Text style={styles.buttonText2}>첫게시물 작성하기</Text>
+                <Text style={styles.addFirstPostText}>첫게시물 작성하기</Text>
               </TouchableOpacity>
             </View>
           </Tab>
+
+          {/* 내가 추천한 게시물 */}
           <Tab
             heading="추천한 게시물"
             activeTextStyle={{ color: 'black', fontWeight: '600' }}
@@ -224,59 +230,64 @@ export default function Mypage({ navigation }) {
             activeTabStyle={{ backgroundColor: '#FFFFFF' }}
           ></Tab>
         </Tabs>
-      </Container>
-    </ScrollView>
+      </ScrollView>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: containerWidth,
   },
   banner: {
-    marginTop: 20,
+    flexDirection: 'row',
     backgroundColor: '#2C98F1',
-    maxHeight: 90,
+    width: '90%',
+    marginTop: 20,
+    paddingHorizontal: 20,
     borderRadius: 10,
-    width: '85%',
     alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  adBox: {
+    marginVertical: 20,
   },
   bannertext: {
-    marginTop: 3,
-    marginLeft: 11,
-    fontSize: 20,
+    fontSize: 17,
     color: 'white',
     fontWeight: '700',
   },
-  button: {
-    width: 70,
-    height: 30,
-    marginEnd: 15,
-    backgroundColor: '#EEEEEE',
+  editButton: {
+    backgroundColor: '#EEE',
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    marginEnd: 20,
     borderRadius: 5,
-    alignSelf: 'flex-end',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonText: {
+  editText: {
     fontSize: 12,
     color: '#777777',
   },
-  button2: {
-    width: 135,
-    height: 30,
-
-    marginTop: 20,
+  addFirstPostButton: {
     backgroundColor: '#ed6653',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginVertical: 20,
     borderRadius: 5,
-    marginLeft: 250,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonText2: {
-    fontSize: 15,
+  addFirstPostText: {
+    fontSize: 14,
     color: 'white',
+  },
+  postContainer: {
+    flex: 1,
+    // height: WindowHeight,
+    padding: 20,
   },
 });
