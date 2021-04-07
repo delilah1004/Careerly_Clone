@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { View, Text, Grid, Col, Content } from 'native-base';
 
+import { OptimizedFlatList } from 'react-native-optimized-flatlist';
+
 import { FontAwesome } from '@expo/vector-icons';
 
 import Loading from '../Loading';
@@ -55,7 +57,7 @@ export default function Main({ navigation }) {
       {postList.length == 0 ? (
         <ActivityIndicator size="large" />
       ) : (
-        <FlatList
+        <OptimizedFlatList
           data={postList}
           ListHeaderComponent={() => {
             return (
@@ -98,7 +100,7 @@ export default function Main({ navigation }) {
               </Content>
             );
           }}
-          onEndReachedThreshold={0}
+          onEndReachedThreshold={0.1}
           onEndReached={async () => {
             console.log('바닥 가까이 감: 리프레시');
             let nextData = await getNextData(pageNum, setPageNum);
