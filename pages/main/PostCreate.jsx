@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
-import { Container, Form, Textarea, Text, View, Input } from 'native-base';
+import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Container, Form, Textarea, Text, View } from 'native-base';
 
 import HeaderPostSave from '../../components/header/HeaderPostSave';
 
@@ -13,19 +13,8 @@ export default function PostCreate({ navigation }) {
   const [url, setUrl] = useState('');
 
   const upload = async () => {
-    if (content == '') {
-      Alert.alert('내용을 입력해주세요');
-      return false;
-    }
-
-    let result = await createPost(content, url, navigation);
-    if (result) {
-      await Alert.alert('업로드 완료');
-      setContent('');
-      setUrl('');
-    } else {
-      Alert.alert('업로드 실패');
-    }
+    // createPost(content, url);
+    createPost(navigation, content, url);
   };
 
   return (

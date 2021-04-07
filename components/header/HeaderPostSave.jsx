@@ -28,7 +28,7 @@ export default function HeaderPostSave({
       </View>
 
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={() => upload()}>
+        <TouchableOpacity style={styles.button} onPress={upload}>
           <Text style={styles.buttonText}>{buttonTitle}</Text>
         </TouchableOpacity>
       </View>
