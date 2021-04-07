@@ -10,24 +10,40 @@ import { View, Text, Grid, Col } from 'native-base';
 
 import { FontAwesome } from '@expo/vector-icons';
 
+import Loading from '../Loading';
+
 import VoteCard from '../../components/vote/VoteCard';
 import MainCard from '../../components/main/MainCard';
 
 import posts from '../../config/posts.json';
+import { getPostList } from '../../config/PostAPI';
 
 const WindowWidth = Dimensions.get('window').width;
 const ThumbSize = WindowWidth * 0.12;
 
 export default function Main({ navigation }) {
   const [postList, setPostList] = useState(posts.result);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     navigation.addListener('beforeRemove', (e) => {
       e.preventDefault();
     });
-  }, []);
+    const unsubscrbie = navigation.addListener('focus', (e) => {
+      console.log('메인페이지 접속중');
+    });
+    download();
+    return unsubscrbie;
+  }, [navigation]);
 
-  return (
+  const download = async () => {
+    const result = await getPostList();
+
+    setPostList(result);
+    setReady(true);
+  };
+
+  return ready ? (
     <ScrollView style={styles.container}>
       {/* 투표 */}
       <ScrollView
@@ -70,6 +86,8 @@ export default function Main({ navigation }) {
         return <MainCard navigation={navigation} post={post} />;
       })}
     </ScrollView>
+  ) : (
+    <Loading />
   );
 }
 
