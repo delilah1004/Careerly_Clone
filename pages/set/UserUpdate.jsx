@@ -1,34 +1,58 @@
-import React, { useState } from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
-import { Container, Form, View } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Container, Form, Text, View } from 'native-base';
+
+import Loading from '../Loading';
 
 import HeaderBack from '../../components/header/HeaderBack';
-
 import InputItem from '../../components/InputItem';
-import ButtonItem from '../../components/ButtonItem';
+
+import { updateUserInfo, getUserInfo } from '../../config/UserAPI';
 
 export default function UserUpdate({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [number, setNumber] = useState('');
-  const [numberError, setNumberError] = useState('');
+  const [ready, setReady] = useState(false);
 
-  const UserUpdate = () => {
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+
+  const update = async () => {
+    await updateUserInfo(email, phone, navigation);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      getUserEmail();
+      setReady(true);
+    });
+  }, []);
+
+  const getUserEmail = async () => {
+    const result = await getUserInfo();
+    setEmail(result.email);
+  };
+
+  let showButton = () => {
     if (email == '') {
-      setEmailError('이메일을 입력해주세요');
-      return false;
+      return (
+        <TouchableOpacity disabled style={[styles.button, styles.disabled]}>
+          <Text style={styles.text}>계정정보 변경하기</Text>
+        </TouchableOpacity>
+      );
     } else {
-      setEmailError('');
-    }
-    if (number == '') {
-      setNumberError('휴대폰 번호를 입력해주세요');
-      return false;
-    } else {
-      setNumberError('');
+      return (
+        <TouchableOpacity
+          style={[styles.button, styles.active]}
+          onPress={() => {
+            update();
+          }}
+        >
+          <Text style={styles.text}>계정정보 변경하기</Text>
+        </TouchableOpacity>
+      );
     }
   };
 
-  return (
+  return ready ? (
     <Container>
       <HeaderBack navigation={navigation} title={'계정 정보 변경하기'} />
       <View style={styles.container}>
@@ -36,30 +60,24 @@ export default function UserUpdate({ navigation }) {
           <InputItem
             title={'이메일'}
             hint={'이메일 입력'}
-            placeholder={'이메일 입력'}
             type={'email'}
             value={email}
-            error={emailError}
             setFunc={setEmail}
           />
           <InputItem
             title={'휴대폰 번호'}
             hint={'휴대폰 번호 입력'}
-            type={'number'}
-            placeholder={'휴대폰 번호 입력'}
-            value={number}
-            error={numberError}
-            setFunc={setNumber}
+            type={'phone'}
+            value={phone}
+            setFunc={setPhone}
           />
         </Form>
 
-        <ButtonItem
-          title="계정정보 변경하기"
-          navigation={navigation}
-          page={'Setting'}
-        />
+        {showButton()}
       </View>
     </Container>
+  ) : (
+    <Loading />
   );
 }
 
@@ -100,5 +118,23 @@ const styles = StyleSheet.create({
   textButton: {
     fontSize: 12,
     textDecorationLine: 'underline',
+  },
+  button: {
+    backgroundColor: '#ed6653',
+    width: '100%',
+    height: 50,
+    borderRadius: 5,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  active: {
+    opacity: 1,
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  text: {
+    color: 'white',
   },
 });
