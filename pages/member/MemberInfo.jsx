@@ -1,298 +1,300 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dimensions,
   StyleSheet,
+  ScrollView,
   TouchableOpacity,
-  ProgressBarAndroid,
   Image,
 } from 'react-native';
-import {
-  Container,
-  Form,
-  Textarea,
-  Text,
-  View,
-  Item,
-  Input,
-  Header,
-  Icon,
-  Button,
-  Thumbnail,
-  Content,
-  Tab,
-  Tabs,
-} from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import * as Animatable from 'react-native-animatable';
+import { Container, Text, View, Thumbnail, Tab, Tabs } from 'native-base';
 
-import {
-  Foundation,
-  Ionicons,
-  Fontisto,
-  FontAwesome,
-  SimpleLineIcons,
-  Entypo,
-} from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 const none = require('../../assets/none.png');
 const none2 = require('../../assets/123.png');
 const im = require('../../assets/icon.png');
-const containerWidth = Dimensions.get('window').width / 3;
-const containerheight = Dimensions.get('screen').height;
+
+const WindowWidth = Dimensions.get('window').width;
+const CardWidth = WindowWidth * 0.5;
+const ThumbSize = WindowWidth * 0.2;
+
+import { getMemberInfo } from '../../config/UserAPI';
 
 import HeaderShare from '../../components/header/HeaderShare';
-import { ScrollView } from 'react-native-gesture-handler';
-export default function Mypage({ navigation }) {
-  return (
-    <ScrollView>
-      <Container style={{ height: containerheight * 1.65 }}>
-        <HeaderShare navigation={navigation} />
+import Loading from '../Loading';
 
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 10,
-          }}
-        >
-          <Thumbnail large source={im} style={{ marginTop: 10 }} />
-          <View
-            style={{
-              position: 'absolute',
-              zIndex: 2,
-              paddingLeft: 280,
-              paddingBottom: 95,
-            }}
-          ></View>
-          <Text style={{ fontSize: 25, marginTop: 10 }}>홍길동</Text>
-          <Text style={{ fontSize: 15, marginTop: 10, color: '#777777' }}>
-            소프트웨어 엔지니어
-          </Text>
-          <View style={{ flexDirection: 'row' }}>
-            <TouchableOpacity style={{ flexDirection: 'row', marginRight: 25 }}>
-              <Text
-                style={{
-                  fontSize: 15,
-                  marginTop: 10,
-                  color: 'black',
-                }}
-              >
-                팔로워
-              </Text>
-              <Text
-                style={{
-                  fontSize: 15,
-                  marginTop: 10,
-                  marginLeft: 30,
-                  color: 'black',
-                }}
-              >
-                |
+export default function MemberInfo({ navigation, route }) {
+  const memberId = route.params;
+
+  const [ready, setReady] = useState(false);
+  const [memberInfo, setMemberInfo] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      download();
+      setReady(true);
+    });
+  }, []);
+
+  const download = async () => {
+    const result = await getMemberInfo(memberId);
+
+    setMemberInfo(result);
+  };
+
+  return ready ? (
+    <Container style={styles.container}>
+      <HeaderShare navigation={navigation} />
+      <ScrollView>
+        {/* 프로필 */}
+        <View style={styles.profileBox}>
+          {/* 사용자 사진 */}
+          <Thumbnail large source={im} />
+
+          {/* 사용자 이름 */}
+          <Text style={styles.userName}>{memberInfo.name}</Text>
+
+          {/* 사용자 직함 */}
+          <Text style={styles.userRole}>{memberInfo.role}</Text>
+
+          {/* 팔로워/팔로잉 */}
+          <View style={styles.followBox}>
+            <TouchableOpacity
+              style={[styles.flexRow, { alignItems: 'center' }]}
+              onPress={() => navigation.push('FollowerList', user._id)}
+            >
+              <Text style={styles.followText}>팔로워</Text>
+              <Text style={styles.followNumberText}>
+                {memberInfo.followerCnt}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{ flexDirection: 'row' }}>
-              <Text
-                style={{
-                  fontSize: 15,
-                  marginTop: 10,
-                  color: 'black',
-                }}
-              >
-                팔로잉
+            <Text
+              style={{ color: '#C7C7C7', fontSize: 13, marginHorizontal: 20 }}
+            >
+              |
+            </Text>
+            <TouchableOpacity
+              style={[styles.flexRow, { alignItems: 'center' }]}
+              onPress={() => navigation.push('FollowingList', memberInfo._id)}
+            >
+              <Text style={styles.followText}>팔로잉</Text>
+              <Text style={styles.followNumberText}>
+                {memberInfo.followingCnt}
               </Text>
             </TouchableOpacity>
           </View>
 
-          <Text
-            style={{
-              paddingTop: 20,
-              paddingLeft: 30,
-            }}
-          >
+          {/* 자기소개 */}
+          <Text style={{ fontSize: 14, marginBottom: 20 }}>
             자기소개입니다.
           </Text>
-          <Text
-            style={{
-              paddingTop: 20,
-              paddingLeft: 30,
-            }}
-          >
-            👍 (+ 커리어리 프로필을 알아도 서로 연락할 길이 없는 것 같다고요? 곧
-            있을 업데이트를 기대해주세요!🙏)`
-          </Text>
+
+          {/* 팔로우 버튼 */}
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>팔로우</Text>
           </TouchableOpacity>
         </View>
+
+        {/* 학력/경력 */}
         <View
           style={{
             marginTop: 30,
+            padding: 20,
             borderTopWidth: 10,
             borderBottomWidth: 10,
             borderColor: '#EEEEEE',
           }}
         >
-          <View style={{ marginLeft: 30 }}>
-            <View style={{ flexDirection: 'row' }}>
-              <Entypo
-                name="suitcase"
-                size={15}
-                color="#8BFAF5"
-                style={{ marginRight: 10, marginTop: 3 }}
-              />
-              <Text style={{ fontWeight: 'bold' }}>
-                노나라
-                <Text style={{ fontSize: 15, fontWeight: 'normal' }}>
-                  {'   '}
-                  마케터
-                </Text>
+          <View style={{ flexDirection: 'row', marginVertical: 10 }}>
+            <Entypo
+              name="suitcase"
+              size={15}
+              color="#A2D9D3"
+              style={{ marginRight: 10, marginTop: 3 }}
+            />
+            <Text style={{ fontWeight: 'bold' }}>
+              서울대학교 AI연구원
+              <Text style={{ fontSize: 15, fontWeight: 'normal' }}>
+                {'   '}
+                웹개발자
               </Text>
-            </View>
-            <View style={{ flexDirection: 'row' }}>
-              <Entypo
-                name="suitcase"
-                size={15}
-                color="#8BFAF5"
-                style={{ marginRight: 10, marginTop: 3 }}
-              />
-              <Text style={{ fontWeight: 'bold' }}>
-                노나라
-                <Text style={{ fontSize: 15, fontWeight: 'normal' }}>
-                  {'   '}
-                  마케터
-                </Text>
+            </Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', marginVertical: 10 }}>
+            <Entypo
+              name="suitcase"
+              size={15}
+              color="#A2D9D3"
+              style={{ marginRight: 10, marginTop: 3 }}
+            />
+            <Text style={{ fontWeight: 'bold' }}>
+              네이버
+              <Text style={{ fontSize: 15, fontWeight: 'normal' }}>
+                {'   '}
+                체험형 인턴
               </Text>
-            </View>
-            <View style={{ flexDirection: 'row' }}>
-              <Entypo
-                name="suitcase"
-                size={15}
-                color="#8BFAF5"
-                style={{ marginRight: 10, marginTop: 3 }}
-              />
-              <Text style={{ fontWeight: 'bold' }}>
-                노나라
-                <Text style={{ fontSize: 15, fontWeight: 'normal' }}>
-                  {'   '}
-                  마케터
-                </Text>
+            </Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', marginVertical: 10 }}>
+            <Entypo
+              name="suitcase"
+              size={15}
+              color="#A2D9D3"
+              style={{ marginRight: 10, marginTop: 3 }}
+            />
+            <Text style={{ fontWeight: 'bold' }}>
+              카카오
+              <Text style={{ fontSize: 15, fontWeight: 'normal' }}>
+                {'   '}
+                체험형 인턴
               </Text>
-            </View>
+            </Text>
           </View>
         </View>
-        <Tabs locked={true} tabBarUnderlineStyle={{ backgroundColor: 'grey' }}>
+
+        {/* 게시물 관리 탭 */}
+        <Tabs locked={true} tabBarUnderlineStyle={{ backgroundColor: '#555' }}>
+          {/* 내가 작성한 게시글 목록 */}
           <Tab
             heading="게시물"
-            activeTextStyle={{ color: 'black', fontWeight: '600' }}
-            textStyle={{ color: 'grey' }}
-            tabStyle={{ backgroundColor: '#FFFFFF' }}
-            activeTabStyle={{ backgroundColor: '#FFFFFF' }}
+            activeTextStyle={styles.tabBaractiveText}
+            textStyle={styles.tabBarText}
+            tabStyle={{ backgroundColor: '#FFF' }}
+            activeTabStyle={styles.tabBarBackground}
           >
-            <View style={styles.container}>
-              <Image
-                source={none}
-                resizeMode="cover"
-                style={{
-                  width: 100,
-                  height: 100,
-                  borderRadius: 10,
-                  justifyContent: 'center',
-                  alignSelf: 'center',
-                  marginLeft: 250,
-                }}
-              />
-              <Text
-                style={{
-                  width: 250,
-                  marginTop: 15,
-                  textAlign: 'center',
-                  marginLeft: 70,
-                }}
-              >
+            {/* 내가 작성한 게시물 */}
+            <View style={styles.postContainer}>
+              {/* 게시글 아이콘 */}
+              <Image source={none} resizeMode="cover" style={styles.postIcon} />
+
+              {/* 게시글 없을 때 멘트 */}
+              <Text style={{ textAlign: 'center' }}>
                 아직 업로드한 게시물이 없어요.
               </Text>
+
+              {/* 게시글 작성하기 버튼 */}
               <TouchableOpacity
-                style={styles.button2}
+                style={styles.addFirstPostButton}
                 onPress={() => {
                   navigation.navigate('PostCreate');
                 }}
               >
-                <Text style={styles.buttonText2}>첫게시물 작성하기</Text>
+                <Text style={styles.addFirstPostText}>첫게시물 작성하기</Text>
               </TouchableOpacity>
             </View>
           </Tab>
+
+          {/* 내가 추천한 게시글 목록 */}
           <Tab
             heading="추천한 게시물"
-            activeTextStyle={{ color: 'black', fontWeight: '600' }}
-            textStyle={{ color: 'grey' }}
-            tabStyle={{ backgroundColor: '#FFFFFF' }}
-            activeTabStyle={{ backgroundColor: '#FFFFFF' }}
-          >
-            <View style={styles.container}>
-              <Image
-                source={none2}
-                resizeMode="cover"
-                style={{
-                  width: 100,
-                  height: 100,
-                  borderRadius: 10,
-                  justifyContent: 'center',
-                  alignSelf: 'center',
-                  marginLeft: 250,
-                }}
-              />
-              <Text
-                style={{
-                  width: 250,
-                  marginTop: 15,
-                  textAlign: 'center',
-                  marginLeft: 70,
-                }}
-              >
-                아직 추천한 게시물이 없어요.
-              </Text>
-            </View>
-          </Tab>
+            activeTextStyle={styles.tabBaractiveText}
+            textStyle={styles.tabBarText}
+            tabStyle={{ backgroundColor: '#FFF' }}
+            activeTabStyle={styles.tabBarBackground}
+          ></Tab>
         </Tabs>
-      </Container>
-    </ScrollView>
+      </ScrollView>
+    </Container>
+  ) : (
+    <Loading />
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: containerWidth,
   },
 
-  button2: {
-    width: 135,
-    height: 30,
-
+  // 프로필 영역
+  profileBox: {
     marginTop: 20,
-    backgroundColor: '#ed6653',
-    borderRadius: 5,
-    marginLeft: 250,
-    alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonText2: {
+  // 사용자 이름
+  userName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  // 사용자 직함
+  userRole: {
+    color: '#999',
+    fontSize: 14,
+    marginVertical: 5,
+  },
+  // flexDirection -> row
+  flexRow: {
+    flexDirection: 'row',
+  },
+  followBox: {
+    flexDirection: 'row',
+    marginVertical: 30,
+    alignItems: 'center',
+  },
+  // Follow Text
+  followText: {
     fontSize: 15,
-    color: 'white',
+  },
+  // Follow Number Text
+  followNumberText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginLeft: 10,
   },
 
+  // 팔로우 버튼
   button: {
-    marginTop: 10,
-    width: 350,
+    width: '90%',
     padding: 5,
     backgroundColor: '#FFEDEE',
-    borderRadius: 10,
+    borderRadius: 5,
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
     color: '#EB6552',
+    fontSize: 14,
+    padding: 3,
+  },
+
+  // Tab Bar
+  tabBaractiveText: { color: 'black', fontWeight: '600' },
+  tabBarText: { color: '#DBDBDB' },
+  tabBarBackground: { backgroundColor: '#FFF' },
+
+  // post 영역
+  postContainer: {
+    flex: 1,
+    // height: WindowHeight,
+    padding: 20,
+  },
+
+  // 게시글 아이콘
+  postIcon: {
+    width: 100,
+    height: 100,
+    marginVertical: 20,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  // 게시글 작성하기 버튼
+  addFirstPostButton: {
+    backgroundColor: '#ed6653',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginVertical: 20,
+    borderRadius: 5,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  // 게시글 작성하기 Text
+  addFirstPostText: {
+    fontSize: 14,
+    color: 'white',
   },
 });
