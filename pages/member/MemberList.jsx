@@ -20,6 +20,7 @@ const WindowWidth = Dimensions.get('window').width;
 export default function MemberList({ navigation, route }) {
   const [ready, setReady] = useState(false);
   const [memberList, setMemberList] = useState(members.result);
+  const [pageNum, setPageNum] = useState(0);
 
   // console.log(route.params.name);
   const name = route.params.name;
@@ -32,7 +33,7 @@ export default function MemberList({ navigation, route }) {
   }, []);
 
   const download = async () => {
-    const result = await getMemberListByName(name, 0);
+    const result = await getMemberListByName(name, pageNum);
 
     setMemberList(result);
   };
