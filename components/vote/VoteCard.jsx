@@ -24,7 +24,7 @@ export default function VoteCard({ navigation, vote }) {
       <View style={styles.itemBody}>
         {/* 투표 제목 */}
         <Text ellipsizeMode={'tail'} numberOfLines={2} style={styles.voteTitle}>
-          세상에 좋은 팀장이 있다? 없다?
+          {vote.title}
         </Text>
       </View>
 
@@ -36,10 +36,10 @@ export default function VoteCard({ navigation, vote }) {
 
         <View style={styles.infoBox}>
           {/* 투표 작성자 이름 */}
-          <Text style={styles.authorName}>홍길동</Text>
+          <Text style={styles.authorName}>{vote.name}</Text>
 
           {/* 투표 작성자 직함 */}
-          <Text style={styles.authorRole}>HR</Text>
+          <Text style={styles.authorRole}>{vote.role}</Text>
         </View>
       </View>
     </TouchableOpacity>

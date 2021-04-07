@@ -5,7 +5,6 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
-  FlatList,
 } from 'react-native';
 import { View, Text, Grid, Col, Content } from 'native-base';
 
@@ -20,6 +19,7 @@ import MainCard from '../../components/main/MainCard';
 
 import posts from '../../config/posts.json';
 import { getPostList, getNextData } from '../../config/PostAPI';
+import { getVoteList } from '../../config/VoteAPI';
 
 const WindowWidth = Dimensions.get('window').width;
 const ThumbSize = WindowWidth * 0.12;
@@ -27,6 +27,7 @@ const ThumbSize = WindowWidth * 0.12;
 export default function Main({ navigation }) {
   const [ready, setReady] = useState(false);
   const [postList, setPostList] = useState(posts.result);
+  const [voteList, setVoteList] = useState('');
   const [pageNum, setPageNum] = useState(0);
 
   useEffect(() => {
@@ -42,8 +43,9 @@ export default function Main({ navigation }) {
 
   const download = async () => {
     const result = await getPostList();
-
     setPostList(result);
+    const votes = await getVoteList();
+    setVoteList(votes);
     setReady(true);
   };
 
@@ -69,9 +71,11 @@ export default function Main({ navigation }) {
                   showsHorizontalScrollIndicator={false}
                 >
                   <View style={styles.voteList}>
-                    <VoteCard navigation={navigation} vote={''} />
-                    <VoteCard navigation={navigation} vote={''} />
-                    <VoteCard navigation={navigation} vote={''} />
+                    {voteList.map((vote, i) => {
+                      return (
+                        <VoteCard navigation={navigation} vote={vote} key={i} />
+                      );
+                    })}
                   </View>
                 </ScrollView>
 

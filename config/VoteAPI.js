@@ -15,7 +15,7 @@ export async function getVoteList() {
       },
     });
 
-    console.log(response.data);
+    return response.data.result;
   } catch (err) {
     const error = err.response.data.error || err.message;
 
