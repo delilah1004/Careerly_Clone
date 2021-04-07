@@ -35,7 +35,7 @@ export default function Mypage({ navigation }) {
     setTimeout(() => {
       download();
       setReady(true);
-    }, 2000);
+    });
   }, []);
 
   const download = async () => {
@@ -152,7 +152,7 @@ export default function Mypage({ navigation }) {
             heading="게시물"
             activeTextStyle={styles.tabBaractiveText}
             textStyle={styles.tabBarText}
-            tabStyle={styles.tabBarBackground}
+            tabStyle={{ backgroundColor: '#FFF' }}
             activeTabStyle={styles.tabBarBackground}
           >
             {/* 내가 작성한 게시물 */}
@@ -182,7 +182,7 @@ export default function Mypage({ navigation }) {
             heading="추천한 게시물"
             activeTextStyle={styles.tabBaractiveText}
             textStyle={styles.tabBarText}
-            tabStyle={styles.tabBarBackground}
+            tabStyle={{ backgroundColor: '#FFF' }}
             activeTabStyle={styles.tabBarBackground}
           ></Tab>
         </Tabs>

@@ -35,7 +35,7 @@ export default function SearchMember({ navigation }) {
     setTimeout(() => {
       download();
       setReady(true);
-    }, 2000);
+    });
   }, []);
 
   const download = async () => {
