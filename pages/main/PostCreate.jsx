@@ -72,14 +72,14 @@ export default function PostCreate({ navigation }) {
         {/* Tip */}
         <View style={styles.tip}>
           <Text>💡</Text>
-          <Text style={{ marginRight: 20 }}>
+          <Text style={{ marginRight: 10 }}>
             프로필을 입력한 사람의 평균 팔로워 수가 더 높아요.
           </Text>
         </View>
 
         {/* 투표 만들기 */}
         <TouchableOpacity
-          style={{ flexDirection: 'row', marginTop: 20 }}
+          style={{ flexDirection: 'row', marginTop: 100 }}
           onPress={() => {
             navigation.navigate('VoteCreate');
           }}

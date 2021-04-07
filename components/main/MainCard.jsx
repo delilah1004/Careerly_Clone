@@ -40,6 +40,31 @@ export default function MainCard({ navigation, post }) {
   // console.log(currentDate);
   // console.log(post.createdAt);
 
+  function timeForToday(value) {
+    const today = new Date();
+    const timeValue = new Date(value);
+
+    const betweenTime = Math.floor(
+      (today.getTime() - timeValue.getTime()) / 1000 / 60
+    );
+    if (betweenTime < 1) return '방금전';
+    if (betweenTime < 60) {
+      return `${betweenTime}분전`;
+    }
+
+    const betweenTimeHour = Math.floor(betweenTime / 60);
+    if (betweenTimeHour < 24) {
+      return `${betweenTimeHour}시간전`;
+    }
+
+    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+    if (betweenTimeDay < 365) {
+      return `${betweenTimeDay}일전`;
+    }
+
+    return `${Math.floor(betweenTimeDay / 365)}년전`;
+  }
+
   return (
     <View style={styles.post}>
       {/* 글 작성자 정보 */}
@@ -59,7 +84,7 @@ export default function MainCard({ navigation, post }) {
           </View>
 
           {/* 글 작성 시간 */}
-          <Text style={styles.time}>1시간전</Text>
+          <Text style={styles.time}>{timeForToday(post.createdAt)}</Text>
         </View>
       </View>
 
