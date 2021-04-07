@@ -146,7 +146,17 @@ export async function getMemberListByCategory(category, pageNum) {
   }
 }
 
-export async function getMemberInfo(userId) {
+export async function updateUserInfo(
+  name,
+  role,
+  introduce,
+  careercompany,
+  careerrole,
+  school,
+  major,
+  imageUri,
+  navigation
+) {
   try {
     const token = await AsyncStorage.getItem('session');
     const response = await axios({
