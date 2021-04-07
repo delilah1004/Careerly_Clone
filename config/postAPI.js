@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const host = 'http://52.79.227.130';
 
+// 완료
 export async function createPost(navigation, content, url) {
   try {
     const token = await AsyncStorage.getItem('session');
@@ -32,6 +33,7 @@ export async function createPost(navigation, content, url) {
   }
 }
 
+// 완료
 export async function getPostList(pageNum) {
   try {
     const token = await AsyncStorage.getItem('session');
@@ -51,6 +53,26 @@ export async function getPostList(pageNum) {
     const error = err.response.data.error || err.message;
 
     Alert.alert(error);
+  }
+}
+
+export async function getNextData(pageNum, setPageNum) {
+  try {
+    console.log('불러올 다음 page 번호: ' + pageNum);
+
+    let data = await getPostList(pageNum);
+
+    if (data.length !== 0) {
+      setPageNum(pageNum + 1);
+      return data;
+    } else {
+      return 0;
+    }
+  } catch (err) {
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
+    return false;
   }
 }
 

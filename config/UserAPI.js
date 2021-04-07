@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const host = 'http://52.79.227.130';
 
+// 완료
 export async function signIn(email, password, navigation) {
   try {
     const response = await axios({
@@ -27,6 +28,7 @@ export async function signIn(email, password, navigation) {
   }
 }
 
+// 완료
 export async function signOut(navigation) {
   try {
     await AsyncStorage.clear();
@@ -40,6 +42,7 @@ export async function signOut(navigation) {
   }
 }
 
+// 완료
 export async function register(name, email, password, role, navigation) {
   try {
     const response = await axios({
@@ -66,6 +69,7 @@ export async function register(name, email, password, role, navigation) {
   }
 }
 
+// 완료
 export async function checkEmail(name, email, password, navigation) {
   try {
     const response = await axios({
@@ -94,6 +98,7 @@ export async function checkEmail(name, email, password, navigation) {
   }
 }
 
+// 완료
 export async function getMemberListByName(name, pageNum) {
   try {
     const token = await AsyncStorage.getItem('session');
