@@ -146,22 +146,12 @@ export async function getMemberListByCategory(category, pageNum) {
   }
 }
 
-export async function updateUserInfo(
-  name,
-  role,
-  introduce,
-  careercompany,
-  careerrole,
-  school,
-  major,
-  imageUri,
-  navigation
-) {
+export async function getMemberInfo(userId) {
   try {
     const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
-      url: host + '/user/' + userId,
+      url: host + '/member/' + userId,
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -194,7 +184,17 @@ export async function getUserInfo() {
   }
 }
 
-export async function updateUserInfo(userInfo) {
+export async function updateUserInfo(
+  name,
+  role,
+  introduce,
+  careercompany,
+  careerrole,
+  school,
+  major,
+  imageUri,
+  navigation
+) {
   try {
     const token = await AsyncStorage.getItem('session');
     const response = await axios({
