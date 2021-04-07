@@ -26,8 +26,8 @@ export default function MemberCard({ navigation, member }) {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    width: ViewWidth / 2,
-    padding: 10,
+    width: (ViewWidth * 0.95) / 2,
+    padding: 7,
   },
   card: {
     backgroundColor: '#FFF',

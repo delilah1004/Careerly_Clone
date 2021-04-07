@@ -12,9 +12,11 @@ import Loading from '../Loading';
 import HeaderBack from '../../components/header/HeaderBack';
 import MemberCard from '../../components/member/MemberCard';
 
-import { getMemberListByName } from '../../config/UserAPI';
 import members from '../../config/member.json';
-const ViewWidth = Dimensions.get('window').width;
+import { getMemberListByName } from '../../config/UserAPI';
+
+const WindowWidth = Dimensions.get('window').width;
+
 export default function MemberList({ navigation, route }) {
   const [ready, setReady] = useState(false);
   const [memberList, setMemberList] = useState(members.result);
@@ -30,9 +32,8 @@ export default function MemberList({ navigation, route }) {
   }, []);
 
   const download = async () => {
-    const result = await getMemberListByName(name, 1);
+    const result = await getMemberListByName(name, 0);
 
-    console.log(result);
     setMemberList(result);
   };
 
@@ -49,18 +50,19 @@ export default function MemberList({ navigation, route }) {
       </TouchableOpacity>
 
       {/* 회원 카드 목록 */}
-      <ScrollView
-        style={{ paddingHorizontal: 10 }}
-        showsHorizontalScrollIndicato={false}
-      >
+      <ScrollView showsHorizontalScrollIndicato={false}>
         <View
           style={{
+            width: WindowWidth,
             flexDirection: 'row',
             flexWrap: 'wrap',
+            paddingHorizontal: (WindowWidth * 0.05) / 2,
           }}
         >
-          {memberList.map((member) => {
-            return <MemberCard navigation={navigation} member={member} />;
+          {memberList.map((member, i) => {
+            return (
+              <MemberCard navigation={navigation} member={member} key={i} />
+            );
           })}
         </View>
       </ScrollView>
@@ -73,16 +75,15 @@ export default function MemberList({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexWrap: 'wrap',
-    width: ViewWidth * 1.05,
     backgroundColor: '#EEE',
+    alignItems: 'center',
   },
   input: {
-    width: ViewWidth / 1.14,
     backgroundColor: '#FFF',
-    borderRadius: 5,
-    alignSelf: 'center',
+    width: '90%',
     padding: 15,
-    marginTop: 8,
+    marginTop: 20,
+    marginBottom: 10,
+    borderRadius: 5,
   },
 });

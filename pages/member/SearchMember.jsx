@@ -17,7 +17,8 @@ import MemberCard from '../../components/member/MemberCard';
 import data from '../../config/data.json';
 import members from '../../config/member.json';
 
-const ScrollWidth = Dimensions.get('window').width * 2.6;
+const WindowWidth = Dimensions.get('window').width;
+const ScrollWidth = WindowWidth * 2.6;
 
 export default function SearchMember({ navigation }) {
   const category = data.category;
@@ -68,12 +69,13 @@ export default function SearchMember({ navigation }) {
               }}
             >
               <MemberCategory title={'추천'} setFunc={setCate} select={cate} />
-              {category.map((title) => {
+              {category.map((title, i) => {
                 return (
                   <MemberCategory
                     title={title}
                     setFunc={setFunc}
                     select={cate}
+                    key={i}
                   />
                 );
               })}
@@ -81,14 +83,18 @@ export default function SearchMember({ navigation }) {
           </ScrollView>
         </View>
 
+        {/* 회원 목록 */}
         <View
           style={{
             flexDirection: 'row',
             flexWrap: 'wrap',
+            paddingHorizontal: (WindowWidth * 0.05) / 2,
           }}
         >
-          {memberList.map((member) => {
-            return <MemberCard navigation={navigation} member={member} />;
+          {memberList.map((member, i) => {
+            return (
+              <MemberCard navigation={navigation} member={member} key={i} />
+            );
           })}
         </View>
       </ScrollView>

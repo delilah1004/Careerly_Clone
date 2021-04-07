@@ -1,7 +1,9 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { Header, Text, Button } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
+
+const WindowWidth = Dimensions.get('window').width;
 
 export default function HeaderBack({ navigation, title }) {
   return (
@@ -21,6 +23,7 @@ export default function HeaderBack({ navigation, title }) {
 
 const styles = StyleSheet.create({
   header: {
+    width: WindowWidth,
     borderBottomWidth: 1.8,
     borderBottomColor: '#D8D8D8',
     justifyContent: 'space-between',
