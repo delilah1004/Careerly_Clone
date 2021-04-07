@@ -94,6 +94,7 @@ export default function Mypage({ navigation }) {
           <View style={styles.followBox}>
             <TouchableOpacity
               style={[styles.flexRow, { alignItems: 'center' }]}
+              onPress={() => navigation.push('FollowerList', user._id)}
             >
               <Text style={styles.followText}>팔로워</Text>
               <Text style={styles.followNumberText}>{user.followerCnt}</Text>
@@ -105,6 +106,7 @@ export default function Mypage({ navigation }) {
             </Text>
             <TouchableOpacity
               style={[styles.flexRow, { alignItems: 'center' }]}
+              onPress={() => navigation.push('FollowingList', user._id)}
             >
               <Text style={styles.followText}>팔로잉</Text>
               <Text style={styles.followNumberText}>{user.followingCnt}</Text>

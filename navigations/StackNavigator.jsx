@@ -19,6 +19,7 @@ import UserUpdate from '../pages/set/UserUpdate';
 import PasswordChange from '../pages/set/PasswordChange';
 import ProfileUpdate from '../pages/mypage/ProfileUpdate';
 import FollowerList from '../pages/FollowerList';
+import FollowingList from '../pages/FollowingList';
 import VoteCreate from '../pages/main/VoteCreate';
 
 const Stack = createStackNavigator();
@@ -47,6 +48,7 @@ const StackNavigator = () => {
       <Stack.Screen name="PasswordChange" component={PasswordChange} />
       <Stack.Screen name="ProfileUpdate" component={ProfileUpdate} />
       <Stack.Screen name="FollowerList" component={FollowerList} />
+      <Stack.Screen name="FollowingList" component={FollowingList} />
       <Stack.Screen name="VoteCreate" component={VoteCreate} />
       <Stack.Screen name="MemberInfo" component={MemberInfo} />
     </Stack.Navigator>
