@@ -147,6 +147,7 @@ export async function getMemberListByCategory(category, pageNum) {
   }
 }
 
+// 완료
 export async function getMemberInfo(userId) {
   try {
     const token = await AsyncStorage.getItem('session');
@@ -158,7 +159,8 @@ export async function getMemberInfo(userId) {
       },
     });
 
-    console.log(response.data);
+    console.log(response.data.result);
+    return response.data.result;
   } catch (err) {
     const error = err.response.data.error || err.message;
 
@@ -186,7 +188,7 @@ export async function getUserInfo() {
   }
 }
 
-export async function updateUserInfo(
+export async function updateProfile(
   name,
   role,
   introduce,
@@ -211,6 +213,33 @@ export async function updateUserInfo(
     });
 
     console.log(response.data);
+  } catch (err) {
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
+  }
+}
+
+export async function updateUserInfo(email, phone, navigation) {
+  try {
+    const token = await AsyncStorage.getItem('session');
+    const response = await axios({
+      method: 'patch',
+      url: host + '/user',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      data: {
+        email: email,
+        phone: phone,
+      },
+    });
+
+    if (response.data.success) {
+      navigation.push('Setting');
+    } else {
+      Alert.alert('계정 정보 변경 실패');
+    }
   } catch (err) {
     const error = err.response.data.error || err.message;
 
