@@ -6,10 +6,13 @@ const host = 'http://52.79.227.130';
 
 export async function createComment(postId, content) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'post',
       url: host + '/comment/' + postId,
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       data: {
         content: content,
       },
@@ -17,31 +20,41 @@ export async function createComment(postId, content) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function getCommentList(postId) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
       url: host + '/comment/' + postId,
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     });
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 // id? 댓글 아이디?
 export async function updateComment(postId, commentInfo) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'patch',
       url: host + '/comment/' + postId,
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       data: {
         commentInfo,
       },
@@ -49,16 +62,21 @@ export async function updateComment(postId, commentInfo) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function deleteComment(commentId) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'delete',
       url: host + '/comment',
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       data: {
         id: commentId,
       },
@@ -66,6 +84,8 @@ export async function deleteComment(commentId) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }

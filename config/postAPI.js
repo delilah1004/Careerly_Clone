@@ -48,7 +48,9 @@ export async function getPostList(pageNum) {
 
     return response.data.result;
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -65,7 +67,9 @@ export async function readPost(postId) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -82,7 +86,9 @@ export async function getRecommenderList(postId) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -99,7 +105,9 @@ export async function getUserPostList(userId) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -116,7 +124,9 @@ export async function getUserRecommendPostList(userId) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -133,7 +143,9 @@ export async function updateRecommend(postId) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -150,7 +162,9 @@ export async function sharePost(postId) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -171,7 +185,9 @@ export async function updatePost(postId, content, url) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -188,6 +204,8 @@ export async function deletePost(postId) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }

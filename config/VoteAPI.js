@@ -6,15 +6,20 @@ const host = 'http://52.79.227.130';
 
 export async function getVoteList() {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
       url: host + '/vote',
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     });
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
@@ -26,10 +31,13 @@ export async function createVote(
   navigation
 ) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'post',
       url: host + '/vote',
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       data: {
         subject: subject,
         content: content,
@@ -40,30 +48,40 @@ export async function createVote(
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function readVote(voteId) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
       url: host + '/vote/' + voteId,
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     });
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function updateVote(voteId, voteInfo) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'patch',
       url: host + '/vote/' + voteId,
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       data: {
         vote: voteInfo,
       },
@@ -71,20 +89,27 @@ export async function updateVote(voteId, voteInfo) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function readVoteResult(voteId) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
       url: host + '/vote/result/' + voteId,
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     });
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }

@@ -6,39 +6,52 @@ const host = 'http://52.79.227.130';
 
 export async function getFollower(userId) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
       url: host + '/follow/follower/' + userId,
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     });
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function getFollowing(userId) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
       url: host + '/follow/following/' + userId,
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     });
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 // followerId == 팔로우할 회원의 Id(memberId) ? 나의 아이디?(userId)
 export async function follow(memberId) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'post',
       url: host + '/follow',
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       data: {
         followerId: memberId,
       },
@@ -46,16 +59,21 @@ export async function follow(memberId) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function unFollow(userId, memberId) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'delete',
       url: host + '/follow',
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       data: {
         userEmail: userId,
         memberEmail: memberId,
@@ -64,6 +82,8 @@ export async function unFollow(userId, memberId) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }

@@ -96,10 +96,13 @@ export async function checkEmail(name, email, password, navigation) {
 
 export async function getMemberListByName(name, pageNum) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
       url: host + '/member',
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       params: {
         search: name,
         page: pageNum,
@@ -109,16 +112,21 @@ export async function getMemberListByName(name, pageNum) {
     // console.log(response.data.result);
     return response.data.result;
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function getMemberListByCategory(category, pageNum) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
       url: host + '/member',
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       params: {
         category: category,
         page: pageNum,
@@ -127,44 +135,59 @@ export async function getMemberListByCategory(category, pageNum) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function getMemberInfo(userId) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
       url: host + '/user/' + userId,
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     });
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function getUserInfo() {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
       url: host + '/user',
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     });
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function updateUserInfo(userInfo) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'put',
       url: host + '/user',
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       data: {
         userInfo,
       },
@@ -172,16 +195,21 @@ export async function updateUserInfo(userInfo) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function findPassword(email) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'post',
       url: host + '/password',
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       data: {
         email: email,
       },
@@ -189,16 +217,21 @@ export async function findPassword(email) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
 
 export async function updatePassword(email) {
   try {
+    const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'put',
       url: host + '/password',
-      header: await AsyncStorage.getItem('session'),
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
       data: {
         email: email,
       },
@@ -206,6 +239,8 @@ export async function updatePassword(email) {
 
     console.log(response.data);
   } catch (err) {
-    Alert.alert('Error! => ', err.message);
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
   }
 }
