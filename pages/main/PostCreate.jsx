@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { Container, Form, Textarea, Text, View, Input } from 'native-base';
 
 import HeaderPostSave from '../../components/header/HeaderPostSave';
@@ -29,66 +29,70 @@ export default function PostCreate({ navigation }) {
   };
 
   return (
-    <Container>
-      <HeaderPostSave
-        navigation={navigation}
-        title={'게시물 업로드'}
-        buttonTitle={'업로드하기'}
-        upload={upload}
-      />
+    <ScrollView>
+      <Container>
+        <HeaderPostSave
+          navigation={navigation}
+          title={'게시물 업로드'}
+          buttonTitle={'업로드하기'}
+          upload={upload}
+        />
 
-      <View style={styles.container}>
-        <Form style={styles.form}>
-          {/* 내용 */}
-          <Text style={styles.label}>내용</Text>
-          <Textarea
-            style={styles.content}
-            rowSpan={10}
-            borderRadius={5}
-            value={content}
-            placeholder="함께 나누고 싶은 생각을 적어주세요"
-            placeholderTextColor="#AAA"
-            onChangeText={(text) => {
-              setContent(text);
-            }}
-          />
+        <View style={styles.container}>
+          <Form style={styles.form}>
+            {/* 내용 */}
+            <Text style={styles.label}>내용</Text>
+            <Textarea
+              style={styles.content}
+              rowSpan={10}
+              borderRadius={5}
+              value={content}
+              placeholder="함께 나누고 싶은 생각을 적어주세요"
+              placeholderTextColor="#AAA"
+              onChangeText={(text) => {
+                setContent(text);
+              }}
+            />
 
-          {/* URL */}
-          <View style={styles.url}>
-            <Text style={styles.label}>URL</Text>
-            <Text style={{ color: 'gray', fontSize: 13 }}> (선택)</Text>
+            {/* URL */}
+            <View style={styles.url}>
+              <Text style={styles.label}>URL</Text>
+              <Text style={{ color: 'gray', fontSize: 13 }}> (선택)</Text>
+            </View>
+            <Textarea
+              style={styles.input}
+              placeholder={'공유할 URL을 입력해주세요'}
+              placeholderTextColor="#AAA"
+              value={url}
+              onChangeText={(text) => {
+                setUrl(text);
+              }}
+            />
+          </Form>
+
+          {/* Tip */}
+          <View style={styles.tip}>
+            <Text>💡</Text>
+            <Text style={{ marginRight: 10 }}>
+              프로필을 입력한 사람의 평균 팔로워 수가 더 높아요.
+            </Text>
           </View>
-          <Input
-            style={styles.input}
-            placeholder={'공유할 URL을 입력해주세요'}
-            placeholderTextColor="#AAA"
-            value={url}
-            onChangeText={(text) => {
-              setUrl(text);
+
+          {/* 투표 만들기 */}
+          <TouchableOpacity
+            style={{ flexDirection: 'row', marginTop: 100 }}
+            onPress={() => {
+              navigation.navigate('VoteCreate');
             }}
-          />
-        </Form>
-
-        {/* Tip */}
-        <View style={styles.tip}>
-          <Text>💡</Text>
-          <Text style={{ marginRight: 10 }}>
-            프로필을 입력한 사람의 평균 팔로워 수가 더 높아요.
-          </Text>
+          >
+            <Entypo name="list" size={24} color="#44ADA4" />
+            <Text style={{ fontWeight: '700', marginLeft: 10 }}>
+              투표 만들기
+            </Text>
+          </TouchableOpacity>
         </View>
-
-        {/* 투표 만들기 */}
-        <TouchableOpacity
-          style={{ flexDirection: 'row', marginTop: 100 }}
-          onPress={() => {
-            navigation.navigate('VoteCreate');
-          }}
-        >
-          <Entypo name="list" size={24} color="#44ADA4" />
-          <Text style={{ fontWeight: '700', marginLeft: 10 }}>투표 만들기</Text>
-        </TouchableOpacity>
-      </View>
-    </Container>
+      </Container>
+    </ScrollView>
   );
 }
 
@@ -112,10 +116,11 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#FFF',
     width: '100%',
-    padding: 10,
-    fontSize: 14,
+    padding: 18,
+    fontSize: 15,
     borderRadius: 5,
     borderWidth: 1,
+    color: 'black',
     borderColor: '#DBDBDB',
     alignSelf: 'center',
   },

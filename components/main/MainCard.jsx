@@ -80,7 +80,7 @@ export default function MainCard({ navigation, post }) {
             <Text style={styles.authorName}>{post.user.name}</Text>
 
             {/* 글 작성자 직함 */}
-            <Text style={styles.authorRole}>{post.user.role}</Text>
+            <Text style={styles.authorRole}>{`  ${post.user.role}`}</Text>
           </View>
 
           {/* 글 작성 시간 */}
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
   authorRole: {
     color: '#999',
-    fontSize: 15,
+    fontSize: 14,
   },
   time: {
     color: '#AAA',
