@@ -46,7 +46,7 @@ export default function Main({ navigation }) {
   };
 
   return ready ? (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       {/* 글 목록
       {postList.map((post) => {
         return <MainCard navigation={navigation} post={post} />;
@@ -98,7 +98,7 @@ export default function Main({ navigation }) {
               </Content>
             );
           }}
-          onEndReachedThreshold={0.01}
+          onEndReachedThreshold={0}
           onEndReached={async () => {
             console.log('바닥 가까이 감: 리프레시');
             let nextData = await getNextData(pageNum, setPageNum);
@@ -112,13 +112,19 @@ export default function Main({ navigation }) {
           }}
           renderItem={(post) => {
             // console.log(data);
-            return <MainCard navigation={navigation} post={post.item} />;
+            return (
+              <MainCard
+                navigation={navigation}
+                post={post.item}
+                key={post.item.id}
+              />
+            );
           }}
           numColumns={1}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item, index) => index.toString()}
         />
       )}
-    </ScrollView>
+    </View>
   ) : (
     <Loading />
   );
