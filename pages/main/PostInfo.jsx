@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -22,11 +22,14 @@ import CommentComponent from '../../components/CommentComponent';
 const im = require('../../assets/icon.png');
 
 import { createComment } from '../../config/commentAPI';
+import Loading from '../Loading';
 
 const WindowWidth = Dimensions.get('window').width;
 const ThumbSize = WindowWidth * 0.12;
 
 export default function PostInfo({ navigation, route }) {
+  const memberId = route.params;
+
   const [comment, setComment] = useState('');
 
   const commentUpload = async () => {
@@ -76,128 +79,129 @@ export default function PostInfo({ navigation, route }) {
   }
 
   return (
-    <Container style={styles.container}>
-      <HeaderBack
-        title={post.user.name + ' 님의 게시물'}
-        navigation={navigation}
-      />
-      <ScrollView>
-        <View style={styles.post}>
-          {/* 글 작성자 정보 */}
-          <View style={styles.itemHeader}>
-            <View style={{ flexDirection: 'row' }}>
-              {/* 글 작성자 이미지 */}
-              <TouchableOpacity>
-                <Thumbnail style={styles.thumbnail} source={im} />
-              </TouchableOpacity>
+    <Loading />
+    // <Container style={styles.container}>
+    //   <HeaderBack
+    //     title={post.user.name + ' 님의 게시물'}
+    //     navigation={navigation}
+    //   />
+    //   <ScrollView>
+    //     <View style={styles.post}>
+    //       {/* 글 작성자 정보 */}
+    //       <View style={styles.itemHeader}>
+    //         <View style={{ flexDirection: 'row' }}>
+    //           {/* 글 작성자 이미지 */}
+    //           <TouchableOpacity>
+    //             <Thumbnail style={styles.thumbnail} source={im} />
+    //           </TouchableOpacity>
 
-              <View style={styles.infoBox}>
-                <View style={styles.user}>
-                  {/* 글 작성자 이름 */}
-                  <Text style={styles.authorName}>{post.user.name}</Text>
+    //           <View style={styles.infoBox}>
+    //             <View style={styles.user}>
+    //               {/* 글 작성자 이름 */}
+    //               <Text style={styles.authorName}>{post.user.name}</Text>
 
-                  {/* 글 작성 시간 */}
-                  <Text style={styles.time}>
-                    {timeForToday(post.createdAt)}
-                  </Text>
-                </View>
+    //               {/* 글 작성 시간 */}
+    //               <Text style={styles.time}>
+    //                 {timeForToday(post.createdAt)}
+    //               </Text>
+    //             </View>
 
-                {/* 글 작성자 직함 */}
-                <Text style={styles.authorRole}>{post.user.role}</Text>
-              </View>
-            </View>
+    //             {/* 글 작성자 직함 */}
+    //             <Text style={styles.authorRole}>{post.user.role}</Text>
+    //           </View>
+    //         </View>
 
-            <View>
-              {/* 팔로우 버튼 */}
-              <TouchableOpacity style={styles.followButton}>
-                <Text style={styles.text}>팔로우</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+    //         <View>
+    //           {/* 팔로우 버튼 */}
+    //           <TouchableOpacity style={styles.followButton}>
+    //             <Text style={styles.text}>팔로우</Text>
+    //           </TouchableOpacity>
+    //         </View>
+    //       </View>
 
-          {/* 글 */}
-          <Text style={styles.content} numberOfLines={6} ellipsizeMode={'tail'}>
-            {post.content}
-          </Text>
+    //       {/* 글 */}
+    //       <Text style={styles.content} numberOfLines={6} ellipsizeMode={'tail'}>
+    //         {post.content}
+    //       </Text>
 
-          {/* 링크 연결 */}
-          <RNUrlPreview text={post.url} />
+    //       {/* 링크 연결 */}
+    //       <RNUrlPreview text={post.url} />
 
-          {/* 추천 현황 */}
-          <View style={styles.recommend}>
-            <Text style={styles.number}>{post.recommendedCnt}명</Text>
-            <Text style={{ fontSize: 13 }}>이 추천했어요</Text>
-          </View>
+    //       {/* 추천 현황 */}
+    //       <View style={styles.recommend}>
+    //         <Text style={styles.number}>{post.recommendedCnt}명</Text>
+    //         <Text style={{ fontSize: 13 }}>이 추천했어요</Text>
+    //       </View>
 
-          {/* 각종 버튼 */}
-          <View style={styles.buttonContainer}>
-            {/* 추천해요 */}
-            <TouchableOpacity style={styles.button}>
-              <Octicons name="light-bulb" size={20} color="#A2D9D3" />
-              <Text style={styles.buttonText}>추천해요</Text>
-            </TouchableOpacity>
+    //       {/* 각종 버튼 */}
+    //       <View style={styles.buttonContainer}>
+    //         {/* 추천해요 */}
+    //         <TouchableOpacity style={styles.button}>
+    //           <Octicons name="light-bulb" size={20} color="#A2D9D3" />
+    //           <Text style={styles.buttonText}>추천해요</Text>
+    //         </TouchableOpacity>
 
-            <View style={{ flexDirection: 'row' }}>
-              {/* 공유하기 */}
-              <TouchableOpacity
-                style={[styles.button]}
-                onPress={() => {
-                  share();
-                }}
-              >
-                <MaterialIcons name="share" size={20} color="#A2D9D3" />
-                <Text style={styles.buttonText}>공유하기</Text>
-                <Text style={styles.number}>{post.sharedCnt}</Text>
-              </TouchableOpacity>
+    //         <View style={{ flexDirection: 'row' }}>
+    //           {/* 공유하기 */}
+    //           <TouchableOpacity
+    //             style={[styles.button]}
+    //             onPress={() => {
+    //               share();
+    //             }}
+    //           >
+    //             <MaterialIcons name="share" size={20} color="#A2D9D3" />
+    //             <Text style={styles.buttonText}>공유하기</Text>
+    //             <Text style={styles.number}>{post.sharedCnt}</Text>
+    //           </TouchableOpacity>
 
-              {/* 댓글 */}
-              <TouchableOpacity
-                style={[styles.button, { marginStart: 10 }]}
-                onPress={() => {
-                  navigation.navigate('PostInfo', { post });
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="comment-processing-outline"
-                  size={20}
-                  color="#A2D9D3"
-                />
-                <Text style={styles.buttonText}>댓글</Text>
-                <Text style={styles.number}>{post.commentCnt}</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
+    //           {/* 댓글 */}
+    //           <TouchableOpacity
+    //             style={[styles.button, { marginStart: 10 }]}
+    //             onPress={() => {
+    //               navigation.navigate('PostInfo', { post });
+    //             }}
+    //           >
+    //             <MaterialCommunityIcons
+    //               name="comment-processing-outline"
+    //               size={20}
+    //               color="#A2D9D3"
+    //             />
+    //             <Text style={styles.buttonText}>댓글</Text>
+    //             <Text style={styles.number}>{post.commentCnt}</Text>
+    //           </TouchableOpacity>
+    //         </View>
+    //       </View>
+    //     </View>
 
-        {/* 댓글 목록 */}
-        <View style={{ paddingBottom: 10 }}>
-          {post.comment.map((comment) => {
-            return (
-              <CommentComponent navigation={navigation} comment={comment} />
-            );
-          })}
-        </View>
-      </ScrollView>
+    //     {/* 댓글 목록 */}
+    //     <View style={{ paddingBottom: 10 }}>
+    //       {post.comment.map((comment) => {
+    //         return (
+    //           <CommentComponent navigation={navigation} comment={comment} />
+    //         );
+    //       })}
+    //     </View>
+    //   </ScrollView>
 
-      {/* 댓글 작성란 */}
-      <Footer style={styles.commentBox}>
-        <Input
-          style={styles.input}
-          placeholder="게시물에 대해 이야기를 나눠보세요"
-          placeholderTextColor="#999"
-          value={comment}
-          onChangeText={(text) => {
-            setComment(text);
-          }}
-        />
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={() => commentUpload()}
-        >
-          <Text style={styles.addButtonText}>등록</Text>
-        </TouchableOpacity>
-      </Footer>
-    </Container>
+    //   {/* 댓글 작성란 */}
+    //   <Footer style={styles.commentBox}>
+    //     <Input
+    //       style={styles.input}
+    //       placeholder="게시물에 대해 이야기를 나눠보세요"
+    //       placeholderTextColor="#999"
+    //       value={comment}
+    //       onChangeText={(text) => {
+    //         setComment(text);
+    //       }}
+    //     />
+    //     <TouchableOpacity
+    //       style={styles.addButton}
+    //       onPress={() => commentUpload()}
+    //     >
+    //       <Text style={styles.addButtonText}>등록</Text>
+    //     </TouchableOpacity>
+    //   </Footer>
+    // </Container>
   );
 }
 
