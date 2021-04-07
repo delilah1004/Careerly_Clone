@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { LogBox } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './navigations/StackNavigator';
@@ -8,7 +9,8 @@ import { StatusBar } from 'expo-status-bar';
 import * as Font from 'expo-font';
 
 export default function App() {
-  console.disableYellowBox = true;
+  LogBox.ignoreLogs(['Warning: ...']);
+
   const [ready, setReady] = useState(true);
 
   const loadFont = () => {
@@ -29,14 +31,13 @@ export default function App() {
         Spoqa_medium: require('./assets/fonts/SpoqaHanSansNeo-Medium.ttf'),
         Spoqa_regular: require('./assets/fonts/SpoqaHanSansNeo-Regular.ttf'),
         Spoqa_bold: require('./assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
-        ...Ionicons.font,
       });
       await setReady(true);
     }, 1000);
   };
 
   useEffect(() => {
-    loadFont();
+    // loadFont();
   }, []);
 
   return ready ? (
