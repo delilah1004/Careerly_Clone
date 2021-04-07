@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import {
   StyleSheet,
@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { Container, Input } from 'native-base';
 
+import Loading from '../Loading';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import MemberCategory from '../../components/member/MemberCategory';
@@ -16,26 +18,38 @@ import MemberCard from '../../components/member/MemberCard';
 
 import data from '../../config/data.json';
 import members from '../../config/member.json';
+import { getMemberListByCategory } from '../../config/UserAPI';
 
 const WindowWidth = Dimensions.get('window').width;
 const ScrollWidth = WindowWidth * 2.6;
 
 export default function SearchMember({ navigation }) {
   const category = data.category;
-
+  const [ready, setReady] = useState(false);
+  const [pageNum, setPageNum] = useState(0);
+  const [cate, setCate] = useState('프로덕트 매니저/서비스 기획');
   const [name, setName] = useState('');
-  const [cate, setCate] = useState('추천');
   const [memberList, setMemberList] = useState(members.result);
 
-  const setFunc = (title) => {
-    setCate(title);
+  useEffect(() => {
+    setTimeout(() => {
+      download();
+      setReady(true);
+    }, 2000);
+  }, []);
+
+  const download = async () => {
+    // console.log(cate, pageNum);
+    const result = await getMemberListByCategory(cate, pageNum);
+
+    setMemberList(result);
   };
 
   const search = () => {
     navigation.push('MemberList', { name });
   };
 
-  return (
+  return ready ? (
     <Container style={styles.container}>
       {/* 회원 카드 목록 */}
       <ScrollView showsHorizontalScrollIndicator={false}>
@@ -68,12 +82,12 @@ export default function SearchMember({ navigation }) {
                 flexWrap: 'wrap',
               }}
             >
-              <MemberCategory title={'추천'} setFunc={setCate} select={cate} />
               {category.map((title, i) => {
                 return (
                   <MemberCategory
                     title={title}
-                    setFunc={setFunc}
+                    setFunc={setCate}
+                    getData={download}
                     select={cate}
                     key={i}
                   />
@@ -99,6 +113,8 @@ export default function SearchMember({ navigation }) {
         </View>
       </ScrollView>
     </Container>
+  ) : (
+    <Loading />
   );
 }
 

@@ -2,15 +2,10 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'native-base';
 
-export default function MemberCategory({ title, setFunc, select }) {
+export default function MemberCategory({ title, setFunc, getData, select }) {
   if (title == select) {
     return (
-      <TouchableOpacity
-        style={[styles.box, styles.activeBox]}
-        onPress={() => {
-          setFunc(title);
-        }}
-      >
+      <TouchableOpacity style={[styles.box, styles.activeBox]}>
         <Text style={[styles.text, styles.activeText]}>{title}</Text>
       </TouchableOpacity>
     );
@@ -18,8 +13,9 @@ export default function MemberCategory({ title, setFunc, select }) {
     return (
       <TouchableOpacity
         style={[styles.box, styles.defaultBox]}
-        onPress={() => {
+        onPress={async () => {
           setFunc(title);
+          getData();
         }}
       >
         <Text style={[styles.text, styles.defaultText]}>{title}</Text>

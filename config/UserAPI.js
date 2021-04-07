@@ -123,6 +123,7 @@ export async function getMemberListByName(name, pageNum) {
   }
 }
 
+// 하나씩 밀리는 오류
 export async function getMemberListByCategory(category, pageNum) {
   try {
     const token = await AsyncStorage.getItem('session');
@@ -138,7 +139,7 @@ export async function getMemberListByCategory(category, pageNum) {
       },
     });
 
-    console.log(response.data);
+    return response.data.result;
   } catch (err) {
     const error = err.response.data.error || err.message;
 
@@ -165,6 +166,7 @@ export async function getMemberInfo(userId) {
   }
 }
 
+// 완료
 export async function getUserInfo() {
   try {
     const token = await AsyncStorage.getItem('session');
@@ -176,7 +178,7 @@ export async function getUserInfo() {
       },
     });
 
-    console.log(response.data);
+    return response.data.result.user;
   } catch (err) {
     const error = err.response.data.error || err.message;
 
