@@ -17,7 +17,7 @@ const ThumbSize = WindowWidth * 0.12;
 
 const currentDate = new Date();
 
-export default function MainCard({ navigation, post, key }) {
+export default function MainCard({ navigation, post }) {
   const share = () => {
     Share.share({
       message: `공유 \n\n 라일락 \n\n 코인`,

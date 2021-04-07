@@ -23,8 +23,8 @@ const WindowWidth = Dimensions.get('window').width;
 const ThumbSize = WindowWidth * 0.12;
 
 export default function Main({ navigation }) {
-  const [postList, setPostList] = useState(posts.result);
   const [ready, setReady] = useState(false);
+  const [postList, setPostList] = useState(posts.result);
   const [pageNum, setPageNum] = useState(0);
 
   useEffect(() => {
@@ -110,14 +110,10 @@ export default function Main({ navigation }) {
               await setPostList(newData);
             }
           }}
-          renderItem={(post) => {
+          renderItem={(post, i) => {
             // console.log(data);
             return (
-              <MainCard
-                navigation={navigation}
-                post={post.item}
-                key={post.item.id}
-              />
+              <MainCard navigation={navigation} post={post.item} key={i} />
             );
           }}
           numColumns={1}
