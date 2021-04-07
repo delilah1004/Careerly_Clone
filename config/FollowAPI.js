@@ -24,6 +24,7 @@ export async function getFollower(userId) {
   }
 }
 
+// 완료
 export async function getFollowing(userId) {
   try {
     const token = await AsyncStorage.getItem('session');
