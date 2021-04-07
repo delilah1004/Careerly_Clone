@@ -58,7 +58,7 @@ export async function getPostList(pageNum) {
 
 export async function getNextData(pageNum, setPageNum) {
   try {
-    console.log('불러올 다음 page 번호: ' + pageNum);
+    console.log('현재 page 번호: ' + pageNum);
 
     let data = await getPostList(pageNum);
 
