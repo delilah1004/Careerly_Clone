@@ -7,13 +7,13 @@ import HeaderBack from '../../components/header/HeaderBack';
 import InputItem from '../../components/InputItem';
 import ButtonItem from '../../components/ButtonItem';
 
-export default function UserUpdate({ navigation }) {
+export default function PasswordChange({ navigation }) {
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [passwordConfirmError, setPasswordConfirmError] = useState('');
 
-  const PassWordChange = () => {
+  const changePassword = () => {
     if (password == '') {
       setPasswordError('비밀번호를 입력해주세요');
       return false;
