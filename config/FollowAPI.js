@@ -18,7 +18,7 @@ export async function getFollower(userId) {
 
     return response.data.result.follower;
   } catch (err) {
-    const error = err.response.data.error || err.message;
+    const error = err.response.data.err || err.message;
 
     Alert.alert(error);
   }
@@ -38,14 +38,14 @@ export async function getFollowing(userId) {
 
     return response.data.result.following;
   } catch (err) {
-    const error = err.response.data.error || err.message;
+    const error = err.response.data.err || err.message;
 
     Alert.alert(error);
   }
 }
 
 // followerId == 팔로우할 회원의 Id(memberId) ? 나의 아이디?(userId)
-export async function follow(memberId) {
+export async function followMember(memberId) {
   try {
     const token = await AsyncStorage.getItem('session');
     const response = await axios({
@@ -55,19 +55,19 @@ export async function follow(memberId) {
         Authorization: 'Bearer ' + token,
       },
       data: {
-        followerId: memberId,
+        followId: memberId,
       },
     });
 
     console.log(response.data);
   } catch (err) {
-    const error = err.response.data.error || err.message;
+    const error = err.response.data.err || err.message;
 
     Alert.alert(error);
   }
 }
 
-export async function unFollow(userId, memberId) {
+export async function unfollowMember(memberId) {
   try {
     const token = await AsyncStorage.getItem('session');
     const response = await axios({
@@ -77,14 +77,13 @@ export async function unFollow(userId, memberId) {
         Authorization: 'Bearer ' + token,
       },
       data: {
-        userEmail: userId,
-        memberEmail: memberId,
+        followId: memberId,
       },
     });
 
     console.log(response.data);
   } catch (err) {
-    const error = err.response.data.error || err.message;
+    const error = err.response.data.err || err.message;
 
     Alert.alert(error);
   }

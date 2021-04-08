@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Content } from 'native-base';
 
-// import Loading from './Loading';
-
 import HeaderBack from '../components/header/HeaderBack';
 import FollowerCard from '../components/FollowerCard';
 
@@ -23,6 +21,8 @@ export default function FollowerList({ navigation, route }) {
 
   const download = async () => {
     const result = await getFollower(userId);
+
+    console.log(result);
 
     setFollowerList(result);
   };
