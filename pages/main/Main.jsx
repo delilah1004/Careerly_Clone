@@ -15,11 +15,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import Loading from '../Loading';
 
 import VoteCard from '../../components/vote/VoteCard';
-import MainCard from '../../components/main/MainCard';
+import MainCard from '../../components/main/PostCard';
 
-import posts from '../../config/posts.json';
+import posts from '../../config/mock/posts.json';
+
 import { getPostList, getNextData } from '../../config/PostAPI';
 import { getVoteList } from '../../config/VoteAPI';
+import { getUserInfo } from '../../config/UserAPI';
 
 const WindowWidth = Dimensions.get('window').width;
 const ThumbSize = WindowWidth * 0.12;
@@ -28,6 +30,7 @@ export default function Main({ navigation }) {
   const [ready, setReady] = useState(false);
   const [postList, setPostList] = useState(posts.result);
   const [voteList, setVoteList] = useState('');
+  const [user, serUser] = useState('');
   const [pageNum, setPageNum] = useState(0);
 
   useEffect(() => {
@@ -46,16 +49,13 @@ export default function Main({ navigation }) {
     setPostList(result);
     const votes = await getVoteList();
     setVoteList(votes);
+    const userInfo = await getUserInfo();
+    serUser(userInfo);
     setReady(true);
   };
 
   return ready ? (
     <View style={styles.container}>
-      {/* 글 목록
-      {postList.map((post) => {
-        return <MainCard navigation={navigation} post={post} />;
-      })} */}
-
       {postList.length == 0 ? (
         <ActivityIndicator size="large" />
       ) : (
@@ -119,7 +119,13 @@ export default function Main({ navigation }) {
           renderItem={(post, i) => {
             // console.log(data);
             return (
-              <MainCard navigation={navigation} post={post.item} key={i} />
+              <MainCard
+                navigation={navigation}
+                post={post.item}
+                userId={user._id}
+                loc={'main'}
+                key={i}
+              />
             );
           }}
           numColumns={1}
