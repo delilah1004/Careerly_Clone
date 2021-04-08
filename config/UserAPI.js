@@ -206,7 +206,24 @@ export async function updateUserInfo(
         Authorization: 'Bearer ' + token,
       },
       data: {
-        userInfo,
+        name: name,
+        role: role,
+
+        introduce: introduce,
+        career: [
+          {
+            careercompany: careercompany,
+            careerrole: careerrole,
+          },
+        ],
+        education: [
+          {
+            school: school,
+            major: major,
+          },
+        ],
+        imageUri,
+        navigation,
       },
     });
 
@@ -240,7 +257,11 @@ export async function findPassword(email) {
   }
 }
 
-export async function updatePassword(email) {
+export async function updatePassword(
+  currentpassword,
+  password,
+  passwordConfirm
+) {
   try {
     const token = await AsyncStorage.getItem('session');
     const response = await axios({
@@ -250,7 +271,9 @@ export async function updatePassword(email) {
         Authorization: 'Bearer ' + token,
       },
       data: {
-        email: email,
+        currentpassword: currentpassword,
+        password: password,
+        passwordConfirm: passwordConfirm,
       },
     });
 
