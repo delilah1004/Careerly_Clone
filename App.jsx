@@ -13,32 +13,32 @@ export default function App() {
 
   const [ready, setReady] = useState(true);
 
-  const loadFont = () => {
-    setTimeout(async () => {
-      await Font.loadAsync({
-        // 본문 Font
-        KoPub_light: require('./assets/fonts/KoPubWorld Dotum Light.ttf'),
-        KoPub_medium: require('./assets/fonts/KoPubWorld Dotum Medium.ttf'),
-        KoPub_bold: require('./assets/fonts/KoPubWorld Dotum Bold.ttf'),
-        // 제목 및 굵은 글씨 Font
-        // 맑은 고딕 에러 (미해결)
-        // Malgun_sl: require('./assets/fonts/MALGUNSL.TTF'),
-        // Malgun: require('./assets/fonts/MALGUN.TTF'),
-        // Malgun_bold: require('./assets/fonts/MALGUNBD.TTF'),
-        // 숫자 관련 Font
-        Spoqa_thin: require('./assets/fonts/SpoqaHanSansNeo-Thin.ttf'),
-        Spoqa_light: require('./assets/fonts/SpoqaHanSansNeo-Light.ttf'),
-        Spoqa_medium: require('./assets/fonts/SpoqaHanSansNeo-Medium.ttf'),
-        Spoqa_regular: require('./assets/fonts/SpoqaHanSansNeo-Regular.ttf'),
-        Spoqa_bold: require('./assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
-      });
-      await setReady(true);
-    }, 1000);
-  };
-
   useEffect(() => {
-    // loadFont();
+    setTimeout(() => {
+      loadFont();
+    });
+    setReady(true);
   }, []);
+
+  const loadFont = async () => {
+    await Font.loadAsync({
+      // 본문 Font
+      KoPub_light: require('./assets/fonts/KoPubWorld-Dotum-Light.ttf'),
+      KoPub_medium: require('./assets/fonts/KoPubWorld-Dotum-Medium.ttf'),
+      KoPub_bold: require('./assets/fonts/KoPubWorld-Dotum-Bold.ttf'),
+      // 제목 및 굵은 글씨 Font
+      // 맑은 고딕 에러 (미해결)
+      Malgun_sl: require('./assets/fonts/MALGUNSL.ttf'),
+      Malgun: require('./assets/fonts/MALGUN.ttf'),
+      Malgun_bold: require('./assets/fonts/MALGUNBD.ttf'),
+      // 숫자 관련 Font
+      Spoqa_thin: require('./assets/fonts/SpoqaHanSansNeo-Thin.ttf'),
+      Spoqa_light: require('./assets/fonts/SpoqaHanSansNeo-Light.ttf'),
+      Spoqa_medium: require('./assets/fonts/SpoqaHanSansNeo-Medium.ttf'),
+      Spoqa_regular: require('./assets/fonts/SpoqaHanSansNeo-Regular.ttf'),
+      Spoqa_bold: require('./assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
+    });
+  };
 
   return ready ? (
     <NavigationContainer>
