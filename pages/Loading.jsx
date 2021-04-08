@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-const backImage = require('../assets/load.gif');
+const backImage = require('../assets/load1.gif');
 
 const WindowWidth = Dimensions.get('window').width;
 const ThumbSize = WindowWidth * 0.12;
