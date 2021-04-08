@@ -56,6 +56,7 @@ export async function getPostList(pageNum) {
   }
 }
 
+// 완료
 export async function getNextData(pageNum, setPageNum) {
   try {
     console.log('현재 page 번호: ' + pageNum);
@@ -76,6 +77,7 @@ export async function getNextData(pageNum, setPageNum) {
   }
 }
 
+// 완료
 export async function readPost(postId) {
   try {
     const token = await AsyncStorage.getItem('session');
@@ -152,11 +154,30 @@ export async function getUserRecommendPostList(userId) {
   }
 }
 
-export async function updateRecommend(postId) {
+export async function recommendPost(postId) {
   try {
     const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'patch',
+      url: host + '/post/recommend/' + postId,
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+
+    console.log(response.data);
+  } catch (err) {
+    const error = err.response.data.error || err.message;
+
+    Alert.alert(error);
+  }
+}
+
+export async function unRecommendPost(postId) {
+  try {
+    const token = await AsyncStorage.getItem('session');
+    const response = await axios({
+      method: 'delete',
       url: host + '/post/recommend/' + postId,
       headers: {
         Authorization: 'Bearer ' + token,
@@ -182,7 +203,7 @@ export async function sharePost(postId) {
       },
     });
 
-    console.log(response.data);
+    return response.data.success;
   } catch (err) {
     const error = err.response.data.error || err.message;
 

@@ -6,48 +6,63 @@ import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 import RNUrlPreview from 'react-native-url-preview';
 
-import { sharePost, addRecommend, unRecommend } from '../../config/PostAPI';
+import {
+  sharePost,
+  recommendPost,
+  unRecommendPost,
+} from '../../config/PostAPI';
 import MainCardHeader from './MainCardHeader';
 import DetailCardHeader from './DetailCardHeader';
 
 export default function PostCard({ navigation, post, userId, loc }) {
-  // console.log(post);
   const [recommendCnt, setRecommendCnt] = useState(post.recommendedCnt);
   const [recommended, setRecommended] = useState(false);
   const [shared, setShared] = useState(post.sharedCnt);
 
   useEffect(() => {
-    getRecommendedInfo();
+    setTimeout(() => getRecommendedInfo());
   }, []);
 
   const getRecommendedInfo = async () => {
-    await post.recommended.map((recommender, i) => {
-      if (recommender._id == userId) {
-        setRecommended(true);
-      }
-    });
-  };
-
-  const share = async () => {
-    const result = await Share.share({
-      message: `${post.content}\n${post.url}`,
-    });
-    if (result.action === Share.sharedAction) {
-      const success = await sharePost(post._id);
-      if (success) setShared(shared + 1);
+    if (post.recommended.length !== 0) {
+      await post.recommended.map((recommender, i) => {
+        if (recommender == userId) {
+          setRecommended(true);
+        }
+      });
     }
   };
 
   const recommend = async () => {
     // 추천 정보 업데이트
     if (recommended) {
-      await unRecommend(post._id);
-      setRecommendCnt(recommendedCnt - 1);
+      await unRecommendPost(post._id);
+      setRecommendCnt(recommendCnt - 1);
     } else {
-      await addRecommend(post._id);
-      setRecommendCnt(recommendedCnt + 1);
+      await recommendPost(post._id);
+      setRecommendCnt(recommendCnt + 1);
     }
     setRecommended(!recommended);
+  };
+
+  const share = async () => {
+    const result = await Share.share({
+      message: `${post.content}\n${post.url}`,
+    }).action;
+    console.log(result);
+    // console.log(result.activityType);
+    // console.log(result.activity);
+    console.log(Share.dismissedAction);
+    // if (result.action == Share.sharedAction) {
+    //   console.log(result.activityType);
+    // } else if (result.action == Share.dismissedAction) {
+    //   //dismissed
+    // }
+    // if (result.action === Share.sharedAction) {
+    //   const success = await sharePost(post._id);
+    //   console.log(success);
+    //   if (success) setShared(shared + 1);
+    // }
   };
 
   const read = () => {
@@ -62,7 +77,7 @@ export default function PostCard({ navigation, post, userId, loc }) {
     }
   };
 
-  const showButton = () => {
+  const showRecommendButton = () => {
     let iconName = 'lightbulb-on-outline';
 
     if (recommended) {
@@ -80,6 +95,34 @@ export default function PostCard({ navigation, post, userId, loc }) {
         <Text style={styles.buttonText}>추천해요</Text>
       </TouchableOpacity>
     );
+  };
+
+  const showCommentButton = () => {
+    if (loc == 'main') {
+      return (
+        <TouchableOpacity style={styles.button} onPress={read}>
+          <MaterialCommunityIcons
+            name="comment-processing-outline"
+            size={20}
+            color="#A2D9D3"
+          />
+          <Text style={styles.buttonText}>댓글</Text>
+          <Text style={styles.number}>{post.commentCnt}</Text>
+        </TouchableOpacity>
+      );
+    } else if (loc == 'detail') {
+      return (
+        <TouchableOpacity disabled style={styles.button}>
+          <MaterialCommunityIcons
+            name="comment-processing-outline"
+            size={20}
+            color="#A2D9D3"
+          />
+          <Text style={styles.buttonText}>댓글</Text>
+          <Text style={styles.number}>{post.commentCnt}</Text>
+        </TouchableOpacity>
+      );
+    }
   };
 
   return (
@@ -105,7 +148,7 @@ export default function PostCard({ navigation, post, userId, loc }) {
       {/* 각종 버튼 */}
       <View style={styles.buttonContainer}>
         {/* 추천해요 */}
-        {showButton()}
+        {showRecommendButton()}
 
         <View style={{ flexDirection: 'row' }}>
           {/* 공유하기 */}
@@ -131,15 +174,7 @@ export default function PostCard({ navigation, post, userId, loc }) {
           </Text>
 
           {/* 댓글 */}
-          <TouchableOpacity style={styles.button} onPress={read}>
-            <MaterialCommunityIcons
-              name="comment-processing-outline"
-              size={20}
-              color="#A2D9D3"
-            />
-            <Text style={styles.buttonText}>댓글</Text>
-            <Text style={styles.number}>{post.commentCnt}</Text>
-          </TouchableOpacity>
+          {showCommentButton()}
         </View>
       </View>
     </View>
