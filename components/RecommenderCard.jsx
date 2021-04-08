@@ -1,31 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import RNUrlPreview from 'react-native-url-preview';
-import {
-  Container,
-  Header,
-  Content,
-  Left,
-  Icon,
-  Right,
-  Text,
-  Button,
-  Card,
-  CardItem,
-  Thumbnail,
-} from 'native-base';
+import { Col, Grid } from 'react-native-easy-grid';
+import { Text, Thumbnail } from 'native-base';
 
-import {
-  Foundation,
-  Ionicons,
-  Fontisto,
-  FontAwesome,
-} from '@expo/vector-icons';
 const im = require('../assets/icon.png');
 
-export default function RecommenderCard({ navigation }) {
+export default function RecommenderCard({ navigation, recommender }) {
   return (
     <TouchableOpacity
       onPress={() => {
@@ -53,7 +34,7 @@ export default function RecommenderCard({ navigation }) {
               fontWeight: 'bold',
             }}
           >
-            홍길동
+            {recommender.name}
           </Text>
           <Text
             style={{
@@ -64,7 +45,7 @@ export default function RecommenderCard({ navigation }) {
               color: 'gray',
             }}
           >
-            벤처케피탈리스트
+            {recommender.role}
           </Text>
         </Col>
       </Grid>

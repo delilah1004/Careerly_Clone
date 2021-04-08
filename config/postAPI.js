@@ -97,18 +97,19 @@ export async function readPost(postId) {
   }
 }
 
+// 완료
 export async function getRecommenderList(postId) {
   try {
     const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
-      url: host + '/page/' + postId + '.recommend',
+      url: host + '/post/' + postId + '/recommend',
       headers: {
         Authorization: 'Bearer ' + token,
       },
     });
 
-    console.log(response.data);
+    return response.data.result.recommended;
   } catch (err) {
     const error = err.response.data.error || err.message;
 
@@ -129,9 +130,30 @@ export async function getUserPostList(userId) {
 
     console.log(response.data);
   } catch (err) {
+    const error = err.response.data.err || err.message;
+
+    Alert.alert(error);
+  }
+}
+
+// 완료
+export async function getNextUserPostList(pageNum, setPageNum) {
+  try {
+    console.log('현재 page 번호: ' + pageNum);
+
+    let data = await getUserPostList(pageNum);
+
+    if (data.length !== 0) {
+      setPageNum(pageNum + 1);
+      return data;
+    } else {
+      return 0;
+    }
+  } catch (err) {
     const error = err.response.data.error || err.message;
 
     Alert.alert(error);
+    return false;
   }
 }
 

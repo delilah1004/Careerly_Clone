@@ -8,11 +8,12 @@ import HeaderBack from '../../components/header/HeaderBack';
 import RecommenderCard from '../../components/RecommenderCard';
 
 import { getRecommenderList } from '../../config/PostAPI';
+import Loading from '../Loading';
 
 export default function RecommenderList({ navigation, route }) {
   const postId = route.params;
 
-  // const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(false);
   const [recommenderList, setRecommenderList] = useState([]);
 
   useEffect(() => {
@@ -23,11 +24,13 @@ export default function RecommenderList({ navigation, route }) {
 
   const download = async () => {
     const result = await getRecommenderList(postId);
+    console.log(result);
 
     setRecommenderList(result);
+    setReady(true);
   };
 
-  return (
+  return ready ? (
     <Container>
       <HeaderBack navigation={navigation} title={'추천'} />
       <Content style={{ marginTop: 30 }}>
@@ -42,6 +45,8 @@ export default function RecommenderList({ navigation, route }) {
         })}
       </Content>
     </Container>
+  ) : (
+    <Loading />
   );
 }
 
