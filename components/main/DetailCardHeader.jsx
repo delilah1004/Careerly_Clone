@@ -7,7 +7,7 @@ const im = require('../../assets/icon.png');
 const WindowWidth = Dimensions.get('window').width;
 const ThumbSize = WindowWidth * 0.12;
 
-export default function DetailCardHeader({ post }) {
+export default function DetailCardHeader({ navigation, post }) {
   const timeForToday = (value) => {
     const today = new Date();
     const timeValue = new Date(value);
@@ -38,7 +38,11 @@ export default function DetailCardHeader({ post }) {
     <View style={styles.itemHeader}>
       <View style={{ flexDirection: 'row' }}>
         {/* 글 작성자 이미지 */}
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push('MemberInfo', post.user._id);
+          }}
+        >
           <Thumbnail style={styles.thumbnail} source={im} />
         </TouchableOpacity>
 

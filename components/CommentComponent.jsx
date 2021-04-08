@@ -13,7 +13,11 @@ export default function CommentComponent({ navigation, comment }) {
     <View style={styles.container}>
       <View style={styles.itemHeader}>
         {/* 댓글 작성자 이미지 */}
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push('MemberInfo', comment.user._id);
+          }}
+        >
           <Thumbnail style={styles.thumbnail} source={my} />
         </TouchableOpacity>
 

@@ -72,9 +72,9 @@ export default function PostCard({ navigation, post, userId, loc }) {
 
   const showHeader = () => {
     if (loc == 'main') {
-      return <MainCardHeader post={post} />;
+      return <MainCardHeader navigation={navigation} post={post} />;
     } else if (loc == 'detail') {
-      return <DetailCardHeader post={post} />;
+      return <DetailCardHeader navigation={navigation} post={post} />;
     }
   };
 
