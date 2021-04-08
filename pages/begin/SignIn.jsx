@@ -34,7 +34,7 @@ export default function SignIn({ navigation }) {
     signIn(email, password, navigation);
   };
 
-  let showButton = () => {
+  const showButton = () => {
     if (email == '' || password == '') {
       return (
         <TouchableOpacity disabled style={[styles.button, styles.disabled]}>
