@@ -21,6 +21,9 @@ import ProfileUpdate from '../pages/mypage/ProfileUpdate';
 import FollowerList from '../pages/FollowerList';
 import FollowingList from '../pages/FollowingList';
 import VoteCreate from '../pages/main/VoteCreate';
+import Vote from '../pages/main/Vote';
+import Loading from '../pages/Loading';
+import PasswordFind from '../pages/begin/PasswordFind';
 
 const Stack = createStackNavigator();
 
@@ -46,11 +49,15 @@ const StackNavigator = () => {
       <Stack.Screen name="ServiceCenter" component={ServiceCenter} />
       <Stack.Screen name="UserUpdate" component={UserUpdate} />
       <Stack.Screen name="PasswordChange" component={PasswordChange} />
+
       <Stack.Screen name="ProfileUpdate" component={ProfileUpdate} />
       <Stack.Screen name="FollowerList" component={FollowerList} />
       <Stack.Screen name="FollowingList" component={FollowingList} />
       <Stack.Screen name="VoteCreate" component={VoteCreate} />
       <Stack.Screen name="MemberInfo" component={MemberInfo} />
+      <Stack.Screen name="Vote" component={Vote} />
+      <Stack.Screen name="Loading" component={Loading} />
+      <Stack.Screen name="PasswordFind" component={PasswordFind} />
     </Stack.Navigator>
   );
 };

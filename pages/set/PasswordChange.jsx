@@ -1,32 +1,34 @@
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { Container, Form, View } from 'native-base';
 
 import HeaderBack from '../../components/header/HeaderBack';
 
 import InputItem from '../../components/InputItem';
-import ButtonItem from '../../components/ButtonItem';
 
+import { findPassword } from '../../config/UserAPI';
 export default function PasswordChange({ navigation }) {
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [passwordConfirmError, setPasswordConfirmError] = useState('');
+  const [currentpassword, setCurrentpassword] = useState('');
 
   const changePassword = () => {
     if (password == '') {
-      setPasswordError('비밀번호를 입력해주세요');
+      setPassword('새 비밀번호를 입력해주세요');
       return false;
     } else {
-      setPasswordError('');
+      setPassword('');
     }
 
     if (password !== passwordConfirm) {
-      setPasswordConfirmError('비밀번호가 서로 일치 하지 않습니다.');
+      setPasswordConfirm('비밀번호가 서로 일치 하지 않습니다.');
       return false;
     } else {
-      setPasswordConfirmError('');
+      setPasswordConfirm('');
     }
+
+    updatePassword(currentpassword, password, passwordConfirm);
   };
 
   return (
@@ -37,33 +39,31 @@ export default function PasswordChange({ navigation }) {
           <InputItem
             title={'현재 비밀번호'}
             hint={'현재 비밀번호 입력'}
-            placeholder={'비밀번호 입력'}
+            value={currentpassword}
+            setFunc={setCurrentpassword}
           />
           <InputItem
             title={'새 비밀번호 '}
             hint={'새 비밀번호 입력'}
             value={password}
-            error={passwordError}
-            placeholder={'새 비밀번호 입력'}
             type={'password'}
             setFunc={setPassword}
           />
           <InputItem
             title={'새 비밀번호 확인'}
-            hint={'휴대폰 번호 입력'}
-            placeholder={'새 비밀번호 확인'}
-            error={passwordError}
-            value={passwordConfirmError}
+            hint={'새 비밀번호 확인'}
+            value={passwordConfirm}
             type={'password'}
             setFunc={setPasswordConfirm}
           />
         </Form>
 
-        <ButtonItem
-          title="비밀번호 변경하기"
-          navigation={navigation}
-          page={'Setting'}
-        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => PassWordChange()}
+        >
+          <Text style={styles.text}>비밀번호 변경하기</Text>
+        </TouchableOpacity>
       </View>
     </Container>
   );
@@ -106,5 +106,18 @@ const styles = StyleSheet.create({
   textButton: {
     fontSize: 12,
     textDecorationLine: 'underline',
+  },
+
+  button: {
+    backgroundColor: '#ed6653',
+    width: '100%',
+    height: 50,
+    borderRadius: 5,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: 'white',
   },
 });
