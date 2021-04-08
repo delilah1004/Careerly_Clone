@@ -154,6 +154,7 @@ export async function getUserRecommendPostList(userId) {
   }
 }
 
+// 완료
 export async function recommendPost(postId) {
   try {
     const token = await AsyncStorage.getItem('session');
@@ -173,6 +174,7 @@ export async function recommendPost(postId) {
   }
 }
 
+// 완료
 export async function unRecommendPost(postId) {
   try {
     const token = await AsyncStorage.getItem('session');
@@ -192,6 +194,7 @@ export async function unRecommendPost(postId) {
   }
 }
 
+// 프론트 문제... 공유가 완료됐는지 확인하는 방법 필요...
 export async function sharePost(postId) {
   try {
     const token = await AsyncStorage.getItem('session');

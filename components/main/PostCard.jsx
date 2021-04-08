@@ -45,6 +45,7 @@ export default function PostCard({ navigation, post, userId, loc }) {
     setRecommended(!recommended);
   };
 
+  // 공유 기능 -> 안드로이드/IOS 문제 등등,,, 공유 완료 되었을 때만 API를 호출하는 로직 구현 필요
   const share = async () => {
     const result = await Share.share({
       message: `${post.content}\n${post.url}`,
