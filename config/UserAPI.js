@@ -22,7 +22,7 @@ export async function signIn(email, password, navigation) {
     Alert.alert('로그인 성공!');
     navigation.push('TabNavigator');
   } catch (err) {
-    const error = err.response.data.error || err.message;
+    const error = err.response.data.err || err.message;
 
     Alert.alert(error);
   }
