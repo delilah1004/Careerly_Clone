@@ -3,6 +3,7 @@ import { StyleSheet, Text, Dimensions, TouchableOpacity } from 'react-native';
 import { Thumbnail, View } from 'native-base';
 
 const my = require('../assets/icon.png');
+const enter = require('../assets/enter.png');
 
 const WindowWidth = Dimensions.get('window').width;
 const ThumbSize = WindowWidth * 0.12;
@@ -33,7 +34,8 @@ export default function CommentComponent({ navigation, comment }) {
       </Text>
 
       {/* 답글 달기 버튼 */}
-      <TouchableOpacity>
+      <TouchableOpacity style={{ flexDirection: 'row' }}>
+        <Thumbnail small source={enter} />
         <Text style={styles.addComment}>답글 달기</Text>
       </TouchableOpacity>
     </View>
@@ -78,5 +80,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     color: '#777',
     fontWeight: '500',
+    paddingTop: 5,
+    paddingLeft: 5,
   },
 });
