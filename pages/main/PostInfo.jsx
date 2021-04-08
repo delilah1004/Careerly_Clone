@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { Container, Footer, Input, Text, View } from 'native-base';
 
 import Loading from '../Loading';
 
 import HeaderBack from '../../components/header/HeaderBack';
+
+import MainCard from '../../components/main/PostCard';
 import CommentComponent from '../../components/CommentComponent';
 
 import { readPost } from '../../config/PostAPI';
-import { createComment } from '../../config/commentAPI';
-import MainCard from '../../components/main/PostCard';
+import { createComment } from '../../config/CommentAPI';
 
 export default function PostInfo({ navigation, route }) {
   const postId = route.params.postId;
@@ -33,17 +34,34 @@ export default function PostInfo({ navigation, route }) {
   };
 
   const commentUpload = async () => {
-    if (comment == '') {
-      Alert.alert('내용을 입력해주세요');
-      return false;
-    }
-
-    let result = await createComment(post.id, content);
+    const result = await createComment(postId, currentComment);
     if (result) {
       await Alert.alert('댓글 작성 완료!');
       setCurrentComment('');
+      download();
     } else {
       Alert.alert('댓글 작성 실패');
+    }
+  };
+
+  const showButton = () => {
+    if (currentComment == '') {
+      return (
+        <TouchableOpacity disabled style={[styles.addButton, styles.disabled]}>
+          <Text style={styles.addButtonText}>등록</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => {
+            commentUpload();
+          }}
+        >
+          <Text style={styles.addButtonText}>등록</Text>
+        </TouchableOpacity>
+      );
     }
   };
 
@@ -86,12 +104,7 @@ export default function PostInfo({ navigation, route }) {
             setCurrentComment(text);
           }}
         />
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={() => commentUpload()}
-        >
-          <Text style={styles.addButtonText}>등록</Text>
-        </TouchableOpacity>
+        {showButton()}
       </Footer>
     </Container>
   ) : (
@@ -122,6 +135,9 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     margin: 10,
     alignItems: 'center',
+  },
+  disabled: {
+    opacity: 0.5,
   },
   addButtonText: {
     fontSize: 14,

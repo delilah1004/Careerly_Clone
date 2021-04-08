@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const host = 'http://52.79.227.130';
 
+// 완료
 export async function createComment(postId, content) {
   try {
     const token = await AsyncStorage.getItem('session');
@@ -18,7 +19,7 @@ export async function createComment(postId, content) {
       },
     });
 
-    console.log(response.data);
+    return response.data.success;
   } catch (err) {
     const error = err.response.data.error || err.message;
 
