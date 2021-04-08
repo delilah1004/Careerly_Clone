@@ -24,6 +24,7 @@ import VoteCreate from '../pages/main/VoteCreate';
 import Vote from '../pages/main/Vote';
 import Loading from '../pages/Loading';
 import PasswordFind from '../pages/begin/PasswordFind';
+import RecommenderList from '../pages/main/RecommenderList';
 
 const Stack = createStackNavigator();
 
@@ -49,7 +50,7 @@ const StackNavigator = () => {
       <Stack.Screen name="ServiceCenter" component={ServiceCenter} />
       <Stack.Screen name="UserUpdate" component={UserUpdate} />
       <Stack.Screen name="PasswordChange" component={PasswordChange} />
-
+      <Stack.Screen name="RecommenderList" component={RecommenderList} />
       <Stack.Screen name="ProfileUpdate" component={ProfileUpdate} />
       <Stack.Screen name="FollowerList" component={FollowerList} />
       <Stack.Screen name="FollowingList" component={FollowingList} />
