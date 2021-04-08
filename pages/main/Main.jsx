@@ -112,7 +112,6 @@ export default function Main({ navigation }) {
               Alert.alert('더이상 글이 없어요!');
             } else {
               let newData = [...postList, ...nextData];
-              // console.log(newData);
               await setPostList(newData);
             }
           }}
