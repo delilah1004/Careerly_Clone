@@ -10,18 +10,15 @@ import { Container, Text, View, Thumbnail, Tab, Tabs } from 'native-base';
 
 import { Entypo } from '@expo/vector-icons';
 
+import Loading from '../Loading';
+
+import { getMemberInfo } from '../../config/UserAPI';
+import HeaderShare from '../../components/header/HeaderShare';
+
 const none = require('../../assets/none.png');
-const none2 = require('../../assets/123.png');
 const im = require('../../assets/icon.png');
 
 const WindowWidth = Dimensions.get('window').width;
-const CardWidth = WindowWidth * 0.5;
-const ThumbSize = WindowWidth * 0.2;
-
-import { getMemberInfo } from '../../config/UserAPI';
-
-import HeaderShare from '../../components/header/HeaderShare';
-import Loading from '../Loading';
 
 export default function MemberInfo({ navigation, route }) {
   const memberId = route.params;

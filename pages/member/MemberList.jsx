@@ -12,7 +12,8 @@ import Loading from '../Loading';
 import HeaderBack from '../../components/header/HeaderBack';
 import MemberCard from '../../components/member/MemberCard';
 
-import members from '../../config/member.json';
+import members from '../../config/mock/member.json';
+
 import { getMemberListByName } from '../../config/UserAPI';
 
 const WindowWidth = Dimensions.get('window').width;

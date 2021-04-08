@@ -5,7 +5,7 @@ import { Container, View, Text } from 'native-base';
 
 import RoleCategory from '../../components/begin/RoleCategory';
 
-import data from '../../config/data.json';
+import data from '../../config/mock/data.json';
 
 import { register } from '../../config/UserAPI';
 

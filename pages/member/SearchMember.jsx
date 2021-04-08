@@ -16,8 +16,9 @@ import { Ionicons } from '@expo/vector-icons';
 import MemberCategory from '../../components/member/MemberCategory';
 import MemberCard from '../../components/member/MemberCard';
 
-import data from '../../config/data.json';
-import members from '../../config/member.json';
+import data from '../../config/mock/data.json';
+import members from '../../config/mock/member.json';
+
 import { getMemberListByCategory, getUserInfo } from '../../config/UserAPI';
 
 const WindowWidth = Dimensions.get('window').width;
