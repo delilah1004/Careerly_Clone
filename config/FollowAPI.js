@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const host = 'http://52.79.227.130';
 
+// 완료
 export async function getFollower(userId) {
   try {
     const token = await AsyncStorage.getItem('session');
@@ -15,7 +16,7 @@ export async function getFollower(userId) {
       },
     });
 
-    console.log(response.data);
+    return response.data.result.follower;
   } catch (err) {
     const error = err.response.data.error || err.message;
 
@@ -23,6 +24,7 @@ export async function getFollower(userId) {
   }
 }
 
+// 완료
 export async function getFollowing(userId) {
   try {
     const token = await AsyncStorage.getItem('session');
@@ -34,7 +36,7 @@ export async function getFollowing(userId) {
       },
     });
 
-    console.log(response.data);
+    return response.data.result.following;
   } catch (err) {
     const error = err.response.data.error || err.message;
 

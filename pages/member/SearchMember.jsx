@@ -18,7 +18,7 @@ import MemberCard from '../../components/member/MemberCard';
 
 import data from '../../config/data.json';
 import members from '../../config/member.json';
-import { getMemberListByCategory } from '../../config/UserAPI';
+import { getMemberListByCategory, getUserInfo } from '../../config/UserAPI';
 
 const WindowWidth = Dimensions.get('window').width;
 const ScrollWidth = WindowWidth * 2.6;
@@ -30,12 +30,14 @@ export default function SearchMember({ navigation }) {
   const [cate, setCate] = useState('프로덕트 매니저/서비스 기획');
   const [name, setName] = useState('');
   const [memberList, setMemberList] = useState(members.result);
+  const [userId, setUserId] = useState('');
 
   useEffect(() => {
     setTimeout(() => {
       download();
+      getUserId();
       setReady(true);
-    }, 2000);
+    });
   }, []);
 
   const download = async () => {
@@ -43,6 +45,14 @@ export default function SearchMember({ navigation }) {
     const result = await getMemberListByCategory(cate, pageNum);
 
     setMemberList(result);
+  };
+
+  const getUserId = async () => {
+    const result = await getUserInfo();
+
+    console.log(result._id);
+
+    setUserId(result._id);
   };
 
   const search = () => {
@@ -107,7 +117,12 @@ export default function SearchMember({ navigation }) {
         >
           {memberList.map((member, i) => {
             return (
-              <MemberCard navigation={navigation} member={member} key={i} />
+              <MemberCard
+                navigation={navigation}
+                member={member}
+                userId={userId}
+                key={i}
+              />
             );
           })}
         </View>

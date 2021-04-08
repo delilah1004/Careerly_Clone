@@ -29,7 +29,7 @@ export default function MemberList({ navigation, route }) {
     setTimeout(() => {
       download();
       setReady(true);
-    }, 2000);
+    });
   }, []);
 
   const download = async () => {

@@ -27,7 +27,7 @@ export default function SignIn({ navigation }) {
         }
       });
       setReady(true);
-    }, 1000);
+    });
   }, []);
 
   const doSignIn = () => {

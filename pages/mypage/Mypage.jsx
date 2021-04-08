@@ -35,7 +35,7 @@ export default function Mypage({ navigation }) {
     setTimeout(() => {
       download();
       setReady(true);
-    }, 2000);
+    });
   }, []);
 
   const download = async () => {
@@ -94,6 +94,7 @@ export default function Mypage({ navigation }) {
           <View style={styles.followBox}>
             <TouchableOpacity
               style={[styles.flexRow, { alignItems: 'center' }]}
+              onPress={() => navigation.push('FollowerList', user._id)}
             >
               <Text style={styles.followText}>팔로워</Text>
               <Text style={styles.followNumberText}>{user.followerCnt}</Text>
@@ -105,6 +106,7 @@ export default function Mypage({ navigation }) {
             </Text>
             <TouchableOpacity
               style={[styles.flexRow, { alignItems: 'center' }]}
+              onPress={() => navigation.push('FollowingList', user._id)}
             >
               <Text style={styles.followText}>팔로잉</Text>
               <Text style={styles.followNumberText}>{user.followingCnt}</Text>
@@ -150,7 +152,7 @@ export default function Mypage({ navigation }) {
             heading="게시물"
             activeTextStyle={styles.tabBaractiveText}
             textStyle={styles.tabBarText}
-            tabStyle={styles.tabBarBackground}
+            tabStyle={{ backgroundColor: '#FFF' }}
             activeTabStyle={styles.tabBarBackground}
           >
             {/* 내가 작성한 게시물 */}
@@ -180,7 +182,7 @@ export default function Mypage({ navigation }) {
             heading="추천한 게시물"
             activeTextStyle={styles.tabBaractiveText}
             textStyle={styles.tabBarText}
-            tabStyle={styles.tabBarBackground}
+            tabStyle={{ backgroundColor: '#FFF' }}
             activeTabStyle={styles.tabBarBackground}
           ></Tab>
         </Tabs>

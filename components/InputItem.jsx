@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Item, Input, Text } from 'native-base';
 
-export default function InputItem({ title, hint, type, setFunc }) {
+export default function InputItem({ title, hint, type, value, setFunc }) {
   return (
     <>
       <Text style={styles.label}>{title}</Text>
@@ -15,6 +15,7 @@ export default function InputItem({ title, hint, type, setFunc }) {
           //type이 패스워드면 화면상에 텍스트가 안보이게 처리하는 속성
           secureTextEntry={type == 'password' ? true : false}
           placeholder={hint}
+          value={value}
           onChangeText={(text) => {
             setFunc(text);
           }}
