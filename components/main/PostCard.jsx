@@ -10,7 +10,7 @@ import { sharePost, addRecommend, unRecommend } from '../../config/PostAPI';
 import MainCardHeader from './MainCardHeader';
 import DetailCardHeader from './DetailCardHeader';
 
-export default function MainCard({ navigation, post, userId, loc }) {
+export default function PostCard({ navigation, post, userId, loc }) {
   // console.log(post);
   const [recommendCnt, setRecommendCnt] = useState(post.recommendedCnt);
   const [recommended, setRecommended] = useState(false);
@@ -95,10 +95,12 @@ export default function MainCard({ navigation, post, userId, loc }) {
       <RNUrlPreview text={post.url} />
 
       {/* 추천 현황 */}
-      <View style={styles.recommend}>
-        <Text style={styles.number}>{recommendCnt}명</Text>
-        <Text style={{ fontSize: 13 }}>이 추천했어요</Text>
-      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('RecommenderList')}>
+        <View style={styles.recommend}>
+          <Text style={styles.number}>{recommendCnt}명</Text>
+          <Text style={{ fontSize: 13 }}>이 추천했어요</Text>
+        </View>
+      </TouchableOpacity>
 
       {/* 각종 버튼 */}
       <View style={styles.buttonContainer}>
