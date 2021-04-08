@@ -4,10 +4,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Start from '../pages/begin/Start';
 import SignIn from '../pages/begin/SignIn';
 import SignUp from '../pages/begin/SignUp';
+import PasswordFind from '../pages/begin/PasswordFind';
 import RolePick from '../pages/begin/RolePick';
 import TabNavigator from './TabNavigator';
 import PostCreate from '../pages/main/PostCreate';
 import PostInfo from '../pages/main/PostInfo';
+import RecommenderList from '../pages/main/RecommenderList';
 import Notificate from '../pages/Notificate';
 import SearchMember from '../pages/member/SearchMember';
 import MemberList from '../pages/member/MemberList';
@@ -23,8 +25,6 @@ import FollowingList from '../pages/FollowingList';
 import VoteCreate from '../pages/main/VoteCreate';
 import Vote from '../pages/main/Vote';
 import Loading from '../pages/Loading';
-import PasswordFind from '../pages/begin/PasswordFind';
-import RecommenderList from '../pages/main/RecommenderList';
 
 const Stack = createStackNavigator();
 
@@ -38,10 +38,12 @@ const StackNavigator = () => {
       <Stack.Screen name="Start" component={Start} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="PasswordFind" component={PasswordFind} />
       <Stack.Screen name="RolePick" component={RolePick} />
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
       <Stack.Screen name="PostCreate" component={PostCreate} />
       <Stack.Screen name="PostInfo" component={PostInfo} />
+      <Stack.Screen name="RecommenderList" component={RecommenderList} />
       <Stack.Screen name="Notificate" component={Notificate} />
       <Stack.Screen name="SearchMember" component={SearchMember} />
       <Stack.Screen name="MemberList" component={MemberList} />
@@ -50,7 +52,6 @@ const StackNavigator = () => {
       <Stack.Screen name="ServiceCenter" component={ServiceCenter} />
       <Stack.Screen name="UserUpdate" component={UserUpdate} />
       <Stack.Screen name="PasswordChange" component={PasswordChange} />
-      <Stack.Screen name="RecommenderList" component={RecommenderList} />
       <Stack.Screen name="ProfileUpdate" component={ProfileUpdate} />
       <Stack.Screen name="FollowerList" component={FollowerList} />
       <Stack.Screen name="FollowingList" component={FollowingList} />
@@ -58,7 +59,6 @@ const StackNavigator = () => {
       <Stack.Screen name="MemberInfo" component={MemberInfo} />
       <Stack.Screen name="Vote" component={Vote} />
       <Stack.Screen name="Loading" component={Loading} />
-      <Stack.Screen name="PasswordFind" component={PasswordFind} />
     </Stack.Navigator>
   );
 };

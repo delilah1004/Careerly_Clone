@@ -1,20 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { StyleSheet } from 'react-native';
 import { Container, Text, View } from 'native-base';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import ButtonItem from '../../components/ButtonItem';
 import TextButton from '../../components/begin/TextButton';
 
-import { getStatusBarHeight } from 'react-native-status-bar-height';
+import Loading from '../Loading';
 
 export default function Start({ navigation }) {
+  const [ready, setReady] = useState(false);
+
   useEffect(() => {
     navigation.addListener('beforeRemove', (e) => {
       e.preventDefault();
     });
+    setTimeout(() => {
+      AsyncStorage.getItem('session', (err, token) => {
+        if (token) {
+          navigation.push('TabNavigator');
+        } else {
+          setReady(true);
+        }
+      });
+      setReady(true);
+    });
   }, [navigation]);
 
-  return (
+  return ready ? (
     <Container>
       <View style={styles.container}>
         <View style={styles.title}>
@@ -52,6 +67,8 @@ export default function Start({ navigation }) {
         </View>
       </View>
     </Container>
+  ) : (
+    <Loading />
   );
 }
 
