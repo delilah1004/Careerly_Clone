@@ -81,13 +81,13 @@ export async function readPost(postId) {
     const token = await AsyncStorage.getItem('session');
     const response = await axios({
       method: 'get',
-      url: host + '/page/' + postId,
+      url: host + '/post/' + postId,
       headers: {
         Authorization: 'Bearer ' + token,
       },
     });
 
-    console.log(response.data);
+    return response.data.result;
   } catch (err) {
     const error = err.response.data.error || err.message;
 

@@ -28,7 +28,7 @@ export default function MainCard({ navigation, post }) {
 
   const read = () => {
     // navigation.push('PostInfo');
-    navigation.push('PostInfo', { post });
+    navigation.push('PostInfo', post._id);
   };
 
   // 날짜 계산하기!
@@ -123,11 +123,18 @@ export default function MainCard({ navigation, post }) {
             <Text style={styles.number}>{post.sharedCnt}</Text>
           </TouchableOpacity>
 
-          {/* 댓글 */}
-          <TouchableOpacity
-            style={[styles.button, { marginStart: 10 }]}
-            onPress={read}
+          <Text
+            style={{
+              color: '#C7C7C7',
+              fontSize: 13,
+              marginHorizontal: 10,
+            }}
           >
+            |
+          </Text>
+
+          {/* 댓글 */}
+          <TouchableOpacity style={styles.button} onPress={read}>
             <MaterialCommunityIcons
               name="comment-processing-outline"
               size={20}
