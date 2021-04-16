@@ -9,7 +9,7 @@ import { StatusBar } from 'expo-status-bar';
 import * as Font from 'expo-font';
 
 export default function App() {
-  LogBox.ignoreLogs(['Warning: ...']);
+  LogBox.ignoreAllLogs();
 
   const [ready, setReady] = useState(true);
 
