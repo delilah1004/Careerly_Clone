@@ -42,7 +42,6 @@ export default function SearchMember({ navigation }) {
   }, []);
 
   const download = async () => {
-    // console.log(cate, pageNum);
     const result = await getMemberListByCategory(cate, pageNum);
 
     setMemberList(result);
@@ -50,8 +49,6 @@ export default function SearchMember({ navigation }) {
 
   const getUserId = async () => {
     const result = await getUserInfo();
-
-    console.log(result._id);
 
     setUserId(result._id);
   };
