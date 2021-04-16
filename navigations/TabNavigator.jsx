@@ -9,9 +9,9 @@ import {
   FontAwesome,
 } from '@expo/vector-icons';
 
-import Main from '../pages/main/Main';
-import SearchMember from '../pages/member/SearchMember';
-import Notification from '../pages/Notificate';
+import { Main } from '../pages/main';
+import { SearchMember } from '../pages/member';
+import Notificate from '../pages/Notificate';
 import MyPage from '../pages/mypage/Mypage';
 
 const Tabs = createBottomTabNavigator();
@@ -30,7 +30,7 @@ const TabNavigator = () => {
           } else if (route.name === 'SearchMember') {
             iconKind = 'Ionicons';
             iconName += 'search-sharp';
-          } else if (route.name === 'Notification') {
+          } else if (route.name === 'Notificate') {
             iconKind = 'Fontisto';
             iconName = 'bell';
           } else if (route.name === 'MyPage') {
@@ -85,7 +85,7 @@ const TabNavigator = () => {
     >
       <Tabs.Screen name="Main" component={Main} />
       <Tabs.Screen name="SearchMember" component={SearchMember} />
-      <Tabs.Screen name="Notification" component={Notification} />
+      <Tabs.Screen name="Notificate" component={Notificate} />
       <Tabs.Screen name="MyPage" component={MyPage} />
     </Tabs.Navigator>
   );
