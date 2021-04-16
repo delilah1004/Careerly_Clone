@@ -136,7 +136,7 @@ export default function PostCard({ navigation, post, userId, loc }) {
       </Text>
 
       {/* 링크 연결 */}
-      <RNUrlPreview text={post.url} />
+      {/* <RNUrlPreview text={post.url} /> */}
 
       {/* 추천 현황 */}
       <TouchableOpacity onPress={() => navigation.navigate('RecommenderList')}>
