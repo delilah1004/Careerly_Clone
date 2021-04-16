@@ -40,9 +40,6 @@ export default function Mypage({ navigation }) {
 
   const download = async () => {
     const result = await getUserInfo();
-
-    console.log(result);
-
     setUser(result);
   };
 
